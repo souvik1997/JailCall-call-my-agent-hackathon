@@ -2,7 +2,7 @@ Name: DefendCA
 Short name: defendca
 Website: https://www.defendca.com
 Phone: +16502411214
-Email:
+Email: 
 Intake URL: https://www.defendca.com/contact-us/
 Counties: san mateo, santa clara, san francisco, alameda
 Primary charge tags: dui, domestic-violence, assault, firearm, drug-possession, drug-trafficking, theft, robbery, burglary, probation-violation

@@ -2,7 +2,7 @@ Name: Walter Rubenstein Criminal Defense
 Short name: walter-rubenstein
 Website: https://walterrubensteinlaw.com
 Phone: +17075464545
-Email:
+Email: 
 Intake URL: https://walterrubensteinlaw.com/
 Counties: sonoma, marin, napa
 Primary charge tags: dui, domestic-violence, assault, drug-possession, drug-trafficking, theft, robbery, burglary, probation-violation

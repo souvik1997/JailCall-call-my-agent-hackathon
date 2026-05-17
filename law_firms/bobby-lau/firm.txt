@@ -2,7 +2,7 @@ Name: Law Offices of Bobby Lau
 Short name: bobby-lau
 Website: https://www.bobbylaulaw.com
 Phone: +14085687578
-Email:
+Email: 
 Intake URL: https://www.bobbylaulaw.com/contact-us/
 Counties: santa clara, alameda, san mateo
 Primary charge tags: dui, domestic-violence, assault, firearm, drug-possession, drug-trafficking, theft, robbery, burglary, probation-violation

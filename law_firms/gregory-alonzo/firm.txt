@@ -2,7 +2,7 @@ Name: Law Office of Gregory M. Alonzo
 Short name: gregory-alonzo
 Website: https://www.alonzocriminaldefense.com
 Phone: +14086739124
-Email:
+Email: 
 Intake URL: https://www.alonzocriminaldefense.com/contact/
 Counties: santa clara, alameda, san mateo
 Primary charge tags: dui, domestic-violence, assault, firearm, drug-possession, drug-trafficking, theft, robbery, burglary, probation-violation

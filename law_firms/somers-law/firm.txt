@@ -2,7 +2,7 @@ Name: Somers Law Office
 Short name: somers-law
 Website: https://www.somerslawoffice.com
 Phone: +17072002734
-Email:
+Email: 
 Intake URL: https://www.somerslawoffice.com/
 Counties: sonoma, marin, napa
 Primary charge tags: dui, domestic-violence, assault, firearm, drug-possession, drug-trafficking, theft, robbery, burglary, probation-violation
