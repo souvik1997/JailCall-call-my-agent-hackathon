@@ -1,0 +1,10 @@
+Name: VIB Law Office
+Short name: vib-law
+Website: https://viblaw.com
+Phone: (408) 920-9720
+Email: contact@viblaw.com
+Intake URL: https://viblaw.com/contact/
+Counties: santa clara, alameda, san mateo
+Primary charge tags: dui, domestic violence, assault, firearm, drug possession/sales, theft, robbery, burglary, probation violation
+Representative case count: 0
+Source URLs: https://viblaw.com/contact/

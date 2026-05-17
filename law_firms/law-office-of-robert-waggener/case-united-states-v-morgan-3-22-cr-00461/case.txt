@@ -1,0 +1,14 @@
+Case name: United States v. Morgan
+Jurisdiction level: Federal
+Docket / appellate number: 3:22-cr-00461
+Court: District Court, N.D. California
+Date filed: 2022-12-07
+Source type: CourtListener RECAP federal criminal docket metadata
+Source URL: https://www.courtlistener.com/docket/66756290/united-states-v-morgan/
+Attorney listed: Danbee Kim
+Party / county: Carolyne Michelle Morgan
+Description: Federal criminal prosecution in the Northern District of California involving Carolyne Michelle Morgan. Public docket entries indicate: 2024-12-13: STIPULATION AND ORDER as to Carolyne Michelle Morgan, Terminate Deadlines and Hearings as to Carolyne Michelle Morgan: 81 STIPULATION WITH PROPOSED ORDER as to Carolyne Michelle Morgan to Continue Change of Plea to February 24, 2025, a nd Exclude Time Until That Date filed by USA., Motions terminated: 81 STIPULATION WITH PROPOSED ORDER as to Carolyne Michelle Morgan to Continue Change of Plea to February 24, 2025, and Exclude Time Until That Date filed by USA. Change of Plea Hearing set for 2/24/2025 10:30 AM in San Francisco, Courtroom 11, 19th Floor before Judge James Donato.. Signed by Judg | 2024-11-01: STIPULATION AND ORDER TO CONTINUE - Ends of Justice as to Carolyne Michelle Morgan Time excluded from 11/4/2024 until 12/16/2024., Change of Plea Hearing set for 12/16/2024 10:30 AM in San Francisco, Courtroom 11, 19th Floor before Judge James Donato. Signed by Judge James Donato on 11/1/2024. (lrc, COURT STAFF) (Filed on 11/1/2024)
+Notes: Firm and attorney were listed in CourtListener docket metadata for an N.D. California criminal case.
+Relevant docket entries:
+- 2024-12-13: STIPULATION AND ORDER as to Carolyne Michelle Morgan, Terminate Deadlines and Hearings as to Carolyne Michelle Morgan: 81 STIPULATION WITH PROPOSED ORDER as to Carolyne Michelle Morgan to Continue Change of Plea to February 24, 2025, a nd Exclude Time Until That Date filed by USA., Motions terminated: 81 STIPULATION WITH PROPOSED ORDER as to Carolyne Michelle Morgan to Continue Change of Plea to February 24, 2025, and Exclude Time Until That Date filed by USA. Change of Plea Hearing set for 2/24/2025 10:30 AM in San Francisco, Courtroom 11, 19th Floor before Judge James Donato.. Signed by Judg
+- 2024-11-01: STIPULATION AND ORDER TO CONTINUE - Ends of Justice as to Carolyne Michelle Morgan Time excluded from 11/4/2024 until 12/16/2024., Change of Plea Hearing set for 12/16/2024 10:30 AM in San Francisco, Courtroom 11, 19th Floor before Judge James Donato. Signed by Judge James Donato on 11/1/2024. (lrc, COURT STAFF) (Filed on 11/1/2024)

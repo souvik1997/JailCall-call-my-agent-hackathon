@@ -1,0 +1,14 @@
+Case name: United States v. Fuqua
+Jurisdiction level: Federal
+Docket / appellate number: 4:20-cr-00334
+Court: District Court, N.D. California
+Date filed: 2020-08-27
+Source type: CourtListener RECAP federal criminal docket metadata
+Source URL: https://www.courtlistener.com/docket/17510518/united-states-v-fuqua/
+Attorney listed: Maya Beth Karwande
+Party / county: Kevin Fuqua
+Description: Federal criminal prosecution in the Northern District of California involving Kevin Fuqua. Public docket entries indicate: 2020-11-19: Plea Agreement | 2020-11-20: JUDGMENT in a Criminal Case as to Kevin Fuqua. Signed by Judge James Donato on 11/19/2020. (lrcS, COURT STAFF) (Filed on 11/20/2020)
+Notes: Firm and attorney were listed in CourtListener docket metadata for an N.D. California criminal case.
+Relevant docket entries:
+- 2020-11-19: Plea Agreement
+- 2020-11-20: JUDGMENT in a Criminal Case as to Kevin Fuqua. Signed by Judge James Donato on 11/19/2020. (lrcS, COURT STAFF) (Filed on 11/20/2020)

@@ -1,0 +1,13 @@
+Case name: Summit Defense case result - DUI charge dismissed
+Jurisdiction level: State/local firm-reported case result
+Docket / appellate number:
+Court:
+Date filed:
+Offense tags: dui
+Actual charges / charge signals: DUI after traffic stop and breath test
+Charge confidence: medium
+Crime description: Client was charged with DUI after a traffic stop and breath test. Defense identified constitutional issues, filed a motion to suppress, the court granted the motion, and prosecutors dismissed the case.
+Source URL: https://summitdefense.com/case-results/
+Attorney listed: Collin Moore
+Firm: Summit Defense
+Notes: This file is part of the offense-searchable corpus. It favors usable charge/category matching over exhaustive case history.

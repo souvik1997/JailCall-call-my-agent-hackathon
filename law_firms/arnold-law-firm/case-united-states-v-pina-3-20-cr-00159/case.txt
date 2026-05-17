@@ -1,0 +1,13 @@
+Case name: United States v. Pina
+Jurisdiction level: Federal
+Docket / appellate number: 3:20-cr-00159
+Court: District Court, N.D. California
+Date filed: 2020-04-16
+Source type: CourtListener RECAP federal criminal docket metadata
+Source URL: https://www.courtlistener.com/docket/17076263/united-states-v-pina/
+Attorney listed: William Frentzen
+Party / county: Rebecca Imelda Pina
+Description: Federal criminal prosecution in the Northern District of California involving Rebecca Imelda Pina. Public docket entries indicate: 2021-03-01: ORDER granting 42 Notice Of Dismissal Without Prejudice and Proposed Order filed by USA. Leave is granted to the government to dismiss without prejudice the information against Rebecca Pina. Signed by Judge Edward M. Chen on 3/1/2021. (afmS, COURT STAFF) (Filed on 3/1/2021) (Entered: 03/01/2021)
+Notes: Firm and attorney were listed in CourtListener docket metadata for an N.D. California criminal case.
+Relevant docket entries:
+- 2021-03-01: ORDER granting 42 Notice Of Dismissal Without Prejudice and Proposed Order filed by USA. Leave is granted to the government to dismiss without prejudice the information against Rebecca Pina. Signed by Judge Edward M. Chen on 3/1/2021. (afmS, COURT STAFF) (Filed on 3/1/2021) (Entered: 03/01/2021)

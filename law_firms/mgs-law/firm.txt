@@ -1,0 +1,10 @@
+Name: Law Office of M. Gerald Schwartzbach
+Short name: mgs-law
+Website: https://www.mgslawyer.com
+Phone: (415) 563-9884
+Email: info@mgslawyer.com
+Intake URL: https://www.mgslawyer.com/contact-us/
+Counties: san francisco, marin, alameda, san mateo
+Primary charge tags: dui, domestic violence, assault, firearm, drug possession/sales, theft, robbery, burglary, white-collar/fraud, probation violation
+Representative case count: 0
+Source URLs: https://www.mgslawyer.com/contact-us/

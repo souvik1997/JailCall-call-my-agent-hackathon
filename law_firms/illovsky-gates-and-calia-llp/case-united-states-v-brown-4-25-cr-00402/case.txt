@@ -1,0 +1,13 @@
+Case name: United States v. Brown
+Jurisdiction level: Federal
+Docket / appellate number: 4:25-cr-00402
+Court: District Court, N.D. California
+Date filed: 2025-11-20
+Source type: CourtListener RECAP federal criminal docket metadata
+Source URL: https://www.courtlistener.com/docket/72034621/united-states-v-brown/
+Attorney listed: Richard Alan Tamor
+Party / county: Felicia Sanders
+Description: Federal criminal prosecution in the Northern District of California involving Felicia Sanders. Public docket entries indicate: 2025-11-20: INDICTMENT as to Allen Brown (1) count(s) 1, 2, 3, 5, Sebron Russell (2) count(s) 1, 2, 3, 4, Marquise Cooper (3) count(s) 1, 2, 3, Janiero Booth (4) count(s) 1, 3, Jowaun Jones (5) count(s) 1, 3, Shawn Mcgee (6) count(s) 1, 3, Salvador Munguia (7) count(s) 1, 3, Jasmine Kumar (8) count(s) 6, Felicia Sanders (9) count(s) 6. (Attachments: # 1 Criminal Cover Sheet) (anj, COURT STAFF) (Filed on 11/20/2025) (Main Document 1 replaced on 12/12/2025) (anj, COURT STAFF). (Attachment 1 replaced on 12/12/2025) (anj, COURT STAFF). (Entered: 11/20/2025)
+Notes: Firm and attorney were listed in CourtListener docket metadata for an N.D. California criminal case.
+Relevant docket entries:
+- 2025-11-20: INDICTMENT as to Allen Brown (1) count(s) 1, 2, 3, 5, Sebron Russell (2) count(s) 1, 2, 3, 4, Marquise Cooper (3) count(s) 1, 2, 3, Janiero Booth (4) count(s) 1, 3, Jowaun Jones (5) count(s) 1, 3, Shawn Mcgee (6) count(s) 1, 3, Salvador Munguia (7) count(s) 1, 3, Jasmine Kumar (8) count(s) 6, Felicia Sanders (9) count(s) 6. (Attachments: # 1 Criminal Cover Sheet) (anj, COURT STAFF) (Filed on 11/20/2025) (Main Document 1 replaced on 12/12/2025) (anj, COURT STAFF). (Attachment 1 replaced on 12/12/2025) (anj, COURT STAFF). (Entered: 11/20/2025)

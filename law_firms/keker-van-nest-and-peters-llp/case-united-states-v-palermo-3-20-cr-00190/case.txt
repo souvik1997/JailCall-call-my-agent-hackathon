@@ -1,0 +1,11 @@
+Case name: United States v. Palermo
+Jurisdiction level: Federal
+Docket / appellate number: 3:20-cr-00190
+Court: District Court, N.D. California
+Date filed: 2020-05-06
+Source type: CourtListener RECAP federal criminal docket metadata
+Source URL: https://www.courtlistener.com/docket/17240995/united-states-v-palermo/
+Attorney listed: Sonja Arndt
+Party / county: Geoffrey Mark Palermo
+Description: Federal criminal prosecution in the Northern District of California involving Geoffrey Mark Palermo. CourtListener RECAP metadata lists counsel and parties, but no charging-summary entry was available in the API result.
+Notes: Firm and attorney were listed in CourtListener docket metadata for an N.D. California criminal case.

@@ -1,0 +1,14 @@
+Case name: United States v. Sullivan
+Jurisdiction level: Federal
+Docket / appellate number: 3:20-cr-00337
+Court: District Court, N.D. California
+Date filed: 2020-09-04
+Source type: CourtListener RECAP federal criminal docket metadata
+Source URL: https://www.courtlistener.com/docket/18443231/united-states-v-sullivan/
+Attorney listed: David H Angeli
+Party / county: Uber Technologies Inc.
+Description: Federal criminal prosecution in the Northern District of California involving Uber Technologies Inc.. Public docket entries indicate: 2022-02-11: MOTION Motion for Pretrial Return Date for Subpoena Duces Tecum to Softbank Group Corp. (Unopposed) by Joseph Sullivan. Motion Hearing set for 3/3/2022 01:30 PM in San Francisco, Courtroom 02, 17th Floor before Judge William H. Orrick. (Attachments: # 1 Declaration Declaration of Michelle Holman Kerin, # 2 Proposed Order)(Kerin, Michelle) (Filed on 2/11/2022) (Entered: 02/11/2022) | 2022-02-11: Order by Judge William H. Orrick granting 94 Motion for Pretrial Return Date for Subpoena Duces Tecum as to Joseph Sullivan (1). (jmd, COURT STAFF) (Filed on 2/11/2022) (Entered: 02/11/2022)
+Notes: Firm and attorney were listed in CourtListener docket metadata for an N.D. California criminal case.
+Relevant docket entries:
+- 2022-02-11: MOTION Motion for Pretrial Return Date for Subpoena Duces Tecum to Softbank Group Corp. (Unopposed) by Joseph Sullivan. Motion Hearing set for 3/3/2022 01:30 PM in San Francisco, Courtroom 02, 17th Floor before Judge William H. Orrick. (Attachments: # 1 Declaration Declaration of Michelle Holman Kerin, # 2 Proposed Order)(Kerin, Michelle) (Filed on 2/11/2022) (Entered: 02/11/2022)
+- 2022-02-11: Order by Judge William H. Orrick granting 94 Motion for Pretrial Return Date for Subpoena Duces Tecum as to Joseph Sullivan (1). (jmd, COURT STAFF) (Filed on 2/11/2022) (Entered: 02/11/2022)

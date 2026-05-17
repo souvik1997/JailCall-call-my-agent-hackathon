@@ -1,0 +1,11 @@
+Case name: United States v. Faasisila
+Jurisdiction level: Federal
+Docket / appellate number: 4:25-cr-00435
+Court: District Court, N.D. California
+Date filed: 2025-12-18
+Source type: CourtListener RECAP federal criminal docket metadata
+Source URL: https://www.courtlistener.com/docket/72151627/united-states-v-faasisila/
+Attorney listed: Sloan Heffron
+Party / county: Jose Herrada-Aragon
+Description: Federal criminal case. CourtListener did not return detailed RECAP metadata for this docket.
+Notes: Firm and attorney were listed in CourtListener docket metadata for an N.D. California criminal case.

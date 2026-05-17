@@ -1,0 +1,13 @@
+Case name: United States v. Fries
+Jurisdiction level: Federal
+Docket / appellate number: 4:26-cr-00231
+Court: District Court, N.D. California
+Date filed: 2026-05-12
+Offense tags: drug-trafficking, methamphetamine
+Actual charges / charge signals: 21 U.S.C. 841(a)(1), (b)(1)(B); distribution of 500 grams or more of a mixture or substance containing a detectable amount of methamphetamine
+Charge confidence: high
+Crime description: RECAP complaint for Carson Fries charges distribution of 500 grams or more of methamphetamine in Bay Point, California; CourtListener returned Robert Joseph Beles as defense counsel.
+Source URL: https://www.courtlistener.com/docket/73332454/united-states-v-fries/
+Attorney listed: Robert Joseph Beles
+Firm: Law Offices of Beles and Beles
+Notes: This file is part of the offense-searchable corpus. It favors usable charge/category matching over exhaustive case history.

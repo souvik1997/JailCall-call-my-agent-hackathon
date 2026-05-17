@@ -1,0 +1,13 @@
+Case name: Nieves case result - misdemeanor domestic battery dismissed
+Jurisdiction level: State/local firm-reported case result
+Docket / appellate number:
+Court:
+Date filed:
+Offense tags: domestic-violence
+Actual charges / charge signals: Misdemeanor domestic battery
+Charge confidence: medium
+Crime description: Client faced misdemeanor domestic battery. Firm reports the case was dismissed without trial.
+Source URL: https://thenieveslawfirm.com/about-us/
+Attorney listed:
+Firm: The Nieves Law Firm
+Notes: This file is part of the offense-searchable corpus. It favors usable charge/category matching over exhaustive case history.

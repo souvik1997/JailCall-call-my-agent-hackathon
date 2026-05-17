@@ -1,0 +1,11 @@
+Case name: United States v. Holquin
+Jurisdiction level: Federal
+Docket / appellate number: 3:22-cr-00463
+Court: District Court, N.D. California
+Date filed: 2022-12-07
+Source type: CourtListener RECAP federal criminal docket metadata
+Source URL: https://www.courtlistener.com/docket/66800599/united-states-v-holquin/
+Attorney listed: Lina Peng
+Party / county: Samuel Holquin
+Description: Federal criminal case. CourtListener did not return detailed RECAP metadata for this docket.
+Notes: Firm and attorney were listed in CourtListener docket metadata for an N.D. California criminal case.

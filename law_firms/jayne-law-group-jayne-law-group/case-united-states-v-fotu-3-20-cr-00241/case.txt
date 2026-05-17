@@ -1,0 +1,11 @@
+Case name: United States v. Fotu
+Jurisdiction level: Federal
+Docket / appellate number: 3:20-cr-00241
+Court: District Court, N.D. California
+Date filed: 2020-06-18
+Source type: CourtListener RECAP federal criminal docket metadata
+Source URL: https://www.courtlistener.com/docket/59877058/united-states-v-fotu/
+Attorney listed: Julia Mezhinsky Jayne
+Party / county: Fasi Fotu
+Description: Federal criminal case. CourtListener did not return detailed RECAP metadata for this docket.
+Notes: Firm and attorney were listed in CourtListener docket metadata for an N.D. California criminal case.

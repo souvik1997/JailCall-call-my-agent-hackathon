@@ -1,0 +1,13 @@
+Case name: United States v. Shafi
+Jurisdiction level: Federal
+Docket / appellate number: 4:25-cr-00258
+Court: District Court, N.D. California
+Date filed: 2025-08-27
+Offense tags: fraud, securities-fraud, wire-fraud, obstruction
+Actual charges / charge signals: Wire fraud; securities fraud; destruction, alteration, or falsification of records in federal investigations under 18 U.S.C. 1519.
+Charge confidence: high
+Crime description: IRL/Get Together founder Abraham Shafi was charged over alleged misrepresentations to investors in a $170 million Series C raise and alleged record deletion after an SEC investigation began. GovInfo defense filing listed Jeffrey B. Schenk of Jones Day.
+Source URL: https://www.govinfo.gov/content/pkg/USCOURTS-cand-4_25-cr-00258/pdf/USCOURTS-cand-4_25-cr-00258-1.pdf
+Attorney listed: Jeffrey B. Schenk
+Firm: Jones Day
+Notes: This file is part of the offense-searchable corpus. It favors usable charge/category matching over exhaustive case history.

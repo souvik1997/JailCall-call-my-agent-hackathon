@@ -1,0 +1,13 @@
+Case name: United States v. Arteaga
+Jurisdiction level: Federal
+Docket / appellate number: 4:25-cr-00395
+Court: District Court, N.D. California
+Date filed: 2025-11-17
+Source type: CourtListener RECAP federal criminal docket metadata
+Source URL: https://www.courtlistener.com/docket/71924166/united-states-v-arteaga/
+Attorney listed: Emily Dahlke
+Party / county: Jisbar Arteaga
+Description: Federal criminal prosecution in the Northern District of California involving Jisbar Arteaga. Public docket entries indicate: 2025-07-29: COMPLAINT as to Jisbar Arteaga (1). (jlm, COURT STAFF) (Filed on 7/29/2025) [4:25-mj-70919-MAG] (Entered: 07/29/2025)
+Notes: Firm and attorney were listed in CourtListener docket metadata for an N.D. California criminal case.
+Relevant docket entries:
+- 2025-07-29: COMPLAINT as to Jisbar Arteaga (1). (jlm, COURT STAFF) (Filed on 7/29/2025) [4:25-mj-70919-MAG] (Entered: 07/29/2025)

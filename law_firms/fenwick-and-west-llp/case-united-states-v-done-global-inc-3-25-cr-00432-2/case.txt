@@ -1,0 +1,14 @@
+Case name: United States v. Done Global, Inc
+Jurisdiction level: Federal
+Docket / appellate number: 3:25-cr-00432
+Court: District Court, N.D. California
+Date filed: 2025-12-17
+Source type: CourtListener RECAP federal criminal docket metadata
+Source URL: https://www.courtlistener.com/docket/72049053/united-states-v-done-global-inc/
+Attorney listed: Jacob Nathaniel Foster
+Party / county: Done Global, Inc
+Description: Federal criminal prosecution in the Northern District of California involving Done Global, Inc. Public docket entries indicate: 2025-12-17: INDICTMENT as to Done Global, Inc (1) count(s) 1, 2-5, 6, 7, Mindful Mental Wellness P.A. (2) count(s) 1. (Attachments: # 1 Criminal Cover Sheet, # 2 Penalty Sheet, # 3 Penalty Sheet) (exl, COURT STAFF) (Filed on 12/17/2025) (Entered: 12/17/2025) | 2025-12-17: INDICTMENT as to Done Global, Inc (1) count(s) 1, 2-5, 6, 7, Mindful Mental Wellness P.A. (2) count(s) 1. (Attachments: # 1 Criminal Cover Sheet, # 2 Penalty Sheet, # 3 Penalty Sheet) (exl, COURT STAFF) (Filed on 12/17/2025) (Entered: 12/17/2025)
+Notes: Firm and attorney were listed in CourtListener docket metadata for an N.D. California criminal case.
+Relevant docket entries:
+- 2025-12-17: INDICTMENT as to Done Global, Inc (1) count(s) 1, 2-5, 6, 7, Mindful Mental Wellness P.A. (2) count(s) 1. (Attachments: # 1 Criminal Cover Sheet, # 2 Penalty Sheet, # 3 Penalty Sheet) (exl, COURT STAFF) (Filed on 12/17/2025) (Entered: 12/17/2025)
+- 2025-12-17: INDICTMENT as to Done Global, Inc (1) count(s) 1, 2-5, 6, 7, Mindful Mental Wellness P.A. (2) count(s) 1. (Attachments: # 1 Criminal Cover Sheet, # 2 Penalty Sheet, # 3 Penalty Sheet) (exl, COURT STAFF) (Filed on 12/17/2025) (Entered: 12/17/2025)

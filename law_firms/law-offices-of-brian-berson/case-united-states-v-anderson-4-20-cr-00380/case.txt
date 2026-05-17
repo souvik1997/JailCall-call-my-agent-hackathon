@@ -1,0 +1,14 @@
+Case name: United States v. Anderson
+Jurisdiction level: Federal
+Docket / appellate number: 4:20-cr-00380
+Court: District Court, N.D. California
+Date filed: 2020-10-08
+Source type: CourtListener RECAP federal criminal docket metadata
+Source URL: https://www.courtlistener.com/docket/59791539/united-states-v-anderson/
+Attorney listed: Alanna Debra Coopersmith
+Party / county: Douglas E. Anderson
+Description: Federal criminal prosecution in the Northern District of California involving Douglas E. Anderson. Public docket entries indicate: 2020-06-15: STIPULATED PROPOSED ORDER EXCLUDING TIME UNDER THE SPEEDY TRIAL ACT as to Douglas E. Anderson, filed by USA, Douglas E. Anderson. (Coopersmith, Alanna) (Filed on 6/15/2020) Modified on 6/16/2020 (jlmS, COURT STAFF). [4:20-mj-70597-MAG] (Entered: 06/15/2020) | 2020-07-29: Set/Reset Hearing as to Defendant Douglas E. Anderson re 14 Order on Stipulation Preliminary Examination or Arraignment on Information set for 9/2/2020 at 10:30 a.m., by Zoom Video Conferencing, before Magistrate Judge Alex G. Tse. (rmm2S, COURT STAFF) (Filed on 7/29/2020) [4:20-mj-70597-MAG]
+Notes: Firm and attorney were listed in CourtListener docket metadata for an N.D. California criminal case.
+Relevant docket entries:
+- 2020-06-15: STIPULATED PROPOSED ORDER EXCLUDING TIME UNDER THE SPEEDY TRIAL ACT as to Douglas E. Anderson, filed by USA, Douglas E. Anderson. (Coopersmith, Alanna) (Filed on 6/15/2020) Modified on 6/16/2020 (jlmS, COURT STAFF). [4:20-mj-70597-MAG] (Entered: 06/15/2020)
+- 2020-07-29: Set/Reset Hearing as to Defendant Douglas E. Anderson re 14 Order on Stipulation Preliminary Examination or Arraignment on Information set for 9/2/2020 at 10:30 a.m., by Zoom Video Conferencing, before Magistrate Judge Alex G. Tse. (rmm2S, COURT STAFF) (Filed on 7/29/2020) [4:20-mj-70597-MAG]

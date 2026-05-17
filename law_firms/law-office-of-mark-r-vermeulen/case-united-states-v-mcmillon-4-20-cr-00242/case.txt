@@ -1,0 +1,11 @@
+Case name: United States v. McMillon
+Jurisdiction level: Federal
+Docket / appellate number: 4:20-cr-00242
+Court: District Court, N.D. California
+Date filed: 2020-06-18
+Source type: CourtListener RECAP federal criminal docket metadata
+Source URL: https://www.courtlistener.com/docket/17261689/united-states-v-mcmillon/
+Attorney listed: Mark R. Vermeulen
+Party / county: Chase Ronyae McMillon
+Description: Federal criminal case. CourtListener did not return detailed RECAP metadata for this docket.
+Notes: Firm and attorney were listed in CourtListener docket metadata for an N.D. California criminal case.

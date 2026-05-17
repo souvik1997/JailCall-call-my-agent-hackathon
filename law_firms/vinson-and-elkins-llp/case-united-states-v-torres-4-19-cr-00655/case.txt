@@ -1,0 +1,11 @@
+Case name: United States v. Torres
+Jurisdiction level: Federal
+Docket / appellate number: 4:19-cr-00655
+Court: District Court, N.D. California
+Date filed: 2019-12-05
+Source type: CourtListener RECAP federal criminal docket metadata
+Source URL: https://www.courtlistener.com/docket/16838772/united-states-v-torres/
+Attorney listed: Matthew J. Jacobs
+Party / county: Juan Carlos Guzman
+Description: Federal criminal case. CourtListener did not return detailed RECAP metadata for this docket.
+Notes: Firm and attorney were listed in CourtListener docket metadata for an N.D. California criminal case.

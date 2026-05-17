@@ -1,0 +1,13 @@
+Case name: United States v. Washington
+Jurisdiction level: Federal
+Docket / appellate number: 3:26-cr-00239
+Court: District Court, N.D. California
+Date filed: 2026-05-15
+Offense tags: drug-trafficking, fentanyl
+Actual charges / charge signals: 21 U.S.C. 846, 841(a)(1), (b)(1)(C); conspiracy to distribute a controlled substance, to wit, a detectable amount of fentanyl
+Charge confidence: high
+Crime description: RECAP complaint charges Marvin Sarmiento and Rachel Louise Washington with fentanyl-distribution conspiracy in San Francisco; CourtListener returned Charles Jason Simpson Woodson as counsel.
+Source URL: https://www.courtlistener.com/docket/73348226/united-states-v-washington/
+Attorney listed: Charles Jason Simpson Woodson
+Firm: Law Offices of Charles Woodson
+Notes: This file is part of the offense-searchable corpus. It favors usable charge/category matching over exhaustive case history.

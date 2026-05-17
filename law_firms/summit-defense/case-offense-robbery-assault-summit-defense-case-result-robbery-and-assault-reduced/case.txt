@@ -1,0 +1,13 @@
+Case name: Summit Defense case result - robbery and assault reduced
+Jurisdiction level: State/local firm-reported case result
+Docket / appellate number:
+Court:
+Date filed:
+Offense tags: robbery, assault
+Actual charges / charge signals: Robbery and assault after bar brawl
+Charge confidence: medium
+Crime description: Client was charged with robbery and assault after a bar brawl. The defense obtained a reduction to a single misdemeanor and avoided life imprisonment exposure described by the firm.
+Source URL: https://summitdefense.com/case-results/
+Attorney listed: Rabin Nabizadeh
+Firm: Summit Defense
+Notes: This file is part of the offense-searchable corpus. It favors usable charge/category matching over exhaustive case history.

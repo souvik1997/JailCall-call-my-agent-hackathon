@@ -1,0 +1,10 @@
+Name: Law Office of Samantha B Jaffe
+Short name: law-office-of-samantha-b-jaffe
+Website: 
+Phone: 
+Email: 
+Intake URL: 
+Counties: 
+Primary charge tags: fraud, insider-trading, securities-fraud
+Representative case count: 1
+Source URLs: https://www.courtlistener.com/docket/71720407/united-states-v-hudson/

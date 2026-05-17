@@ -1,0 +1,13 @@
+Case name: Nieves case result - sexual assault no criminal charges
+Jurisdiction level: State/local firm-reported case result
+Docket / appellate number:
+Court:
+Date filed:
+Offense tags: sex-crimes
+Actual charges / charge signals: Title IX sexual assault allegations
+Charge confidence: medium
+Crime description: Client faced Title IX sexual assault allegations. Firm reports no criminal charges were filed.
+Source URL: https://thenieveslawfirm.com/about-us/
+Attorney listed:
+Firm: The Nieves Law Firm
+Notes: This file is part of the offense-searchable corpus. It favors usable charge/category matching over exhaustive case history.

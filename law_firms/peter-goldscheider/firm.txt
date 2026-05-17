@@ -1,0 +1,10 @@
+Name: Law Offices of Peter F. Goldscheider
+Short name: peter-goldscheider
+Website: https://www.gdcriminaldefense.com
+Phone: (650) 364-6361
+Email: peter@gdcriminaldefense.com
+Intake URL: https://www.gdcriminaldefense.com/contact/
+Counties: san mateo, santa clara, san francisco
+Primary charge tags: dui, domestic violence, assault, firearm, drug possession/sales, theft, robbery, burglary, probation violation
+Representative case count: 0
+Source URLs: https://www.gdcriminaldefense.com/contact/

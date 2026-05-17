@@ -1,0 +1,13 @@
+Case name: Summit Defense case result - attempted murder probation
+Jurisdiction level: State/local firm-reported case result
+Docket / appellate number:
+Court:
+Date filed:
+Offense tags: murder, violent-crime
+Actual charges / charge signals: Three counts of attempted murder
+Charge confidence: medium
+Crime description: Client was charged with three counts of attempted murder while suffering from severe mental health delusions. Defense mitigation and negotiation led to probation with credit for time served, avoiding prison and strike convictions.
+Source URL: https://summitdefense.com/case-results/
+Attorney listed: Jim Riley; Ryan McHugh
+Firm: Summit Defense
+Notes: This file is part of the offense-searchable corpus. It favors usable charge/category matching over exhaustive case history.

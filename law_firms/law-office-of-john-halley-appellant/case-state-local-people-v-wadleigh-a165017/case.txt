@@ -1,0 +1,14 @@
+Case name: People v. Wadleigh
+Jurisdiction level: State appellate / local superior court origin
+Docket / appellate number: A165017
+Local trial court: San Mateo County Superior Court
+Local trial court number:
+Court: California Court of Appeal
+Date filed: 2023-07-12
+Source type: California public appellate criminal opinion describing local superior court proceedings
+Source URL: https://www.courtlistener.com/opinion/9413061/people-v-wadleigh/
+Opinion PDF: http://www.courts.ca.gov/opinions/documents/A165017.PDF
+Attorney listed: John Halley Appellant
+Party / county: San Mateo County
+Description: 20-SF-002550-A) Daniel Wadleigh appeals from the denial of his motion pursuant to Penal Code section 1538.51 to suppress evidence found during searches of his residence and electronic accounts. After the trial court found the evidence admissible, Wadleigh pled no contest to one count of possessing child pornography in violation of section 311.11, subdivision (a).
+Notes: This is a California state appellate opinion arising from a local county superior court criminal case. Defense counsel was extracted from the public opinion.

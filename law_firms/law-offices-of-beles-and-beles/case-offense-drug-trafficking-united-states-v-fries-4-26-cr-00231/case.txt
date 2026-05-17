@@ -1,0 +1,16 @@
+Case name: United States v. Fries
+Jurisdiction level: Federal
+Docket / appellate number: 4:26-cr-00231
+Court: District Court, N.D. California
+Date filed: 2026-05-12
+Offense tags: drug-trafficking
+Actual charges / charge signals: drug trafficking | narcotics
+Charge confidence: high
+Crime description: Public RECAP docket metadata matched this case to drug trafficking, narcotics. Relevant docket text: COMPLAINT as to Carson Fries (1). (jlm, COURT STAFF) (Filed on 9/22/2025) (Main Document 1 replaced on 12/9/2025) (jlm, COURT STAFF). [4:25-mj-71143-MAG] (Entered: 09/22/2025)
+Source URL: https://www.courtlistener.com/docket/73332454/united-states-v-fries/
+Attorney listed: John Paul Reichmuth
+Firm: Law Offices of Beles and Beles
+Defendant / party: Carson Fries
+Source snippets:
+- COMPLAINT as to Carson Fries (1). (jlm, COURT STAFF) (Filed on 9/22/2025) (Main Document 1 replaced on 12/9/2025) (jlm, COURT STAFF). [4:25-mj-71143-MAG] (Entered: 09/22/2025)
+Notes: This file is part of the offense-searchable corpus. It favors usable charge/category matching over exhaustive case history.

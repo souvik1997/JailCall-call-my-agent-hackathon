@@ -1,0 +1,13 @@
+Case name: Nieves case result - assault domestic violence burglary not guilty
+Jurisdiction level: State/local firm-reported case result
+Docket / appellate number:
+Court:
+Date filed:
+Offense tags: assault, domestic-violence, burglary
+Actual charges / charge signals: Second-degree assault, second-degree domestic violence, and first-degree burglary
+Charge confidence: medium
+Crime description: Client was alleged to have broken into a partner's house and assaulted two people with a coffee pot. Defense asserted self-defense and obtained not-guilty verdicts on all three counts after trial.
+Source URL: https://thenieveslawfirm.com/gurjit-pandher-bringing-results-experience-to-the-nieves-law-firm/
+Attorney listed: Gurjit Pandher
+Firm: The Nieves Law Firm
+Notes: This file is part of the offense-searchable corpus. It favors usable charge/category matching over exhaustive case history.

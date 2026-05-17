@@ -1,0 +1,10 @@
+Name: Law Office of Vijay Dinakar
+Short name: law-office-of-vijay-dinakar
+Website: https://www.vijaylaw.com/
+Phone: +14082752307
+Email: info@vijaylaw.com
+Intake URL: https://www.vijaylaw.com/
+Counties: santa clara
+Primary charge tags: dui, domestic-violence, theft, violent-crime, immigration-consequences
+Representative case count: 0
+Source URLs: https://www.vijaylaw.com/

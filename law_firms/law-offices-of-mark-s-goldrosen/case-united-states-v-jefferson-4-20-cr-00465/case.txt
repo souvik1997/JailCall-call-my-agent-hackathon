@@ -1,0 +1,11 @@
+Case name: United States v. Jefferson
+Jurisdiction level: Federal
+Docket / appellate number: 4:20-cr-00465
+Court: District Court, N.D. California
+Date filed: 2020-12-07
+Source type: CourtListener RECAP federal criminal docket metadata
+Source URL: https://www.courtlistener.com/docket/18723643/united-states-v-jefferson/
+Attorney listed: David W. Rizk
+Party / county: Jeremiah Jefferson
+Description: Federal criminal case. CourtListener did not return detailed RECAP metadata for this docket.
+Notes: Firm and attorney were listed in CourtListener docket metadata for an N.D. California criminal case.

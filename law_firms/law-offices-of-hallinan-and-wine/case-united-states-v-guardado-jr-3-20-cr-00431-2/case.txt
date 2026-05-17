@@ -1,0 +1,13 @@
+Case name: United States v. Guardado, Jr.
+Jurisdiction level: Federal
+Docket / appellate number: 3:20-cr-00431
+Court: District Court, N.D. California
+Date filed: 2020-11-17
+Source type: CourtListener RECAP federal criminal docket metadata
+Source URL: https://www.courtlistener.com/docket/59694145/united-states-v-guardado-jr/
+Attorney listed: Kenneth Howard Wine
+Party / county: Andrew Ray Perez
+Description: Federal criminal prosecution in the Northern District of California involving Andrew Ray Perez. Public docket entries indicate: 2021-03-08: ORDER granting 43 Stipulation to Exclude Time Under the Speedy Trial Act from 3/5/2021 to 3/23/2021 as to Andrew Ray Perez (4). Signed by Magistrate Judge Sallie Kim on 3/8/2021. (mklS, COURT STAFF) (Entered: 03/08/2021)
+Notes: Firm and attorney were listed in CourtListener docket metadata for an N.D. California criminal case.
+Relevant docket entries:
+- 2021-03-08: ORDER granting 43 Stipulation to Exclude Time Under the Speedy Trial Act from 3/5/2021 to 3/23/2021 as to Andrew Ray Perez (4). Signed by Magistrate Judge Sallie Kim on 3/8/2021. (mklS, COURT STAFF) (Entered: 03/08/2021)

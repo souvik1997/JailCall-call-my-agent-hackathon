@@ -1,0 +1,10 @@
+Name: Morris Law PC
+Short name: morris-law-pc
+Website: https://www.morrisdefense.com/
+Phone: +15103300814
+Email: 
+Intake URL: https://www.morrisdefense.com/
+Counties: alameda, contra costa, solano, santa clara, marin, san francisco, napa, sonoma, san mateo
+Primary charge tags: dui, domestic-violence, drug-trafficking, firearm, violent-crime, murder, theft, federal-crimes
+Representative case count: 0
+Source URLs: https://www.morrisdefense.com/

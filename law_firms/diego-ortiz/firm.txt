@@ -1,0 +1,10 @@
+Name: Law Office of Diego E. Ortiz
+Short name: diego-ortiz
+Website: https://www.diegoeortiz.com
+Phone: (510) 654-4470
+Email: diego@diegoeortiz.com
+Intake URL: https://www.diegoeortiz.com/contact
+Counties: alameda, contra costa, san francisco
+Primary charge tags: dui, domestic violence, assault, firearm, drug possession/sales, theft, robbery, burglary, probation violation
+Representative case count: 0
+Source URLs: https://www.diegoeortiz.com/contact

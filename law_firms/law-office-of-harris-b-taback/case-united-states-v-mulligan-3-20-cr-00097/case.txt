@@ -1,0 +1,13 @@
+Case name: United States v. Mulligan
+Jurisdiction level: Federal
+Docket / appellate number: 3:20-cr-00097
+Court: District Court, N.D. California
+Date filed: 2020-02-27
+Source type: CourtListener RECAP federal criminal docket metadata
+Source URL: https://www.courtlistener.com/docket/16901787/united-states-v-mulligan/
+Attorney listed: Ross E Weingarten
+Party / county: Timothy Mulligan
+Description: Federal criminal prosecution in the Northern District of California involving Timothy Mulligan. Public docket entries indicate: 2021-05-03: Motion to Dismiss
+Notes: Firm and attorney were listed in CourtListener docket metadata for an N.D. California criminal case.
+Relevant docket entries:
+- 2021-05-03: Motion to Dismiss

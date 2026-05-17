@@ -1,0 +1,11 @@
+Case name: United States v. Benjamin
+Jurisdiction level: Federal
+Docket / appellate number: 3:20-cr-00442
+Court: District Court, N.D. California
+Date filed: 2020-11-30
+Source type: CourtListener RECAP federal criminal docket metadata
+Source URL: https://www.courtlistener.com/docket/18760453/united-states-v-benjamin/
+Attorney listed: James Thomas Reilly
+Party / county: Adrian Kyle Benjamin
+Description: Federal criminal case. CourtListener did not return detailed RECAP metadata for this docket.
+Notes: Firm and attorney were listed in CourtListener docket metadata for an N.D. California criminal case.

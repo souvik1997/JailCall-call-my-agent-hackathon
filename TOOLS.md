@@ -1016,10 +1016,20 @@ def to_anthropic_history(recent: list[dict] | None) -> list[dict]:
         text = (entry.get("content") or "").strip()
         if not text:
             continue
-        role = "assistant" if entry.get("direction") == "outbound" else "user"
+        role = "assistant" if entry.get("role") == "agent" else "user"
         out.append({"role": role, "content": text})
     return out
 ```
+
+> **Verified against live capture (2026-05-17):** AgentPhone webhook payloads
+> use `{"role": "agent"|"user", "content": str}` for each `recentHistory`
+> entry. Earlier docs showing `direction: "inbound"/"outbound"` were wrong.
+> Payloads also carry `event`, `channel`, `timestamp` (ISO-8601), `agentId`,
+> `conversationState` (null in webhook mode), and a `data` envelope with
+> `callId`, `numberId`, `from`, `to`, `contact`, `status`, `transcript`,
+> `direction`. The `agent.call_ended` `data` adds `startedAt`, `endedAt`,
+> `durationSeconds`, `disconnectionReason`, full `transcript` array,
+> `summary`, `userSentiment`, `callSuccessful`.
 
 ### Webhook route (FastAPI)
 

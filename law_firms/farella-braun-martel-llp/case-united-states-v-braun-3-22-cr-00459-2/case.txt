@@ -1,0 +1,14 @@
+Case name: United States v. Braun
+Jurisdiction level: Federal
+Docket / appellate number: 3:22-cr-00459
+Court: District Court, N.D. California
+Date filed: 2022-12-07
+Source type: CourtListener RECAP federal criminal docket metadata
+Source URL: https://www.courtlistener.com/docket/66622071/united-states-v-braun/
+Attorney listed: William Patrick Keane
+Party / county: Aaron Hugh Braun
+Description: Federal criminal prosecution in the Northern District of California involving Aaron Hugh Braun. Public docket entries indicate: 2022-12-15: WAIVER OF INDICTMENT by Aaron Hugh Braun (slh, COURT STAFF) (Filed on 12/15/2022) (Entered: 12/19/2022) | 2022-12-15: STIPULATED ORDER EXCLUDING TIME UNDER THE SPEEDY TRIAL ACT as to Aaron Hugh Braun. Signed by Magistrate Judge Lisa J. Cisneros on 12/15/2022. (slh, COURT STAFF) (Filed on 12/15/2022) (Entered: 12/19/2022)
+Notes: Firm and attorney were listed in CourtListener docket metadata for an N.D. California criminal case.
+Relevant docket entries:
+- 2022-12-15: WAIVER OF INDICTMENT by Aaron Hugh Braun (slh, COURT STAFF) (Filed on 12/15/2022) (Entered: 12/19/2022)
+- 2022-12-15: STIPULATED ORDER EXCLUDING TIME UNDER THE SPEEDY TRIAL ACT as to Aaron Hugh Braun. Signed by Magistrate Judge Lisa J. Cisneros on 12/15/2022. (slh, COURT STAFF) (Filed on 12/15/2022) (Entered: 12/19/2022)

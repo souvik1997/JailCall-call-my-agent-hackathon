@@ -1,0 +1,10 @@
+Name: Law Offices of Marsanne Weese
+Short name: marsanne-weese
+Website: https://weeselaw.com
+Phone: (415) 398-4300
+Email: weese@weeselaw.com
+Intake URL: https://weeselaw.com/
+Counties: san francisco, alameda, san mateo, contra costa
+Primary charge tags: dui, domestic violence, assault, firearm, drug possession/sales, theft, robbery, burglary, white-collar/fraud, probation violation
+Representative case count: 0
+Source URLs: https://weeselaw.com/

@@ -1,0 +1,13 @@
+Case name: Lamano case result - second DUI diversion dismissed
+Jurisdiction level: State/local firm-reported case result
+Docket / appellate number:
+Court:
+Date filed:
+Offense tags: dui
+Actual charges / charge signals: Second DUI with immigration consequences
+Charge confidence: medium
+Crime description: Asylum seeker with disabled spouse and child was accused of a second DUI. Defense persuaded the judge and DA to divert the case because of severe immigration and family consequences; charges were dismissed.
+Source URL: https://www.lamanolaw.com/successful-cases/
+Attorney listed:
+Firm: Lamano Law Office
+Notes: This file is part of the offense-searchable corpus. It favors usable charge/category matching over exhaustive case history.

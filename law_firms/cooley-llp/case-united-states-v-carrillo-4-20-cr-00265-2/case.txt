@@ -1,0 +1,13 @@
+Case name: United States v. Carrillo
+Jurisdiction level: Federal
+Docket / appellate number: 4:20-cr-00265
+Court: District Court, N.D. California
+Date filed: 2020-06-25
+Source type: CourtListener RECAP federal criminal docket metadata
+Source URL: https://www.courtlistener.com/docket/17297325/united-states-v-carrillo/
+Attorney listed: Katherine M. Lloyd-Lovett
+Party / county: Steven Carrillo
+Description: Federal criminal prosecution in the Northern District of California involving Steven Carrillo. Public docket entries indicate: 2022-09-06: AMENDED JUDGMENT IN A CRIMINAL CASE as to Steven Carrillo. Signed by Judge Yvonne Gonzalez Rogers on 9/6/2022. (amg, COURT STAFF) (Filed on 9/6/2022) (Entered: 09/06/2022)
+Notes: Firm and attorney were listed in CourtListener docket metadata for an N.D. California criminal case.
+Relevant docket entries:
+- 2022-09-06: AMENDED JUDGMENT IN A CRIMINAL CASE as to Steven Carrillo. Signed by Judge Yvonne Gonzalez Rogers on 9/6/2022. (amg, COURT STAFF) (Filed on 9/6/2022) (Entered: 09/06/2022)

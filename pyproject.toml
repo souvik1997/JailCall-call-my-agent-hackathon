@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "bailcall"
+name = "jailcall"
 version = "0.1.0"
 description = "Emergency legal access voice agent — YC Call My Agent Hackathon 2026-05-17."
 requires-python = ">=3.13"
@@ -16,6 +16,7 @@ dependencies = [
     "browser-use-sdk>=3.6.0",
     "agentmail>=0.5.0",
     "agentphone>=0.7.0",
+    "google-genai>=2.3.0",
 ]
 
 [dependency-groups]
@@ -28,7 +29,7 @@ dev = [
 ]
 
 [tool.hatch.build.targets.wheel]
-packages = ["bailcall"]
+packages = ["jailcall"]
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Ruff — every rule on, narrow set of intentional carve-outs.
@@ -66,15 +67,25 @@ ignore = [
     "ANN",      # type hints optional in tests
     "INP001",   # tests dir doesn't need __init__.py
 ]
-"bailcall/setup_agent.py" = [
+"jailcall/setup_agent.py" = [
     "T201",     # print() in setup scripts is intentional
+]
+"jailcall/controller.py" = [
+    "E501",     # SYSTEM_PROMPT is verbatim from SPEC.md — locked text, can't reflow
+]
+"evals/**" = [
+    "INP001",   # eval scripts are runnable modules, no __init__.py needed
+    "T201",     # print() is the whole point of a CLI runner
+    "S101",     # asserts are how we encode invariants in the harness
+    "PLR2004",  # magic numbers (status codes, port numbers) are fine
+    "PLR0913",  # harness helpers often take many kw-only params; clarity > arg count
 ]
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
 
 [tool.ruff.lint.isort]
-known-first-party = ["bailcall"]
+known-first-party = ["jailcall"]
 required-imports = ["from __future__ import annotations"]
 
 [tool.ruff.format]
@@ -84,7 +95,7 @@ docstring-code-format = true
 # basedpyright — strictest mode. Pyright's superset with extra checks.
 # ─────────────────────────────────────────────────────────────────────────────
 [tool.basedpyright]
-include = ["bailcall"]
+include = ["jailcall"]
 exclude = [".venv", "**/__pycache__", "**/node_modules"]
 typeCheckingMode = "all"
 pythonVersion = "3.13"

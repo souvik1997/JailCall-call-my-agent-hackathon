@@ -1,0 +1,13 @@
+Case name: Summit Defense case result - felony domestic violence and probation violation dismissed
+Jurisdiction level: State/local firm-reported case result
+Docket / appellate number:
+Court:
+Date filed:
+Offense tags: domestic-violence, probation-violation
+Actual charges / charge signals: Felony domestic violence and probation violation
+Charge confidence: medium
+Crime description: Client was charged with felony domestic violence and a probation violation. Targeted written motions limited witness testimony and weakened the prosecution case, leading to dismissal of all charges.
+Source URL: https://summitdefense.com/case-results/
+Attorney listed: Collin Moore; Jim Riley
+Firm: Summit Defense
+Notes: This file is part of the offense-searchable corpus. It favors usable charge/category matching over exhaustive case history.

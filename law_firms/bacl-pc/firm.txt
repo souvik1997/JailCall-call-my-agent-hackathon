@@ -1,0 +1,10 @@
+Name: Bay Area Criminal Lawyers PC
+Short name: bacl-pc
+Website: https://www.bayareacrimlaw.com
+Phone: (415) 552-1215
+Email: info@baclpc.com
+Intake URL: https://www.bayareacrimlaw.com/contact-us/
+Counties: san francisco, alameda, san mateo, contra costa, santa clara
+Primary charge tags: dui, domestic violence, assault, firearm, drug possession/sales, theft, robbery, burglary, white-collar/fraud, probation violation
+Representative case count: 0
+Source URLs: https://www.bayareacrimlaw.com/contact-us/

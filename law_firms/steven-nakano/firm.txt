@@ -1,0 +1,10 @@
+Name: Law Office of Steven H. Nakano
+Short name: steven-nakano
+Website: https://www.nakanolaw.com
+Phone: (408) 998-1985
+Email: 
+Intake URL: https://www.nakanolaw.com/
+Counties: santa clara, alameda, san mateo
+Primary charge tags: dui, domestic violence, assault, firearm, drug possession/sales, theft, robbery, burglary, probation violation, reckless driving
+Representative case count: 0
+Source URLs: https://www.nakanolaw.com/

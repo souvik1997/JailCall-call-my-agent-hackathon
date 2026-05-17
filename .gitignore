@@ -29,3 +29,9 @@ build/
 .idea/
 .DS_Store
 Thumbs.db
+
+# Eval fixtures captured at runtime from real AgentPhone deliveries.
+evals/captures/
+
+# Tool-call log written by jailcall.tools each run, read by evals/replay.py.
+evals/last_run/

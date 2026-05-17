@@ -1,0 +1,21 @@
+Case name: People v. Flores
+Jurisdiction level: State appellate / local superior court origin
+Docket / appellate number: A171602
+Court: California Court of Appeal
+Date filed: 2026-02-11
+Local trial court: Alameda County Superior Court
+Local trial court number: 24-CR-005102B
+Offense tags: fentanyl
+Actual charges / charge signals: When the undercover officer texted and called the phone number he had been communicating with to coordinate the fentanyl purchase, Flores’s “phone was alerted of the text message and phone call.” In May 2024, Flores and his passenger, who is not part of this appeal, were charged with felony possession of fentanyl for sale (Health & Saf.
+Charge confidence: high
+Crime description: After pleading no contest to felony possession of fentanyl for sale, Jeremy Flores was sentenced to two years of formal probation with a condition permitting warrantless searches of Flores’s electronic devices. BACKGROUND After responding to an advertisement for the sale of fentanyl pills posted on “an online Classifieds forum” (craigslist.com), an undercover police officer negotiated the purchase of 1,000 fentanyl pills for $2,400 “via text 1 message.”1 Using “law enforcement databases,” police discovered the phone number the seller provided to the undercover officer “was assigned to a voice over internet [protocol] (VOIP) subscriber.” VOIP is “an internet-based” program that “can be downloaded on any phone” and is “commonly use[d]” by “people involved with illicit controlled substance sales . When the undercover officer texted and called the phone number he had been communicating with to coordinate the fentanyl purchase, Flores’s “phone was alerted of the text message and phone call.” In May 2024, Flores and his passenger, who is not part of this appeal, were charged with felony possession of fentanyl for sale (Health & Saf.
+Source URL: https://www.courtlistener.com/opinion/10788382/people-v-flores/
+Opinion PDF: https://www.courts.ca.gov/opinions/documents/A171602.PDF
+Attorney listed: Samantha Schwartz
+Firm: Law Office of Samantha Schwartz
+Defendant / party:
+Source snippets:
+- After pleading no contest to felony possession of fentanyl for sale, Jeremy Flores was sentenced to two years of formal probation with a condition permitting warrantless searches of Flores’s electronic devices.
+- BACKGROUND After responding to an advertisement for the sale of fentanyl pills posted on “an online Classifieds forum” (craigslist.com), an undercover police officer negotiated the purchase of 1,000 fentanyl pills for $2,400 “via text 1 message.”1 Using “law enforcement databases,” police discovered the phone number the seller provided to the undercover officer “was assigned to a voice over internet [protocol] (VOIP) subscriber.” VOIP is “an internet-based” program that “can be downloaded on any phone” and is “commonly use[d]” by “people involved with illicit controlled substance sales .
+- When the undercover officer texted and called the phone number he had been communicating with to coordinate the fentanyl purchase, Flores’s “phone was alerted of the text message and phone call.” In May 2024, Flores and his passenger, who is not part of this appeal, were charged with felony possession of fentanyl for sale (Health & Saf.
+Notes: This file is part of the offense-searchable corpus. It favors usable charge/category matching over exhaustive case history.

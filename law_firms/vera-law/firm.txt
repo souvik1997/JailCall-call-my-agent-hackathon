@@ -1,0 +1,10 @@
+Name: Vera Law Office
+Short name: vera-law
+Website: https://www.veralawoffice.com
+Phone: (510) 561-9656
+Email: help@veralawoffice.com
+Intake URL: https://www.veralawoffice.com/contact/
+Counties: alameda, contra costa, san francisco
+Primary charge tags: dui, domestic violence, assault, firearm, drug possession/sales, theft, robbery, burglary, probation violation
+Representative case count: 0
+Source URLs: https://www.veralawoffice.com/contact/

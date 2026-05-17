@@ -1,0 +1,11 @@
+Case name: United States v. Campoy, et.al
+Jurisdiction level: Federal
+Docket / appellate number: 5:20-cr-00458
+Court: District Court, N.D. California
+Date filed: 2020-12-03
+Source type: CourtListener RECAP federal criminal docket metadata
+Source URL: https://www.courtlistener.com/docket/59246979/united-states-v-campoy-etal/
+Attorney listed: Jack D. Gordon
+Party / county: Lamberto LNU
+Description: Federal criminal case. CourtListener did not return detailed RECAP metadata for this docket.
+Notes: Firm and attorney were listed in CourtListener docket metadata for an N.D. California criminal case.

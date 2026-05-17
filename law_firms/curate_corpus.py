@@ -1,0 +1,479 @@
+"""Merge staged firm/case research into the JailCall law-firm corpus."""
+
+# ruff: noqa: D103, E501, PLW2901, T201
+
+from __future__ import annotations
+
+import csv
+import json
+import re
+from collections import Counter, defaultdict
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent
+STAGING = ROOT / "_staging"
+
+CASE_COLUMNS = [
+    "FIRM_NAME",
+    "SHORT_NAME",
+    "CASE_NAME",
+    "JURISDICTION",
+    "COURT",
+    "DOCKET",
+    "DATE_FILED",
+    "OFFENSE_TAGS",
+    "ACTUAL_CHARGES",
+    "CONFIDENCE",
+    "ATTORNEY",
+    "DESCRIPTION",
+    "SOURCE_URL",
+    "CASE_PATH",
+]
+
+PROFILE_COLUMNS = [
+    "NAME",
+    "SHORT_NAME",
+    "WEBSITE",
+    "PHONE",
+    "EMAIL",
+    "INTAKE_URL",
+    "COUNTIES",
+    "PRIMARY_CHARGE_TAGS",
+    "CASE_COUNT",
+    "REPRESENTATIVE_CASES",
+    "SOURCE_URLS",
+    "PROFILE_TEXT",
+]
+
+SHORT_NAME_ALIASES = {
+    "alanna-d-coopersmithe-attorney-at-law": "alanna-d-coopersmith-attorney-at-law",
+    "beles-and-beles": "law-offices-of-beles-and-beles",
+    "demetrius-costy": "demetrius-costy-law",
+    "east-bay-defense": "alanna-d-coopersmith-attorney-at-law",
+    "jpc-law": "law-office-of-john-p-campion",
+    "lamano-law": "lamano-law-office",
+    "nieves-law": "the-nieves-law-firm",
+    "roberts-elliott-law-corp": "roberts-elliott-law-corp",
+}
+
+
+def clean(value: object) -> str:
+    text = "" if value is None else str(value)
+    return re.sub(r"\s+", " ", text.replace("\t", " ")).strip()
+
+
+def slugify(value: str) -> str:
+    value = value.lower()
+    value = value.replace("&", " and ")
+    value = re.sub(r"[^a-z0-9]+", "-", value)
+    return value.strip("-") or "unknown-firm"
+
+
+def canonical_short_name(value: str) -> str:
+    value = clean(value)
+    if value and not re.fullmatch(r"[a-z0-9][a-z0-9-]*", value):
+        value = slugify(value)
+    return SHORT_NAME_ALIASES.get(value, value)
+
+
+def read_tsv(path: Path) -> list[dict[str, str]]:
+    if not path.exists():
+        return []
+    with path.open(newline="", encoding="utf-8") as handle:
+        return [
+            {clean(k): clean(v) for k, v in row.items()}
+            for row in csv.DictReader(handle, delimiter="\t")
+        ]
+
+
+def write_tsv(path: Path, columns: list[str], rows: list[dict[str, str]]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.DictWriter(handle, fieldnames=columns, delimiter="\t", lineterminator="\n")
+        writer.writeheader()
+        for row in rows:
+            writer.writerow({column: clean(row.get(column, "")) for column in columns})
+
+
+def parse_firm_file(path: Path) -> dict[str, str]:
+    data: dict[str, str] = {}
+    if not path.exists():
+        return data
+    for line in path.read_text(encoding="utf-8", errors="ignore").splitlines():
+        if ":" not in line:
+            continue
+        key, value = line.split(":", 1)
+        data[clean(key).lower()] = clean(value)
+    return data
+
+
+def merge_value(current: str, incoming: str) -> str:
+    current = clean(current)
+    incoming = clean(incoming)
+    return current or incoming
+
+
+def merge_csv_list(*values: str) -> str:
+    seen: set[str] = set()
+    merged: list[str] = []
+    for value in values:
+        for item in re.split(r"[,;|]", clean(value)):
+            item = clean(item).lower()
+            if item and item not in seen:
+                seen.add(item)
+                merged.append(item)
+    return ", ".join(merged)
+
+
+def load_firms() -> dict[str, dict[str, str]]:
+    firms: dict[str, dict[str, str]] = {}
+
+    for row in read_tsv(ROOT / "law_firms.tsv"):
+        short_name = canonical_short_name(row.get("SHORT_NAME", "")) or slugify(row.get("NAME", ""))
+        if not short_name:
+            continue
+        firms[short_name] = {
+            "NAME": clean(row.get("NAME")),
+            "SHORT_NAME": short_name,
+            "WEBSITE": clean(row.get("WEBSITE")),
+            "PHONE": clean(row.get("PHONE")),
+            "EMAIL": "",
+            "INTAKE_URL": "",
+            "COUNTIES": "",
+            "PRIMARY_CHARGE_TAGS": "",
+            "SOURCE_URLS": "",
+        }
+
+    for firm_file in ROOT.glob("*/firm.txt"):
+        info = parse_firm_file(firm_file)
+        short_name = canonical_short_name(info.get("short name") or firm_file.parent.name)
+        firm = firms.setdefault(
+            short_name,
+            {
+                "NAME": info.get("name", short_name.replace("-", " ").title()),
+                "SHORT_NAME": short_name,
+                "WEBSITE": "",
+                "PHONE": "",
+                "EMAIL": "",
+                "INTAKE_URL": "",
+                "COUNTIES": "",
+                "PRIMARY_CHARGE_TAGS": "",
+                "SOURCE_URLS": "",
+            },
+        )
+        firm["NAME"] = merge_value(firm.get("NAME", ""), info.get("name", ""))
+        firm["WEBSITE"] = merge_value(firm.get("WEBSITE", ""), info.get("website", ""))
+        firm["PHONE"] = merge_value(firm.get("PHONE", ""), info.get("phone", ""))
+        firm["EMAIL"] = merge_value(firm.get("EMAIL", ""), info.get("email", ""))
+        firm["INTAKE_URL"] = merge_value(firm.get("INTAKE_URL", ""), info.get("intake url", ""))
+        firm["COUNTIES"] = merge_csv_list(firm.get("COUNTIES", ""), info.get("counties", ""))
+
+    for staged in STAGING.glob("*/firms.tsv"):
+        for row in read_tsv(staged):
+            name = clean(row.get("NAME"))
+            short_name = canonical_short_name(row.get("SHORT_NAME", "")) or slugify(name)
+            if not name or not short_name:
+                continue
+            firm = firms.setdefault(
+                short_name,
+                {
+                    "NAME": name,
+                    "SHORT_NAME": short_name,
+                    "WEBSITE": "",
+                    "PHONE": "",
+                    "EMAIL": "",
+                    "INTAKE_URL": "",
+                    "COUNTIES": "",
+                    "PRIMARY_CHARGE_TAGS": "",
+                    "SOURCE_URLS": "",
+                },
+            )
+            firm["NAME"] = name or firm.get("NAME", "")
+            firm["WEBSITE"] = merge_value(firm.get("WEBSITE", ""), row.get("WEBSITE", ""))
+            firm["PHONE"] = merge_value(firm.get("PHONE", ""), row.get("PHONE", ""))
+            firm["EMAIL"] = merge_value(firm.get("EMAIL", ""), row.get("EMAIL", ""))
+            firm["INTAKE_URL"] = merge_value(firm.get("INTAKE_URL", ""), row.get("INTAKE_URL", ""))
+            firm["COUNTIES"] = merge_csv_list(firm.get("COUNTIES", ""), row.get("COUNTIES", ""))
+            firm["PRIMARY_CHARGE_TAGS"] = merge_csv_list(
+                firm.get("PRIMARY_CHARGE_TAGS", ""),
+                row.get("PRIMARY_CHARGE_TAGS", ""),
+            )
+            firm["SOURCE_URLS"] = merge_csv_list(
+                firm.get("SOURCE_URLS", ""), row.get("SOURCE_URL", "")
+            )
+
+    return firms
+
+
+def load_cases() -> list[dict[str, str]]:
+    deduped: dict[tuple[str, str, str, str], dict[str, str]] = {}
+    sources = [ROOT / "cases.tsv", *STAGING.glob("*/cases.tsv")]
+    for source in sources:
+        for row in read_tsv(source):
+            case = {
+                "FIRM_NAME": clean(row.get("FIRM_NAME")),
+                "SHORT_NAME": canonical_short_name(row.get("SHORT_NAME", ""))
+                or slugify(row.get("FIRM_NAME", "")),
+                "CASE_NAME": clean(row.get("CASE_NAME")),
+                "JURISDICTION": clean(row.get("JURISDICTION")),
+                "COURT": clean(row.get("COURT")),
+                "DOCKET": clean(row.get("DOCKET")),
+                "DATE_FILED": clean(row.get("DATE_FILED")),
+                "OFFENSE_TAGS": merge_csv_list(row.get("OFFENSE_TAGS", "")),
+                "ACTUAL_CHARGES": clean(row.get("ACTUAL_CHARGES")),
+                "CONFIDENCE": clean(row.get("CONFIDENCE")) or "medium",
+                "ATTORNEY": clean(row.get("ATTORNEY")),
+                "DESCRIPTION": clean(row.get("DESCRIPTION")),
+                "SOURCE_URL": clean(row.get("SOURCE_URL")),
+                "CASE_PATH": clean(row.get("CASE_PATH")),
+            }
+            if not case["FIRM_NAME"] or not case["CASE_NAME"]:
+                continue
+            key = (
+                case["SHORT_NAME"],
+                case["CASE_NAME"].lower(),
+                case["DOCKET"].lower(),
+                case["OFFENSE_TAGS"].lower(),
+            )
+            existing = deduped.get(key)
+            if not existing:
+                deduped[key] = case
+                continue
+            for column in CASE_COLUMNS:
+                existing[column] = merge_value(existing.get(column, ""), case.get(column, ""))
+
+    return sorted(
+        deduped.values(),
+        key=lambda row: (
+            row["SHORT_NAME"],
+            row["DATE_FILED"],
+            row["CASE_NAME"],
+            row["OFFENSE_TAGS"],
+        ),
+    )
+
+
+def case_summary(case: dict[str, str]) -> str:
+    tags = case.get("OFFENSE_TAGS", "")
+    charges = case.get("ACTUAL_CHARGES", "")
+    name = case.get("CASE_NAME", "")
+    if charges:
+        return f"{name} ({tags}: {charges})"
+    return f"{name} ({tags})"
+
+
+def build_profiles(
+    firms: dict[str, dict[str, str]], cases: list[dict[str, str]]
+) -> list[dict[str, str]]:
+    cases_by_firm: dict[str, list[dict[str, str]]] = defaultdict(list)
+    tags_by_firm: dict[str, Counter[str]] = defaultdict(Counter)
+
+    for case in cases:
+        short_name = case["SHORT_NAME"]
+        cases_by_firm[short_name].append(case)
+        for tag in re.split(r"[,;|]", case.get("OFFENSE_TAGS", "")):
+            tag = clean(tag).lower()
+            if tag:
+                tags_by_firm[short_name][tag] += 1
+
+    for short_name, tag_counts in tags_by_firm.items():
+        firm = firms.setdefault(
+            short_name,
+            {
+                "NAME": cases_by_firm[short_name][0]["FIRM_NAME"],
+                "SHORT_NAME": short_name,
+                "WEBSITE": "",
+                "PHONE": "",
+                "EMAIL": "",
+                "INTAKE_URL": "",
+                "COUNTIES": "",
+                "PRIMARY_CHARGE_TAGS": "",
+                "SOURCE_URLS": "",
+            },
+        )
+        firm["PRIMARY_CHARGE_TAGS"] = merge_csv_list(
+            firm.get("PRIMARY_CHARGE_TAGS", ""),
+            ", ".join(tag for tag, _count in tag_counts.most_common()),
+        )
+
+    profiles: list[dict[str, str]] = []
+    for short_name, firm in sorted(
+        firms.items(), key=lambda item: item[1].get("NAME", item[0]).lower()
+    ):
+        firm_cases = sorted(
+            cases_by_firm.get(short_name, []),
+            key=lambda row: row.get("DATE_FILED", ""),
+            reverse=True,
+        )
+        representative = "; ".join(case_summary(case) for case in firm_cases[:5])
+        source_urls = merge_csv_list(
+            firm.get("SOURCE_URLS", ""),
+            ", ".join(case.get("SOURCE_URL", "") for case in firm_cases[:5]),
+        )
+        tags = firm.get("PRIMARY_CHARGE_TAGS", "")
+        profile_text = " ".join(
+            part
+            for part in [
+                f"{firm.get('NAME', '')} is a Bay Area criminal defense firm.",
+                f"Counties served: {firm.get('COUNTIES', '')}." if firm.get("COUNTIES") else "",
+                f"Charge categories: {tags}." if tags else "",
+                f"Representative cases: {representative}." if representative else "",
+                "Useful for JailCall routing when a caller gives a matching general charge category.",
+            ]
+            if part
+        )
+        profiles.append(
+            {
+                "NAME": firm.get("NAME", ""),
+                "SHORT_NAME": short_name,
+                "WEBSITE": firm.get("WEBSITE", ""),
+                "PHONE": firm.get("PHONE", ""),
+                "EMAIL": firm.get("EMAIL", ""),
+                "INTAKE_URL": firm.get("INTAKE_URL", ""),
+                "COUNTIES": firm.get("COUNTIES", ""),
+                "PRIMARY_CHARGE_TAGS": tags,
+                "CASE_COUNT": str(len(firm_cases)),
+                "REPRESENTATIVE_CASES": representative,
+                "SOURCE_URLS": source_urls,
+                "PROFILE_TEXT": profile_text,
+            }
+        )
+    return profiles
+
+
+def write_moss_documents(profiles: list[dict[str, str]]) -> None:
+    with (ROOT / "moss_documents.jsonl").open("w", encoding="utf-8") as handle:
+        for profile in profiles:
+            doc = {
+                "id": profile["SHORT_NAME"],
+                "text": profile["PROFILE_TEXT"],
+                "metadata": {
+                    "name": profile["NAME"],
+                    "short_name": profile["SHORT_NAME"],
+                    "website": profile["WEBSITE"],
+                    "phone": profile["PHONE"],
+                    "email": profile["EMAIL"],
+                    "intake_url": profile["INTAKE_URL"],
+                    "counties": profile["COUNTIES"],
+                    "charge_tags": profile["PRIMARY_CHARGE_TAGS"],
+                    "case_count": profile["CASE_COUNT"],
+                    "source_urls": profile["SOURCE_URLS"],
+                },
+            }
+            handle.write(json.dumps(doc, ensure_ascii=True, sort_keys=True) + "\n")
+
+
+def write_firm_files(profiles: list[dict[str, str]]) -> None:
+    for profile in profiles:
+        firm_dir = ROOT / profile["SHORT_NAME"]
+        firm_dir.mkdir(parents=True, exist_ok=True)
+        lines = [
+            f"Name: {profile['NAME']}",
+            f"Short name: {profile['SHORT_NAME']}",
+            f"Website: {profile['WEBSITE']}",
+            f"Phone: {profile['PHONE']}",
+            f"Email: {profile['EMAIL']}",
+            f"Intake URL: {profile['INTAKE_URL']}",
+            f"Counties: {profile['COUNTIES']}",
+            f"Primary charge tags: {profile['PRIMARY_CHARGE_TAGS']}",
+            f"Representative case count: {profile['CASE_COUNT']}",
+            f"Source URLs: {profile['SOURCE_URLS']}",
+        ]
+        (firm_dir / "firm.txt").write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+
+def write_case_files(cases: list[dict[str, str]]) -> None:
+    for case in cases:
+        if case.get("CASE_PATH"):
+            continue
+        tags = "-".join(
+            slugify(tag) for tag in re.split(r"[,;|]", case.get("OFFENSE_TAGS", "")) if clean(tag)
+        )
+        suffix = slugify(
+            " ".join(part for part in [case["CASE_NAME"], case.get("DOCKET", "")] if part)
+        )
+        case_dir = ROOT / case["SHORT_NAME"] / f"case-offense-{tags}-{suffix}"
+        case_dir.mkdir(parents=True, exist_ok=True)
+        case["CASE_PATH"] = str(case_dir.relative_to(ROOT) / "case.txt")
+        lines = [
+            f"Case name: {case['CASE_NAME']}",
+            f"Jurisdiction level: {case['JURISDICTION']}",
+            f"Docket / appellate number: {case['DOCKET']}",
+            f"Court: {case['COURT']}",
+            f"Date filed: {case['DATE_FILED']}",
+            f"Offense tags: {case['OFFENSE_TAGS']}",
+            f"Actual charges / charge signals: {case['ACTUAL_CHARGES']}",
+            f"Charge confidence: {case['CONFIDENCE']}",
+            f"Crime description: {case['DESCRIPTION']}",
+            f"Source URL: {case['SOURCE_URL']}",
+            f"Attorney listed: {case['ATTORNEY']}",
+            f"Firm: {case['FIRM_NAME']}",
+            "Notes: This file is part of the offense-searchable corpus. It favors usable charge/category matching over exhaustive case history.",
+        ]
+        (case_dir / "case.txt").write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+
+def update_summary(profiles: list[dict[str, str]], cases: list[dict[str, str]]) -> None:
+    tag_counts: Counter[str] = Counter()
+    for case in cases:
+        for tag in re.split(r"[,;|]", case.get("OFFENSE_TAGS", "")):
+            tag = clean(tag).lower()
+            if tag:
+                tag_counts[tag] += 1
+
+    summary = {
+        "firms": len(profiles),
+        "firm_directories": len(
+            [path for path in ROOT.iterdir() if path.is_dir() and not path.name.startswith("_")]
+        ),
+        "case_files": len(list(ROOT.glob("*/case-*/case.txt"))),
+        "federal_cases": sum(
+            1 for row in cases if row.get("JURISDICTION", "").lower().startswith("federal")
+        ),
+        "state_appellate_local_origin_cases": sum(
+            1 for row in cases if "state" in row.get("JURISDICTION", "").lower()
+        ),
+        "rows_with_phone": sum(1 for row in profiles if row.get("PHONE")),
+        "rows_with_website": sum(1 for row in profiles if row.get("WEBSITE")),
+        "rows_with_email": sum(1 for row in profiles if row.get("EMAIL")),
+        "rows_with_intake_url": sum(1 for row in profiles if row.get("INTAKE_URL")),
+        "offense_searchable_cases": len(cases),
+        "offense_searchable_firms": len({row["SHORT_NAME"] for row in cases}),
+        "offense_tag_counts": dict(sorted(tag_counts.items())),
+        "cases_tsv": "law_firms/cases.tsv",
+        "firm_profiles_tsv": "law_firms/firm_profiles.tsv",
+        "moss_documents_jsonl": "law_firms/moss_documents.jsonl",
+        "offense_taxonomy_tsv": "law_firms/offense_taxonomy.tsv",
+        "source_note": "Firm profiles are optimized for JailCall/Moss routing. Representative cases use public CourtListener/RECAP, California appellate opinions, and staged public web research when available.",
+    }
+    (ROOT / "summary.json").write_text(
+        json.dumps(summary, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+    )
+
+
+def main() -> None:
+    firms = load_firms()
+    cases = load_cases()
+    profiles = build_profiles(firms, cases)
+
+    write_case_files(cases)
+    write_tsv(ROOT / "cases.tsv", CASE_COLUMNS, cases)
+    write_tsv(ROOT / "firm_profiles.tsv", PROFILE_COLUMNS, profiles)
+    write_tsv(
+        ROOT / "law_firms.tsv",
+        ["NAME", "SHORT_NAME", "WEBSITE", "PHONE"],
+        profiles,
+    )
+    write_moss_documents(profiles)
+    write_firm_files(profiles)
+    update_summary(profiles, cases)
+
+    print(f"profiles={len(profiles)}")
+    print(f"cases={len(cases)}")
+    print(f"with_phone={sum(1 for row in profiles if row.get('PHONE'))}")
+    print(f"with_email={sum(1 for row in profiles if row.get('EMAIL'))}")
+    print(f"with_intake_url={sum(1 for row in profiles if row.get('INTAKE_URL'))}")
+
+
+if __name__ == "__main__":
+    main()

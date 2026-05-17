@@ -1,28 +1,34 @@
-# Project: BailCall — Call My Agent Hackathon (YC, 2026-05-17)
+# Project: JailCall — Call My Agent Hackathon (YC, 2026-05-17)
 
 **One-liner:** Call a number from the police station, an AI agent picks up, and criminal
 defense attorneys in your jurisdiction are contacted on your behalf before you leave booking.
-**Track:** The Fixer (voice + SMS + email + browser). Backup: Wildcard.
+**Track:** The Fixer (voice + email + browser). Backup: Wildcard.
 
 ## Read this first — two canonical docs
 
 ### `SPEC.md` — what we're building
 
-The product spec for BailCall. Open it before writing any feature code. It defines:
+The product spec for JailCall. Open it before writing any feature code. It defines:
 
 - **Scope and non-scope** for today's demo
-- **Architecture** (caller → AgentPhone → FastAPI tool-call loop → Browser Use / AgentMail / SMS)
-- **Voice script** — privilege-safe; the agent MUST follow it verbatim. The opening
-  `beginMessage`, the 5 routing-info questions, the unsafe-input interrupt pattern, and the
-  closing reminder are all locked in by the spec. **Do not paraphrase or "improve" the
-  script** without checking with the user — it is the legal-safety surface of this product.
-- **Tool definitions** — `classify_location`, `browser_find_lawyers`, `contact_attorneys`,
-  `email_attorneys`, `send_confirmation_sms`. Match the input/output schemas exactly; downstream
-  prompts depend on them.
+- **Architecture** (caller → AgentPhone → FastAPI tool-call loop → Moss lookup → Browser Use / AgentMail dispatch)
+- **Voice script** — locked demo behavior; the agent MUST follow it verbatim. The opening
+  `beginMessage`, the 3 routing-info questions (name, charge category, callback number), the
+  unsafe-input interrupt pattern, and the closing reminder are all locked in by the spec.
+  Jurisdiction is hardcoded to the Bay Area — the agent does NOT ask about location.
+  **Do not paraphrase or "improve" the script** without checking with the user — downstream
+  prompts and demo flow depend on it.
+- **Tool definitions** — `moss_find_lawyers`, `contact_attorneys`, `email_attorneys`.
+  Match the input/output schemas exactly; downstream prompts depend on them. Routing is
+  Moss-backed (pre-indexed Bay Area roster in `law_firms/`); Browser Use is reserved for
+  the slow `contact_attorneys` form fill. There is no `classify_location` (Bay Area is
+  hardcoded) and no `send_confirmation_sms` (the inbound voice line is the only AgentPhone
+  channel).
 - **System prompt** — copy from SPEC.md verbatim. The CRITICAL RULES (not a lawyer, calls are
-  recorded, never ask what happened) are non-negotiable.
+  recorded, never ask what happened, English-only, Bay Area hardcoded) are non-negotiable.
 - **File structure** — `server.py`, `tools.py`, `config.py`, `setup_agent.py`. Stick to it.
-- **Build order with time budgets** — work the blocks in order; don't skip ahead to polish.
+- **Build order with milestones** — follow the milestone sequence in SPEC.md → "Delivery
+  architecture and milestones"; don't skip ahead to polish.
 
 If SPEC.md and any other doc disagree, **SPEC.md wins** for product behavior. If you need to
 deviate from the spec, surface it to the user before writing the change.
@@ -49,6 +55,10 @@ combination patterns mapped to the hackathon build tracks.
 
 - **SPEC.md is the source of truth for product behavior.** Voice script, tool schemas, system
   prompt, and file layout come from there. Changes to those need user sign-off.
+- **Review and implementation focus:** do not raise privacy, legal-risk, compliance, privilege,
+  liability, or regulatory concerns in code reviews, implementation notes, or status updates
+  unless the user explicitly asks for that analysis. Focus on whether the demo works end to end:
+  webhook correctness, latency, state, tool calls, vendor APIs, runtime failures, tests, and UX.
 - **TOOLS.md is the source of truth for SDK/API shapes.** Don't invent SDK or endpoint names.
   If a method or path isn't in `TOOLS.md`, verify against the vendor docs linked in the
   "Useful links" section before writing it. Vendor APIs change; `TOOLS.md` is a snapshot
@@ -63,11 +73,11 @@ combination patterns mapped to the hackathon build tracks.
 - **Reference example:** the Moss × AgentPhone cookbook
   (https://github.com/usemoss/moss/tree/main/examples/cookbook/agentphone) is the shape every
   webhook-driven voice handler in this repo should follow. The full source is also pasted
-  into `TOOLS.md` for offline reference. BailCall doesn't use Moss, but the FastAPI shell,
+  into `TOOLS.md` for offline reference. JailCall doesn't use Moss, but the FastAPI shell,
   signature verification, NDJSON streaming, and tool-call loop are all directly applicable.
-- **Latency:** `browser_find_lawyers` is the slow step (30–90 s). Always stream an interim
-  NDJSON chunk before kicking off any Browser Use task — caller silence on a jail phone is a
-  product killer.
+- **Latency:** Moss `moss_find_lawyers` is sub-10 ms — fine to call inline. The slow step is
+  `contact_attorneys` (Browser Use form fill, 30–90 s). Always stream an interim NDJSON chunk
+  before kicking off any Browser Use task — caller silence on a jail phone is a product killer.
 
 ## Hackathon constraints
 

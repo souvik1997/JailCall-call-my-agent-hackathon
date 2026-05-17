@@ -1,0 +1,13 @@
+Case name: United States v. Taylor
+Jurisdiction level: Federal
+Docket / appellate number: 4:20-cr-00301
+Court: District Court, N.D. California
+Date filed: 2020-07-23
+Source type: CourtListener RECAP federal criminal docket metadata
+Source URL: https://www.courtlistener.com/docket/18408601/united-states-v-taylor/
+Attorney listed: Samantha Schott Bennett
+Party / county: Levyonne Ignacio-Booth
+Description: Federal criminal prosecution in the Northern District of California involving Levyonne Ignacio-Booth. Public docket entries indicate: 2020-08-29: Set/Reset Hearing as to Defendant Levyonne Ignacio-Booth re Warrant Issued, 8 Indictment : Initial Appearance/Arraignment on Indictment set for 8/31/2020 1at 0:30 a.m., by Zoom Video Conference, before Magistrate Judge Thomas S. Hixson. (rmm2S, COURT STAFF) (Filed on 8/29/2020)
+Notes: Firm and attorney were listed in CourtListener docket metadata for an N.D. California criminal case.
+Relevant docket entries:
+- 2020-08-29: Set/Reset Hearing as to Defendant Levyonne Ignacio-Booth re Warrant Issued, 8 Indictment : Initial Appearance/Arraignment on Indictment set for 8/31/2020 1at 0:30 a.m., by Zoom Video Conference, before Magistrate Judge Thomas S. Hixson. (rmm2S, COURT STAFF) (Filed on 8/29/2020)

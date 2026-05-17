@@ -1,0 +1,13 @@
+Case name: United States v. Herron
+Jurisdiction level: Federal
+Docket / appellate number: 4:25-cr-00433
+Court: District Court, N.D. California
+Date filed: 2025-12-18
+Source type: CourtListener RECAP federal criminal docket metadata
+Source URL: https://www.courtlistener.com/docket/72060334/united-states-v-herron/
+Attorney listed: Jonah Platt Ross
+Party / county: Maurice Herron
+Description: Federal criminal prosecution in the Northern District of California involving Maurice Herron. Public docket entries indicate: 2025-12-03: ***CAPTION ON ORDER HAS INCORRECT DEFENDANT'S NAME; PLEASE REFER TO DOCUMENT NO. 5 *** ORDER by Magistrate Judge Robert M. Illman GRANTING 2 Motion for Sealing Order as to Maurice Herron (1). Signed by Magistrate Judge Robert M. Illman on 12/03/25. (jlm, COURT STAFF) Modified on 12/3/2025 (jlm, COURT STAFF). Modified on 12/4/2025 (jlm, COURT STAFF). [4:25-mj-71446-MAG] (Entered: 12/03/2025)
+Notes: Firm and attorney were listed in CourtListener docket metadata for an N.D. California criminal case.
+Relevant docket entries:
+- 2025-12-03: ***CAPTION ON ORDER HAS INCORRECT DEFENDANT'S NAME; PLEASE REFER TO DOCUMENT NO. 5 *** ORDER by Magistrate Judge Robert M. Illman GRANTING 2 Motion for Sealing Order as to Maurice Herron (1). Signed by Magistrate Judge Robert M. Illman on 12/03/25. (jlm, COURT STAFF) Modified on 12/3/2025 (jlm, COURT STAFF). Modified on 12/4/2025 (jlm, COURT STAFF). [4:25-mj-71446-MAG] (Entered: 12/03/2025)

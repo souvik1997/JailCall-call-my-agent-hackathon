@@ -1,0 +1,14 @@
+Case name: People v. Lopez-Tapia
+Jurisdiction level: State appellate / local superior court origin
+Docket / appellate number: A169083
+Local trial court: San Mateo County Superior Court
+Local trial court number: 23NF003945A
+Court: California Court of Appeal
+Date filed: 2026-05-15
+Source type: California public appellate criminal opinion describing local superior court proceedings
+Source URL: https://www.courtlistener.com/opinion/10859916/people-v-lopez-tapia/
+Opinion PDF: https://www.courts.ca.gov/opinions/documents/A169083.PDF
+Attorney listed: Keith Fox
+Party / county: San Mateo County
+Description: Jamir Lopez-Tapia was convicted of one count of witness dissuasion and sentenced to the middle term of two years in state prison, doubled to four years by operation of a prior strike allegation. He argues that the trial court failed to comply with its obligation under Penal Code 1 section 1170, subdivision (b)(6) (section 1170(b)(6)) to apply a presumption in favor of the lower term based on his childhood trauma.
+Notes: This is a California state appellate opinion arising from a local county superior court criminal case. Defense counsel was extracted from the public opinion.

@@ -1,0 +1,13 @@
+Case name: United States v. Pan
+Jurisdiction level: Federal
+Docket / appellate number: 3:25-cr-00428
+Court: District Court, N.D. California
+Date filed: 2025-12-17
+Offense tags: fraud, wire-fraud, smuggling
+Actual charges / charge signals: Conspiracy; conspiracy to commit wire fraud; wire fraud; smuggling; entry of goods by false statements in an alleged scheme to evade more than $109 million in customs duties.
+Charge confidence: high
+Crime description: CourtListener RECAP metadata listed Tamara A. Crepet of Duane Morris LLP as counsel for Hua Liang Xie. DOJ described the indictment against Xin Mian Pan, Hua Liang Xie, Jinhua Wang, and related companies in the customs-duty evasion matter.
+Source URL: https://www.courtlistener.com/docket/72123703/united-states-v-pan/
+Attorney listed: Tamara A. Crepet
+Firm: Duane Morris LLP
+Notes: This file is part of the offense-searchable corpus. It favors usable charge/category matching over exhaustive case history.

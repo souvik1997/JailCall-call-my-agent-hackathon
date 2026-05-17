@@ -1,0 +1,10 @@
+Name: Silver Law Firm
+Short name: silver-law
+Website: https://www.esilverlaw.com
+Phone: (510) 995-0000
+Email: advice@esilverlaw.com
+Intake URL: https://www.esilverlaw.com/contact/
+Counties: alameda, contra costa, san francisco
+Primary charge tags: dui, domestic violence, assault, firearm, drug possession/sales, theft, robbery, burglary, white-collar/fraud, probation violation
+Representative case count: 0
+Source URLs: https://www.esilverlaw.com/contact/

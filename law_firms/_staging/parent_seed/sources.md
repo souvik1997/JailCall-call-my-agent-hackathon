@@ -1,0 +1,26 @@
+# Parent Seed Sources
+
+- https://www.mowrylawgroup.com/
+- https://summitdefense.com/
+- https://www.lamanolaw.com/contact-us-lamano-law/
+- https://www.eastbaydefense.com/
+- https://knightjustice.com/
+- https://baydefense.com/
+- https://www.robertsandelliott.com/
+- https://peranilaw.com/
+- https://www.allenspearelaw.com/
+- https://www.jpcampionlaw.com/
+- https://www.linscheidlaw.com/
+- https://sjdefender.com/practice-areas/
+- https://www.delldefense.com/criminal-defense/
+- https://www.vijaylaw.com/
+- https://www.costylaw.com/
+- https://www.bayarea-attorney.com/PracticeAreas/Federal-Crimes.asp
+- https://www.wkimball.com/
+- https://www.jeremyblank.com/
+- https://www.morrisdefense.com/
+- https://thenieveslawfirm.com/contact-us/
+- https://www.cantor-law.com/white-collar-defense/
+- https://www.criminalaw.net/criminal-defense/weapons-gun-offenses/
+- https://www.guytonjinkerson.lawyer/white-collar-crime/
+- https://valerynechaylaw.com/criminal-defense/federal-criminal-lawyer/

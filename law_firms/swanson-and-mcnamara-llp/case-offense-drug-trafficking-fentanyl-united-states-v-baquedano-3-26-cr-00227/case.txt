@@ -1,0 +1,13 @@
+Case name: United States v. Baquedano
+Jurisdiction level: Federal
+Docket / appellate number: 3:26-cr-00227
+Court: District Court, N.D. California
+Date filed: 2026-05-08
+Offense tags: drug-trafficking, fentanyl
+Actual charges / charge signals: knowingly possessed with intent to distribute a controlled substance; government detention motion describes the charged offense as drug trafficking involving a kilogram of fentanyl
+Charge confidence: high
+Crime description: RECAP detention memorandum states Carlos Alberto Baquedano was charged with a drug trafficking offense involving a kilogram of fentanyl; CourtListener returned Swanson & McNamara LLP counsel metadata.
+Source URL: https://www.courtlistener.com/docket/73319493/united-states-v-baquedano/
+Attorney listed: August P. Gugelmann
+Firm: Swanson & McNamara LLP
+Notes: This file is part of the offense-searchable corpus. It favors usable charge/category matching over exhaustive case history.

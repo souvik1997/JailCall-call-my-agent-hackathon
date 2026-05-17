@@ -1,0 +1,13 @@
+Case name: United States v. Waltenbaugh
+Jurisdiction level: Federal
+Docket / appellate number: 5:26-mj-70682
+Court: District Court, N.D. California
+Date filed: 2026-05-14
+Offense tags: firearm
+Actual charges / charge signals: 18 U.S.C. 922(g)(1); felon in possession of a firearm and ammunition
+Charge confidence: high
+Crime description: RECAP criminal complaint charges Karl Waltenbaugh with felon in possession of a firearm and ammunition in Santa Cruz County; CourtListener returned Office of the Federal Public Defender, San Francisco counsel metadata.
+Source URL: https://www.courtlistener.com/docket/73340872/united-states-v-waltenbaugh/
+Attorney listed: Edward Austin Smock
+Firm: Office of the Federal Public Defender, San Francisco
+Notes: This file is part of the offense-searchable corpus. It favors usable charge/category matching over exhaustive case history.

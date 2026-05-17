@@ -1,0 +1,14 @@
+Case name: United States v. Magat
+Jurisdiction level: Federal
+Docket / appellate number: 5:18-cr-00612
+Court: District Court, N.D. California
+Date filed: 2018-12-20
+Source type: CourtListener RECAP federal criminal docket metadata
+Source URL: https://www.courtlistener.com/docket/8444481/united-states-v-magat/
+Attorney listed: Marja-Liisa Overbeck
+Party / county: John Magat
+Description: Federal criminal prosecution in the Northern District of California involving John Magat. Public docket entries indicate: 2018-12-18: STIPULATION WITH PROPOSED ORDER to Continue Detention Hearing Date from December 19, 2018 to January 3, 2019 as to John Magat filed by USA. (Griffin, Katherine) (Filed on 12/18/2018) Modified on 12/19/2018 (cfeS, COURT STAFF). [5:18-mj-71734-MAG] (Entered: 12/18/2018) | 2018-12-18: ORDER Granting 5 Stipulation Continuing Detention Hearing as to John Magat (1). Signed by Magistrate Judge Sallie Kim on 12/18/2018. (mklS, COURT STAFF) Modified on 12/19/2018 (cfeS, COURT STAFF). [5:18-mj-71734-MAG] (Entered: 12/18/2018)
+Notes: Firm and attorney were listed in CourtListener docket metadata for an N.D. California criminal case.
+Relevant docket entries:
+- 2018-12-18: STIPULATION WITH PROPOSED ORDER to Continue Detention Hearing Date from December 19, 2018 to January 3, 2019 as to John Magat filed by USA. (Griffin, Katherine) (Filed on 12/18/2018) Modified on 12/19/2018 (cfeS, COURT STAFF). [5:18-mj-71734-MAG] (Entered: 12/18/2018)
+- 2018-12-18: ORDER Granting 5 Stipulation Continuing Detention Hearing as to John Magat (1). Signed by Magistrate Judge Sallie Kim on 12/18/2018. (mklS, COURT STAFF) Modified on 12/19/2018 (cfeS, COURT STAFF). [5:18-mj-71734-MAG] (Entered: 12/18/2018)

@@ -1,0 +1,13 @@
+Case name: United States v. Fries
+Jurisdiction level: Federal
+Docket / appellate number: 4:26-cr-00231
+Court: District Court, N.D. California
+Date filed: 2026-05-12
+Offense tags: drug-trafficking, methamphetamine
+Actual charges / charge signals: 21 U.S.C. 841(a)(1), (b)(1)(B); distribution of 500 grams or more of a mixture or substance containing a detectable amount of methamphetamine
+Charge confidence: medium
+Crime description: RECAP complaint gives exact methamphetamine distribution charge; CourtListener search returned Matthew Thomas Matejcek and Federal Public Defender's Office, Oakland among counsel/firm metadata, but attorney-firm pairing was inferred from result ordering.
+Source URL: https://www.courtlistener.com/docket/73332454/united-states-v-fries/
+Attorney listed: Matthew Thomas Matejcek
+Firm: Federal Public Defender's Office, Oakland
+Notes: This file is part of the offense-searchable corpus. It favors usable charge/category matching over exhaustive case history.

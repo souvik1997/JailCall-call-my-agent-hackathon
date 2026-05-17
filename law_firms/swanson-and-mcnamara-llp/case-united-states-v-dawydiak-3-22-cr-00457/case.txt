@@ -1,0 +1,11 @@
+Case name: United States v. Dawydiak
+Jurisdiction level: Federal
+Docket / appellate number: 3:22-cr-00457
+Court: District Court, N.D. California
+Date filed: 2022-12-02
+Source type: CourtListener RECAP federal criminal docket metadata
+Source URL: https://www.courtlistener.com/docket/66609516/united-states-v-dawydiak/
+Attorney listed: Britt H. Evangelist
+Party / county: Walter Dawydiak
+Description: Federal criminal case. CourtListener did not return detailed RECAP metadata for this docket.
+Notes: Firm and attorney were listed in CourtListener docket metadata for an N.D. California criminal case.

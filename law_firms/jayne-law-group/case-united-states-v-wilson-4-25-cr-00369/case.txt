@@ -1,0 +1,13 @@
+Case name: United States v. Wilson
+Jurisdiction level: Federal
+Docket / appellate number: 4:25-cr-00369
+Court: District Court, N.D. California
+Date filed: 2025-11-05
+Source type: CourtListener RECAP federal criminal docket metadata
+Source URL: https://www.courtlistener.com/docket/71877554/united-states-v-wilson/
+Attorney listed: Ivana Djak
+Party / county: Felix Dondrell Wilson
+Description: Federal criminal prosecution in the Northern District of California involving Felix Dondrell Wilson. Public docket entries indicate: 2025-02-27: ***PLEASE DISREGARD DOCKET ENTRY 9 PER INCORRECT ATTACHED ORDER. SEE DOCKET ENTRY 10 INSTEAD***ORDER granting 7 Motion for Writ of Habeas Corpus ad prosequendum as to Felix Dondrell Wilson (2) so Defendant can be produced on 3/14/2025 at 10:30 AM before Magistrate Judge Kandis A. Westmore. Signed by Chief Magistrate Judge Donna M. Ryu on 2/27/2025. (ig, COURT STAFF) Modified on 2/27/2025 (ig, COURT STAFF). Modified on 2/28/2025 (jlm, COURT STAFF). [4:24-mj-71557-MAG] (Entered: 02/27/2025)
+Notes: Firm and attorney were listed in CourtListener docket metadata for an N.D. California criminal case.
+Relevant docket entries:
+- 2025-02-27: ***PLEASE DISREGARD DOCKET ENTRY 9 PER INCORRECT ATTACHED ORDER. SEE DOCKET ENTRY 10 INSTEAD***ORDER granting 7 Motion for Writ of Habeas Corpus ad prosequendum as to Felix Dondrell Wilson (2) so Defendant can be produced on 3/14/2025 at 10:30 AM before Magistrate Judge Kandis A. Westmore. Signed by Chief Magistrate Judge Donna M. Ryu on 2/27/2025. (ig, COURT STAFF) Modified on 2/27/2025 (ig, COURT STAFF). Modified on 2/28/2025 (jlm, COURT STAFF). [4:24-mj-71557-MAG] (Entered: 02/27/2025)

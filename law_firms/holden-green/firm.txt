@@ -1,0 +1,10 @@
+Name: Law Offices of Holden W. Green
+Short name: holden-green
+Website: https://holdengreen.com
+Phone: (408) 451-8449
+Email: 
+Intake URL: https://holdengreen.com/
+Counties: santa clara, alameda, san mateo
+Primary charge tags: dui, domestic violence, assault, firearm, drug possession/sales, theft, robbery, burglary, white-collar/fraud, probation violation
+Representative case count: 0
+Source URLs: https://holdengreen.com/

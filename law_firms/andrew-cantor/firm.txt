@@ -1,0 +1,10 @@
+Name: Law Offices of Andrew Cantor
+Short name: andrew-cantor
+Website: https://www.andrewcantor.com
+Phone: (415) 500-5849
+Email: cantor@andrewcantor.com
+Intake URL: https://www.andrewcantor.com/contact/
+Counties: san francisco, san mateo, marin, alameda
+Primary charge tags: dui, domestic violence, assault, firearm, drug possession/sales, theft, robbery, burglary, white-collar/fraud, probation violation
+Representative case count: 0
+Source URLs: https://www.andrewcantor.com/contact/

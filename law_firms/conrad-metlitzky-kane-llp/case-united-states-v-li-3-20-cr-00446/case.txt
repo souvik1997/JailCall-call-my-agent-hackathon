@@ -1,0 +1,13 @@
+Case name: United States v. Li
+Jurisdiction level: Federal
+Docket / appellate number: 3:20-cr-00446
+Court: District Court, N.D. California
+Date filed: 2020-12-01
+Source type: CourtListener RECAP federal criminal docket metadata
+Source URL: https://www.courtlistener.com/docket/68476193/united-states-v-li/
+Attorney listed: Miranda Kane
+Party / county: Lin Chen
+Description: Federal criminal prosecution in the Northern District of California involving Lin Chen. Public docket entries indicate: 2024-05-16: STIPULATION WITH PROPOSED ORDER as to Lin Chen to Modifying Conditions of Pre-Trial Release. (Kane, Miranda) (Filed on 5/16/2024) (Entered: 05/16/2024)
+Notes: Firm and attorney were listed in CourtListener docket metadata for an N.D. California criminal case.
+Relevant docket entries:
+- 2024-05-16: STIPULATION WITH PROPOSED ORDER as to Lin Chen to Modifying Conditions of Pre-Trial Release. (Kane, Miranda) (Filed on 5/16/2024) (Entered: 05/16/2024)

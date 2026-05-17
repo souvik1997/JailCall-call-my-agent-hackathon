@@ -1,0 +1,11 @@
+Case name: United States v. Green
+Jurisdiction level: Federal
+Docket / appellate number: 4:20-cr-00074
+Court: District Court, N.D. California
+Date filed: 2020-02-14
+Source type: CourtListener RECAP federal criminal docket metadata
+Source URL: https://www.courtlistener.com/docket/16851303/united-states-v-green/
+Attorney listed: Charles Jason Simpson Woodson
+Party / county: Lance Green
+Description: Federal criminal case. CourtListener did not return detailed RECAP metadata for this docket.
+Notes: Firm and attorney were listed in CourtListener docket metadata for an N.D. California criminal case.

@@ -1,0 +1,14 @@
+Case name: People v. Mohammed
+Jurisdiction level: State appellate / local superior court origin
+Docket / appellate number: H052908
+Local trial court: Santa Clara County Superior Court
+Local trial court number:
+Court: California Court of Appeal
+Date filed: 2026-04-29
+Source type: California public appellate criminal opinion describing local superior court proceedings
+Source URL: https://www.courtlistener.com/opinion/10850565/people-v-mohammed/
+Opinion PDF: https://www.courts.ca.gov/opinions/documents/H052908.PDF
+Attorney listed: Robert L.S. Angress Sami
+Party / county: Santa Clara County
+Description: 1130.) Since the Supreme Court made this statement, the clear majority of published decisions considering the issue have held that trial courts lack inherent jurisdiction to correct unauthorized sentences. involved appellate rather than trial court jurisdiction—we see no good reason to depart from the literal implication of the Supreme Court’s statement and join the majority view in holding that trial courts lack inherent jurisdiction to correct unauthorized sentences.
+Notes: This is a California state appellate opinion arising from a local county superior court criminal case. Defense counsel was extracted from the public opinion.

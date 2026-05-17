@@ -1,0 +1,13 @@
+Case name: United States v. Nadimpalli
+Jurisdiction level: Federal
+Docket / appellate number: 3:24-cr-00021
+Court: District Court, N.D. California
+Date filed: 2024-01-17
+Offense tags: fraud, securities-fraud, wire-fraud
+Actual charges / charge signals: Securities fraud under 15 U.S.C. 78j(b), 78ff and 17 C.F.R. 240.10b-5; wire fraud under 18 U.S.C. 1343.
+Charge confidence: high
+Crime description: SKAEL founder and former CEO Baba Nadimpalli was charged over false revenue, annual recurring revenue, customer, and sales information used to raise more than $40 million. GovInfo judgment lists Jonathan M. Baum as retained defense counsel.
+Source URL: https://www.govinfo.gov/content/pkg/USCOURTS-cand-3_24-cr-00021/pdf/USCOURTS-cand-3_24-cr-00021-0.pdf
+Attorney listed: Jonathan M. Baum
+Firm: HWG LLP
+Notes: This file is part of the offense-searchable corpus. It favors usable charge/category matching over exhaustive case history.

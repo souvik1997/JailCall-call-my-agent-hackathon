@@ -1,0 +1,13 @@
+Case name: Nieves case result - marijuana possession for sale dismissed
+Jurisdiction level: State/local firm-reported case result
+Docket / appellate number:
+Court:
+Date filed:
+Offense tags: drug-trafficking
+Actual charges / charge signals: Marijuana possession for sale
+Charge confidence: medium
+Crime description: Client faced marijuana possession for sale allegations. Firm reports all charges dismissed and property ordered returned.
+Source URL: https://thenieveslawfirm.com/about-us/
+Attorney listed:
+Firm: The Nieves Law Firm
+Notes: This file is part of the offense-searchable corpus. It favors usable charge/category matching over exhaustive case history.

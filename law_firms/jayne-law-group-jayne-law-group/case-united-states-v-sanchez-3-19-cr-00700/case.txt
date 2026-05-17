@@ -1,0 +1,13 @@
+Case name: United States v. Sanchez
+Jurisdiction level: Federal
+Docket / appellate number: 3:19-cr-00700
+Court: District Court, N.D. California
+Date filed: 2019-12-17
+Source type: CourtListener RECAP federal criminal docket metadata
+Source URL: https://www.courtlistener.com/docket/17177034/united-states-v-sanchez/
+Attorney listed: Ashley Riser
+Party / county: Jose Ivan Sanchez
+Description: Federal criminal prosecution in the Northern District of California involving Jose Ivan Sanchez. Public docket entries indicate: 2020-09-18: STIPULATION AND ORDER RE 53 Vacating Change of Plea Hearing, Setting Status Conference, and Excluding Time as to Froylan Sanchez. Status Conference set for 11/3/2020 02:30 PM before Judge Richard Seeborg.This proceeding will be held by AT&T Conference Line. The court circulates the following conference number to allow the equivalent of a public hearing by telephone.For conference line information, see: https://apps.cand.uscourts.gov/telhrg/ All counsel, members of the public and press please use the following dial-in information below to access the conference line: Dial In: 1-888-684-8852Acces
+Notes: Firm and attorney were listed in CourtListener docket metadata for an N.D. California criminal case.
+Relevant docket entries:
+- 2020-09-18: STIPULATION AND ORDER RE 53 Vacating Change of Plea Hearing, Setting Status Conference, and Excluding Time as to Froylan Sanchez. Status Conference set for 11/3/2020 02:30 PM before Judge Richard Seeborg.This proceeding will be held by AT&T Conference Line. The court circulates the following conference number to allow the equivalent of a public hearing by telephone.For conference line information, see: https://apps.cand.uscourts.gov/telhrg/ All counsel, members of the public and press please use the following dial-in information below to access the conference line: Dial In: 1-888-684-8852Acces

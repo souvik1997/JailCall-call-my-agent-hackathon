@@ -1,0 +1,13 @@
+Case name: United States v. Sullivan
+Jurisdiction level: Federal
+Docket / appellate number: 3:20-cr-00337
+Court: District Court, N.D. California
+Date filed: 2020-09-04
+Source type: CourtListener RECAP federal criminal docket metadata
+Source URL: https://www.courtlistener.com/docket/18414184/united-states-v-sullivan/
+Attorney listed: Edward A. Piper
+Party / county: Joseph Sullivan
+Description: Federal criminal prosecution in the Northern District of California involving Joseph Sullivan. Public docket entries indicate: 2023-04-27: SENTENCING MEMORANDUM by USA as to Joseph Sullivan (Dawson, Andrew) (Filed on 4/27/2023) (Entered: 04/27/2023)
+Notes: Firm and attorney were listed in CourtListener docket metadata for an N.D. California criminal case.
+Relevant docket entries:
+- 2023-04-27: SENTENCING MEMORANDUM by USA as to Joseph Sullivan (Dawson, Andrew) (Filed on 4/27/2023) (Entered: 04/27/2023)

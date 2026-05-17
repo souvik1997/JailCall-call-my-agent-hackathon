@@ -1,0 +1,45 @@
+TAG	MATCH_TERMS
+dui	dui, driving under the influence, vehicle code section 23152
+reckless-driving	reckless driving
+traffic	traffic ticket, traffic violation, vehicle offense, suspended license, dmv
+vehicular-manslaughter	vehicular manslaughter, gross vehicular manslaughter
+domestic-violence	domestic violence, corporal injury, spousal abuse, domestic battery
+wire-fraud	wire fraud
+mail-fraud	mail fraud
+bank-fraud	bank fraud
+securities-fraud	securities fraud
+insider-trading	insider trading
+money-laundering	money laundering
+health-care-fraud	health care fraud, healthcare fraud
+tax-fraud	tax fraud
+computer-fraud	computer fraud, cybercrime, cyber crime
+white-collar-crime	white collar, economic crime, complex economic crimes, embezzlement
+embezzlement	embezzlement
+identity-theft	identity theft
+drug-trafficking	drug trafficking, possession with intent, distribution of, conspiracy to distribute
+fentanyl	fentanyl
+methamphetamine	methamphetamine
+cocaine	cocaine
+firearm	firearm, felon in possession, gun, armed
+robbery	robbery, carjacking
+burglary	burglary
+assault	assault
+witness-dissuasion	witness dissuasion, witness intimidation, dissuading a witness
+child-pornography	child pornography, csam
+sex-trafficking	sex trafficking
+sex-crimes	sex crime, sexual assault, rape, solicitation, child molest
+murder	murder, homicide
+violent-crime	violent crime, strike offense, criminal threats, kidnapping
+gang-crime	gang crime, gang-related offense
+manslaughter	manslaughter
+theft	theft, stolen
+fraud	fraud
+federal-crimes	federal crime, federal criminal defense, federal prosecution
+obstruction	obstruction, obstruction of justice
+smuggling	smuggling, importation
+probation-violation	probation violation, violation of probation
+juvenile	juvenile, juvenile court
+felony	felony
+misdemeanor	misdemeanor
+restraining-order	restraining order, protective order
+immigration-consequences	criminal immigration, immigration consequences, crimmigration

@@ -1,0 +1,10 @@
+Name: Law Office of Javier Rios
+Short name: javier-rios
+Website: https://www.javierlaw.com
+Phone: (408) 478-4444
+Email: rios@javierlaw.com
+Intake URL: https://www.javierlaw.com/contact/
+Counties: santa clara, alameda, san mateo
+Primary charge tags: dui, domestic violence, assault, firearm, drug possession/sales, theft, robbery, burglary, probation violation
+Representative case count: 0
+Source URLs: https://www.javierlaw.com/contact/

@@ -1,0 +1,11 @@
+Case name: United States v. Aguirre, et.al
+Jurisdiction level: Federal
+Docket / appellate number: 5:20-cr-00460
+Court: District Court, N.D. California
+Date filed: 2020-12-03
+Source type: CourtListener RECAP federal criminal docket metadata
+Source URL: https://www.courtlistener.com/docket/61055048/united-states-v-aguirre-etal/
+Attorney listed: Christina T. Liu
+Party / county: Jose Manuel Rodriguez Naranjo
+Description: Federal criminal prosecution in the Northern District of California involving Jose Manuel Rodriguez Naranjo. CourtListener RECAP metadata lists counsel and parties, but no charging-summary entry was available in the API result.
+Notes: Firm and attorney were listed in CourtListener docket metadata for an N.D. California criminal case.

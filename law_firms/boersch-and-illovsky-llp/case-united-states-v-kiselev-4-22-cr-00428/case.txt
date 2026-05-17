@@ -1,0 +1,13 @@
+Case name: United States v. Kiselev
+Jurisdiction level: Federal
+Docket / appellate number: 4:22-cr-00428
+Court: District Court, N.D. California
+Date filed: 2022-11-09
+Source type: CourtListener RECAP federal criminal docket metadata
+Source URL: https://www.courtlistener.com/docket/65745832/united-states-v-kiselev/
+Attorney listed: Martha A Boersch
+Party / county: Alexsei Kiselev
+Description: Federal criminal prosecution in the Northern District of California involving Alexsei Kiselev. Public docket entries indicate: 2023-06-26: STIPULATION AND AMENDED PROTECTIVE ORDER PURSUANT TO SECTION 3 OF THE CLASSIFIED INFORMATION PROCEDURES ACT by Judge Jeffrey S. White granting 94 Stipulation as to Alexsei Kiselev (1). (kkp, COURT STAFF) (Filed on 6/26/2023) (Entered: 06/26/2023)
+Notes: Firm and attorney were listed in CourtListener docket metadata for an N.D. California criminal case.
+Relevant docket entries:
+- 2023-06-26: STIPULATION AND AMENDED PROTECTIVE ORDER PURSUANT TO SECTION 3 OF THE CLASSIFIED INFORMATION PROCEDURES ACT by Judge Jeffrey S. White granting 94 Stipulation as to Alexsei Kiselev (1). (kkp, COURT STAFF) (Filed on 6/26/2023) (Entered: 06/26/2023)

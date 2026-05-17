@@ -1,0 +1,11 @@
+Case name: United States v. Velcu
+Jurisdiction level: Federal
+Docket / appellate number: 5:20-cr-00340
+Court: District Court, N.D. California
+Date filed: 2020-09-08
+Source type: CourtListener RECAP federal criminal docket metadata
+Source URL: https://www.courtlistener.com/docket/60069642/united-states-v-velcu/
+Attorney listed: Daniel Lee Barton
+Party / county: Ion Velcu
+Description: Federal criminal case. CourtListener did not return detailed RECAP metadata for this docket.
+Notes: Firm and attorney were listed in CourtListener docket metadata for an N.D. California criminal case.

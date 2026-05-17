@@ -1,0 +1,10 @@
+Name: Law Office of Robert Tayac
+Short name: bay-area-dui-defense
+Website: https://bayareaduidefense.com
+Phone: (415) 552-6000
+Email: 
+Intake URL: https://bayareaduidefense.com/contact-us/
+Counties: san francisco, alameda, san mateo, contra costa, marin
+Primary charge tags: dui, reckless driving, probation violation
+Representative case count: 0
+Source URLs: https://bayareaduidefense.com/contact-us/

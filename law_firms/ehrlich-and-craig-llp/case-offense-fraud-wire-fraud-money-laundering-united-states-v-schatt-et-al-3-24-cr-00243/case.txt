@@ -1,0 +1,13 @@
+Case name: United States v. Schatt et al
+Jurisdiction level: Federal
+Docket / appellate number: 3:24-cr-00243
+Court: District Court, N.D. California
+Date filed: 2024-05-01
+Offense tags: fraud, wire-fraud, money-laundering
+Actual charges / charge signals: Conspiracy to commit wire fraud; wire fraud; money laundering transactions under 18 U.S.C. 1957; financial transactions to promote unlawful activity under 18 U.S.C. 1956(a)(1)(A).
+Charge confidence: high
+Crime description: Cred LLC cryptocurrency-lending executives Daniel Schatt and Joseph Podulka were charged in a customer and investor fraud case. Public filing listed Miles Ehrlich of Ehrlich & Craig LLP for Daniel Schatt.
+Source URL: https://www.docketalarm.com/cases/California_Northern_District_Court/3--24-cr-00243/USA_v._Schatt_et_al/59/
+Attorney listed: Miles Ehrlich
+Firm: Ehrlich & Craig LLP
+Notes: This file is part of the offense-searchable corpus. It favors usable charge/category matching over exhaustive case history.

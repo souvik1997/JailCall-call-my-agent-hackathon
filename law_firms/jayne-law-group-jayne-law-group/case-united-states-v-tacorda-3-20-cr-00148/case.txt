@@ -1,0 +1,14 @@
+Case name: United States v. Tacorda
+Jurisdiction level: Federal
+Docket / appellate number: 3:20-cr-00148
+Court: District Court, N.D. California
+Date filed: 2020-04-09
+Source type: CourtListener RECAP federal criminal docket metadata
+Source URL: https://www.courtlistener.com/docket/18414628/united-states-v-tacorda/
+Attorney listed: Julia Mezhinsky Jayne
+Party / county: Hilda Tacorda
+Description: Federal criminal prosecution in the Northern District of California involving Hilda Tacorda. Public docket entries indicate: 2019-09-10: Set/Reset Hearing as to Defendant Hilda Tacorda re 1 Complaint Initial Appearance set for 9/18/2019 10:30 AM in San Francisco, Courtroom G, 15th Floor before Hon. John Jelderks. (klhS, COURT STAFF) (Filed on 9/10/2019)9/10/19: moved from 9/13 to 9/18 via email request from defense counsel Julia Jayne [3:19-mj-71432-MAG] | 2019-09-03: COMPLAINT as to Hilda Tacorda (1). (kmsS, COURT STAFF) (Filed on 9/3/2019) (mjj2S, COURT STAFF). [3:19-mj-71432-MAG] (Entered: 09/04/2019)
+Notes: Firm and attorney were listed in CourtListener docket metadata for an N.D. California criminal case.
+Relevant docket entries:
+- 2019-09-10: Set/Reset Hearing as to Defendant Hilda Tacorda re 1 Complaint Initial Appearance set for 9/18/2019 10:30 AM in San Francisco, Courtroom G, 15th Floor before Hon. John Jelderks. (klhS, COURT STAFF) (Filed on 9/10/2019)9/10/19: moved from 9/13 to 9/18 via email request from defense counsel Julia Jayne [3:19-mj-71432-MAG]
+- 2019-09-03: COMPLAINT as to Hilda Tacorda (1). (kmsS, COURT STAFF) (Filed on 9/3/2019) (mjj2S, COURT STAFF). [3:19-mj-71432-MAG] (Entered: 09/04/2019)

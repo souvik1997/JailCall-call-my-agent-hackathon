@@ -1,0 +1,19 @@
+Case name: People v. Mohammed
+Jurisdiction level: State appellate / local superior court origin
+Docket / appellate number: H052908
+Court: California Court of Appeal
+Date filed: 2026-04-29
+Offense tags: drug-trafficking, methamphetamine
+Actual charges / charge signals: C2210384 In the lead case against Mohammed, he was charged with committing 16 offenses on three separate days.
+Charge confidence: high
+Crime description: C2210384 In the lead case against Mohammed, he was charged with committing 16 offenses on three separate days. The August 12, 2022 Offenses Mohammed was charged with committing five felonies and two misdemeanors on August 12, 2022. (b)(1)); (4) transportation, sale, or distribution of a controlled substance (methamphetamine) (count 4; Health & Saf.
+Source URL: https://www.courtlistener.com/opinion/10850565/people-v-mohammed/
+Opinion PDF: https://www.courts.ca.gov/opinions/documents/H052908.PDF
+Attorney listed: Robert L.S. Angress Sami
+Firm: Law Office of Robert L.S. Angress Sami
+Defendant / party:
+Source snippets:
+- C2210384 In the lead case against Mohammed, he was charged with committing 16 offenses on three separate days.
+- The August 12, 2022 Offenses Mohammed was charged with committing five felonies and two misdemeanors on August 12, 2022.
+- (b)(1)); (4) transportation, sale, or distribution of a controlled substance (methamphetamine) (count 4; Health & Saf.
+Notes: This file is part of the offense-searchable corpus. It favors usable charge/category matching over exhaustive case history.

@@ -1,0 +1,10 @@
+Name: Jones Day
+Short name: jones-day
+Website: 
+Phone: 
+Email: 
+Intake URL: 
+Counties: 
+Primary charge tags: fraud, securities-fraud, wire-fraud, obstruction
+Representative case count: 1
+Source URLs: https://www.govinfo.gov/content/pkg/uscourts-cand-4_25-cr-00258/pdf/uscourts-cand-4_25-cr-00258-1.pdf

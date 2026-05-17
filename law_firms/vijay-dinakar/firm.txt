@@ -1,0 +1,10 @@
+Name: Law Office of Vijay Dinakar
+Short name: vijay-dinakar
+Website: https://vijaylaw.com
+Phone: (408) 275-2307
+Email: info@vijaylaw.com
+Intake URL: https://vijaylaw.com/contact/
+Counties: santa clara, alameda, san mateo
+Primary charge tags: dui, domestic violence, assault, firearm, drug possession/sales, theft, robbery, burglary, white-collar/fraud, probation violation
+Representative case count: 0
+Source URLs: https://vijaylaw.com/contact/

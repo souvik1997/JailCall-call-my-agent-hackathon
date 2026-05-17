@@ -1,0 +1,13 @@
+Case name: United States v. Vega-Sainz
+Jurisdiction level: Federal
+Docket / appellate number: 3:19-cr-00602
+Court: District Court, N.D. California
+Date filed: 2019-11-12
+Source type: CourtListener RECAP federal criminal docket metadata
+Source URL: https://www.courtlistener.com/docket/16828149/united-states-v-vega-sainz/
+Attorney listed: Philip Andrew Kopczynski
+Party / county: Jose Buenrostro
+Description: Federal criminal prosecution in the Northern District of California involving Jose Buenrostro. Public docket entries indicate: 2019-11-12: INDICTMENT as to Jose Vega-Sainz (1) count(s) 1, 2, 6, 7-8, Ramon Soria-Sanchez (2) count(s) 1, 2, 3, 6, 7, Jose Buenrostro (3) count(s) 1, 2, 4, 5, 6, 8. (tnS, COURT STAFF) (Filed on 11/12/2019) (Additional attachment(s) added on 2/10/2020: # 1 Criminal Cover Sheet) (mjj2S, COURT STAFF). (Entered: 11/12/2019)
+Notes: Firm and attorney were listed in CourtListener docket metadata for an N.D. California criminal case.
+Relevant docket entries:
+- 2019-11-12: INDICTMENT as to Jose Vega-Sainz (1) count(s) 1, 2, 6, 7-8, Ramon Soria-Sanchez (2) count(s) 1, 2, 3, 6, 7, Jose Buenrostro (3) count(s) 1, 2, 4, 5, 6, 8. (tnS, COURT STAFF) (Filed on 11/12/2019) (Additional attachment(s) added on 2/10/2020: # 1 Criminal Cover Sheet) (mjj2S, COURT STAFF). (Entered: 11/12/2019)

@@ -1,0 +1,10 @@
+Name: Law Offices of Leon J. Mezzetti, Jr.
+Short name: mezzetti-law
+Website: https://www.mezzetti.com
+Phone: (408) 279-8400
+Email: 
+Intake URL: https://www.mezzetti.com/
+Counties: santa clara, alameda, san mateo
+Primary charge tags: dui, domestic violence, assault, firearm, drug possession/sales, theft, robbery, burglary, probation violation
+Representative case count: 0
+Source URLs: https://www.mezzetti.com/

@@ -1,0 +1,11 @@
+Case name: United States v. Baquedano
+Jurisdiction level: Federal
+Docket / appellate number: 3:26-cr-00227
+Court: District Court, N.D. California
+Date filed: 2026-05-08
+Source type: CourtListener RECAP federal criminal docket metadata
+Source URL: https://www.courtlistener.com/docket/73319493/united-states-v-baquedano/
+Attorney listed: August P. Gugelmann
+Party / county: Carlos Alberto Baquedano
+Description: Federal criminal case. CourtListener did not return detailed RECAP metadata for this docket.
+Notes: Firm and attorney were listed in CourtListener docket metadata for an N.D. California criminal case.

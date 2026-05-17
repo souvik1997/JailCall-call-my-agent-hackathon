@@ -1,0 +1,13 @@
+Case name: United States v. Aguilar
+Jurisdiction level: Federal
+Docket / appellate number: 3:26-cr-00232
+Court: District Court, N.D. California
+Date filed: 2026-05-13
+Offense tags: child-pornography
+Actual charges / charge signals: 18 U.S.C. 2252(a)(4)(B), (b)(2); possession and/or access with intent to view a visual depiction of a minor engaged in sexually explicit conduct
+Charge confidence: high
+Crime description: RECAP criminal complaint charges Angel Martinez Aguilar with possession/access with intent to view CSAM; CourtListener returned Federal Defender Northern District of California, San Francisco counsel metadata.
+Source URL: https://www.courtlistener.com/docket/73341015/united-states-v-aguilar/
+Attorney listed: Ana Laura Botello
+Firm: Federal Defender Northern District of California, San Francisco
+Notes: This file is part of the offense-searchable corpus. It favors usable charge/category matching over exhaustive case history.

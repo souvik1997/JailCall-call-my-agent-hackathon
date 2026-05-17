@@ -1,0 +1,13 @@
+Case name: Lamano case result - domestic violence and DUI dismissed
+Jurisdiction level: State/local firm-reported case result
+Docket / appellate number:
+Court:
+Date filed:
+Offense tags: domestic-violence, dui, assault
+Actual charges / charge signals: Domestic violence and DUI after restaurant incident
+Charge confidence: medium
+Crime description: A couple was accused after an incident outside a restaurant: the wife was arrested for DUI and the husband for domestic violence. Defense investigation showed inconsistencies and that clients were victims; charges were dismissed.
+Source URL: https://www.lamanolaw.com/successful-cases/
+Attorney listed:
+Firm: Lamano Law Office
+Notes: This file is part of the offense-searchable corpus. It favors usable charge/category matching over exhaustive case history.

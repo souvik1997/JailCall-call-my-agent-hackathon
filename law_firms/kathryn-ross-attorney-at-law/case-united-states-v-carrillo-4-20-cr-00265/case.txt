@@ -1,0 +1,13 @@
+Case name: United States v. Carrillo
+Jurisdiction level: Federal
+Docket / appellate number: 4:20-cr-00265
+Court: District Court, N.D. California
+Date filed: 2020-06-25
+Source type: CourtListener RECAP federal criminal docket metadata
+Source URL: https://www.courtlistener.com/docket/17303516/united-states-v-carrillo/
+Attorney listed: Katherine M. Lloyd-Lovett
+Party / county: Steven Carrillo
+Description: Federal criminal prosecution in the Northern District of California involving Steven Carrillo. Public docket entries indicate: 2020-06-23: Order by Magistrate Judge Laurel Beeler granting 6 Stipulated Order Excluding Time Under the Speedy Trial Act from 6/19/2020 to 6/24/2020 as to Robert Alvin Justus Jr. (1). (ejkS, COURT STAFF) (Filed on 6/23/2020) [4:20-mj-70771-MAG] (Entered: 06/23/2020)
+Notes: Firm and attorney were listed in CourtListener docket metadata for an N.D. California criminal case.
+Relevant docket entries:
+- 2020-06-23: Order by Magistrate Judge Laurel Beeler granting 6 Stipulated Order Excluding Time Under the Speedy Trial Act from 6/19/2020 to 6/24/2020 as to Robert Alvin Justus Jr. (1). (ejkS, COURT STAFF) (Filed on 6/23/2020) [4:20-mj-70771-MAG] (Entered: 06/23/2020)
