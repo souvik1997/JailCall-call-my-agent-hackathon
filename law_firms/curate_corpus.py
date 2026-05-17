@@ -191,13 +191,26 @@ def has_dispatch_path(firm: dict[str, str]) -> bool:
     return bool(firm.get("INTAKE_URL") or firm.get("EMAIL"))
 
 
+def has_usable_site_text(short_name: str) -> bool:
+    site_text_dir = ROOT / short_name / "site_text"
+    return any(
+        path.name != "errors.txt" and path.stat().st_size > 0
+        for path in site_text_dir.glob("*.txt")
+    )
+
+
 def is_excluded_entity(firm: dict[str, str]) -> bool:
     haystack = f"{firm.get('NAME', '')} {firm.get('SHORT_NAME', '')}"
     return any(pattern.search(haystack) for pattern in EXCLUDED_NAME_PATTERNS)
 
 
 def is_runtime_profile(profile: dict[str, str]) -> bool:
-    return bool(profile.get("PRIMARY_CHARGE_TAGS")) and has_dispatch_path(profile) and not is_excluded_entity(profile)
+    return (
+        bool(profile.get("PRIMARY_CHARGE_TAGS"))
+        and has_dispatch_path(profile)
+        and has_usable_site_text(profile.get("SHORT_NAME", ""))
+        and not is_excluded_entity(profile)
+    )
 
 
 def read_tsv(path: Path) -> list[dict[str, str]]:

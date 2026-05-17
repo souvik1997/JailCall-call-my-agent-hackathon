@@ -1,4 +1,0 @@
-https://morgandaly.com/: URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'morgandaly.com'. (_ssl.c:1081)>
-https://www.morgandaly.com/: URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'www.morgandaly.com'. (_ssl.c:1081)>
-http://morgandaly.com/: URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'morgandaly.com'. (_ssl.c:1081)>
-http://www.morgandaly.com/: URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'www.morgandaly.com'. (_ssl.c:1081)>

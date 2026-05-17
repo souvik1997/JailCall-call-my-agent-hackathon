@@ -1,4 +1,0 @@
-https://www.getyourcasefixed.com/: URLError: <urlopen error [Errno -2] Name or service not known>
-https://getyourcasefixed.com/: URLError: <urlopen error [Errno -2] Name or service not known>
-http://www.getyourcasefixed.com/: URLError: <urlopen error [Errno -2] Name or service not known>
-http://getyourcasefixed.com/: URLError: <urlopen error [Errno -2] Name or service not known>

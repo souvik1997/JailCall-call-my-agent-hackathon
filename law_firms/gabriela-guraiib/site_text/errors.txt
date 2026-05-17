@@ -1,8 +1,0 @@
-https://www.guraiib.com/: URLError: <urlopen error [Errno -2] Name or service not known>
-https://guraiib.com/: URLError: <urlopen error [Errno -2] Name or service not known>
-http://www.guraiib.com/: URLError: <urlopen error [Errno -2] Name or service not known>
-http://guraiib.com/: URLError: <urlopen error [Errno -2] Name or service not known>
-https://www.guraiib.com/contact: URLError: <urlopen error [Errno -2] Name or service not known>
-https://guraiib.com/contact: URLError: <urlopen error [Errno -2] Name or service not known>
-http://www.guraiib.com/contact: URLError: <urlopen error [Errno -2] Name or service not known>
-http://guraiib.com/contact: URLError: <urlopen error [Errno -2] Name or service not known>

@@ -1,8 +1,0 @@
-https://www.valientelawfirm.com/: URLError: <urlopen error [Errno -2] Name or service not known>
-https://valientelawfirm.com/: URLError: <urlopen error [Errno -2] Name or service not known>
-http://www.valientelawfirm.com/: URLError: <urlopen error [Errno -2] Name or service not known>
-http://valientelawfirm.com/: URLError: <urlopen error [Errno -2] Name or service not known>
-https://www.valientelawfirm.com/criminal-defense: URLError: <urlopen error [Errno -2] Name or service not known>
-https://valientelawfirm.com/criminal-defense: URLError: <urlopen error [Errno -2] Name or service not known>
-http://www.valientelawfirm.com/criminal-defense: URLError: <urlopen error [Errno -2] Name or service not known>
-http://valientelawfirm.com/criminal-defense: URLError: <urlopen error [Errno -2] Name or service not known>

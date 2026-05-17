@@ -1,4 +1,0 @@
-https://www.bergstrom-bruce.com/: URLError: <urlopen error [Errno -2] Name or service not known>
-https://bergstrom-bruce.com/: URLError: <urlopen error [Errno -2] Name or service not known>
-http://www.bergstrom-bruce.com/: URLError: <urlopen error [Errno -2] Name or service not known>
-http://bergstrom-bruce.com/: URLError: <urlopen error [Errno -2] Name or service not known>
