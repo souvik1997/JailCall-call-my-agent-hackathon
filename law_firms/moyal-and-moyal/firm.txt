@@ -1,10 +1,10 @@
 Name: Moyal & Moyal
 Short name: moyal-and-moyal
 Website: https://www.moyaldefenselaw.com
-Phone: (925) 437-2424
+Phone: +19254372424
 Email: kenmoyal@gmail.com
 Intake URL: https://www.moyaldefenselaw.com/
 Counties: contra costa, alameda, solano
-Primary charge tags: dui, domestic violence, assault, firearm, drug possession/sales, theft, robbery, burglary, probation violation
+Primary charge tags: dui, domestic-violence, assault, firearm, drug-possession, drug-trafficking, theft, robbery, burglary, probation-violation
 Representative case count: 0
 Source URLs: https://www.moyaldefenselaw.com/

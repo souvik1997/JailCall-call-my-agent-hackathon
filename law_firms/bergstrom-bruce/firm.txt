@@ -1,10 +1,10 @@
 Name: Bergstrom & Bruce
 Short name: bergstrom-bruce
 Website: https://www.bergstrom-bruce.com
-Phone: (707) 927-7144
-Email:
+Phone: +17079277144
+Email: 
 Intake URL: https://www.bergstrom-bruce.com/
 Counties: napa, sonoma, solano
-Primary charge tags: dui, domestic violence, assault, firearm, drug possession/sales, theft, probation violation, reckless driving
+Primary charge tags: dui, domestic-violence, assault, firearm, drug-possession, drug-trafficking, theft, probation-violation, reckless-driving
 Representative case count: 0
 Source URLs: https://www.bergstrom-bruce.com/

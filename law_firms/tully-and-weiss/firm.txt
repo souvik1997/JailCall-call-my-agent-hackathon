@@ -1,10 +1,10 @@
 Name: Tully & Weiss Attorneys at Law
 Short name: tully-and-weiss
 Website: https://tully-weiss.com
-Phone: (925) 229-9700
-Email:
+Phone: +19252299700
+Email: 
 Intake URL: https://tully-weiss.com/contact/
 Counties: contra costa, alameda, solano
-Primary charge tags: dui, domestic violence, assault, firearm, drug possession/sales, theft, robbery, burglary, white-collar/fraud, probation violation
+Primary charge tags: dui, domestic-violence, assault, firearm, drug-possession, drug-trafficking, theft, robbery, burglary, white-collar-crime, fraud, probation-violation
 Representative case count: 0
 Source URLs: https://tully-weiss.com/contact/

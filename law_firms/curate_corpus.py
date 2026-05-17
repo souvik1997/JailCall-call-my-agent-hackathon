@@ -1,12 +1,13 @@
 """Merge staged firm/case research into the JailCall law-firm corpus."""
 
-# ruff: noqa: D103, E501, PLW2901, T201
+# ruff: noqa: D103, E501, INP001, PLR2004, PLW2901, T201
 
 from __future__ import annotations
 
 import csv
 import json
 import re
+import shutil
 from collections import Counter, defaultdict
 from pathlib import Path
 
@@ -48,13 +49,57 @@ PROFILE_COLUMNS = [
 SHORT_NAME_ALIASES = {
     "alanna-d-coopersmithe-attorney-at-law": "alanna-d-coopersmith-attorney-at-law",
     "beles-and-beles": "law-offices-of-beles-and-beles",
+    "beles-and-beles-law-offices": "law-offices-of-beles-and-beles",
     "demetrius-costy": "demetrius-costy-law",
     "east-bay-defense": "alanna-d-coopersmith-attorney-at-law",
+    "jayne-law-group": "jayne-law",
+    "jayne-law-group-jayne-law-group": "jayne-law",
     "jpc-law": "law-office-of-john-p-campion",
     "lamano-law": "lamano-law-office",
+    "law-office-of-adrienne-dell": "adrienne-dell",
+    "law-office-of-allen-c-speare": "allen-speare",
+    "law-office-of-andrew-cantor": "andrew-cantor",
+    "law-office-of-javier-rios": "javier-rios",
+    "law-office-of-vijay-dinakar": "vijay-dinakar",
+    "law-offices-of-beles-and-beles-2": "law-offices-of-beles-and-beles",
+    "law-offices-of-johnson-and-johnson": "johnson-and-johnson",
+    "law-offices-of-marsanne-weese": "marsanne-weese",
+    "law-offices-of-paula-canny": "paula-canny",
+    "mowry-law-group": "mowry-law",
     "nieves-law": "the-nieves-law-firm",
-    "roberts-elliott-law-corp": "roberts-elliott-law-corp",
+    "nolan-barton-olmos-and-luciano-llp": "nbo-law",
+    "offices-of-douglas-l-rappaport": "law-offices-of-douglas-l-rappaport",
+    "rien-adams-and-cox-llp": "rien-adams-cox",
+    "roberts-elliott-law-corp": "roberts-elliott",
+    "the-law-office-of-adam-g-gasner-law-chambers-building": "gasner-criminal-law",
 }
+
+NAME_OVERRIDES = {
+    "gasner-criminal-law": "Gasner Criminal Law",
+}
+
+TAG_ALIASES = {
+    "criminal-defense": (),
+    "domestic violence": ("domestic-violence",),
+    "drug possession/sales": ("drug-possession", "drug-trafficking"),
+    "homicide": ("murder",),
+    "probation violation": ("probation-violation",),
+    "reckless driving": ("reckless-driving",),
+    "white-collar/fraud": ("white-collar-crime", "fraud"),
+}
+
+EXCLUDED_NAME_PATTERNS = [
+    re.compile(pattern, re.IGNORECASE)
+    for pattern in [
+        r"\bfederal defender\b",
+        r"\bfederal public defender\b",
+        r"\bpublic defender\b",
+        r"\boffice of the federal public defender\b",
+        r"\bdistrict attorney\b",
+        r"\bunited states attorney\b",
+        r"\bdepartment of justice\b",
+    ]
+]
 
 
 def clean(value: object) -> str:
@@ -74,6 +119,58 @@ def canonical_short_name(value: str) -> str:
     if value and not re.fullmatch(r"[a-z0-9][a-z0-9-]*", value):
         value = slugify(value)
     return SHORT_NAME_ALIASES.get(value, value)
+
+
+def normalize_url(value: str) -> str:
+    value = clean(value)
+    if not value:
+        return ""
+    if re.match(r"https?://", value, re.IGNORECASE):
+        return value
+    return f"https://{value}"
+
+
+def normalize_phone(value: str) -> str:
+    value = clean(value)
+    if not value:
+        return ""
+    digits = re.sub(r"\D", "", value)
+    if value.startswith("+") and 8 <= len(digits) <= 15:
+        return f"+{digits}"
+    if len(digits) == 10:
+        return f"+1{digits}"
+    if len(digits) == 11 and digits.startswith("1"):
+        return f"+{digits}"
+    return value
+
+
+def normalize_tag_list(*values: str) -> str:
+    seen: set[str] = set()
+    merged: list[str] = []
+    for value in values:
+        for item in re.split(r"[,;|]", clean(value)):
+            item = clean(item).lower()
+            if not item:
+                continue
+            mapped = TAG_ALIASES.get(item, (item,))
+            for tag in mapped:
+                if tag and tag not in seen:
+                    seen.add(tag)
+                    merged.append(tag)
+    return ", ".join(merged)
+
+
+def has_dispatch_path(firm: dict[str, str]) -> bool:
+    return bool(firm.get("INTAKE_URL") or firm.get("EMAIL") or firm.get("WEBSITE"))
+
+
+def is_excluded_entity(firm: dict[str, str]) -> bool:
+    haystack = f"{firm.get('NAME', '')} {firm.get('SHORT_NAME', '')}"
+    return any(pattern.search(haystack) for pattern in EXCLUDED_NAME_PATTERNS)
+
+
+def is_runtime_profile(profile: dict[str, str]) -> bool:
+    return bool(profile.get("PRIMARY_CHARGE_TAGS")) and has_dispatch_path(profile) and not is_excluded_entity(profile)
 
 
 def read_tsv(path: Path) -> list[dict[str, str]]:
@@ -125,6 +222,29 @@ def merge_csv_list(*values: str) -> str:
     return ", ".join(merged)
 
 
+def load_taxonomy_terms() -> dict[str, str]:
+    return {
+        normalize_tag_list(row.get("TAG", "")): clean(row.get("MATCH_TERMS", ""))
+        for row in read_tsv(ROOT / "offense_taxonomy.tsv")
+        if normalize_tag_list(row.get("TAG", ""))
+    }
+
+
+def caller_match_terms(tags: str, taxonomy_terms: dict[str, str]) -> str:
+    terms: list[str] = []
+    seen: set[str] = set()
+    for tag in re.split(r"[,;|]", tags):
+        tag = clean(tag).lower()
+        if not tag:
+            continue
+        for term in [tag.replace("-", " "), *re.split(r"[,;|]", taxonomy_terms.get(tag, ""))]:
+            term = clean(term).lower()
+            if term and term not in seen:
+                seen.add(term)
+                terms.append(term)
+    return ", ".join(terms[:24])
+
+
 def load_firms() -> dict[str, dict[str, str]]:
     firms: dict[str, dict[str, str]] = {}
 
@@ -133,10 +253,10 @@ def load_firms() -> dict[str, dict[str, str]]:
         if not short_name:
             continue
         firms[short_name] = {
-            "NAME": clean(row.get("NAME")),
+            "NAME": NAME_OVERRIDES.get(short_name, clean(row.get("NAME"))),
             "SHORT_NAME": short_name,
-            "WEBSITE": clean(row.get("WEBSITE")),
-            "PHONE": clean(row.get("PHONE")),
+            "WEBSITE": normalize_url(row.get("WEBSITE", "")),
+            "PHONE": normalize_phone(row.get("PHONE", "")),
             "EMAIL": "",
             "INTAKE_URL": "",
             "COUNTIES": "",
@@ -161,11 +281,11 @@ def load_firms() -> dict[str, dict[str, str]]:
                 "SOURCE_URLS": "",
             },
         )
-        firm["NAME"] = merge_value(firm.get("NAME", ""), info.get("name", ""))
-        firm["WEBSITE"] = merge_value(firm.get("WEBSITE", ""), info.get("website", ""))
-        firm["PHONE"] = merge_value(firm.get("PHONE", ""), info.get("phone", ""))
+        firm["NAME"] = NAME_OVERRIDES.get(short_name, merge_value(firm.get("NAME", ""), info.get("name", "")))
+        firm["WEBSITE"] = merge_value(firm.get("WEBSITE", ""), normalize_url(info.get("website", "")))
+        firm["PHONE"] = merge_value(firm.get("PHONE", ""), normalize_phone(info.get("phone", "")))
         firm["EMAIL"] = merge_value(firm.get("EMAIL", ""), info.get("email", ""))
-        firm["INTAKE_URL"] = merge_value(firm.get("INTAKE_URL", ""), info.get("intake url", ""))
+        firm["INTAKE_URL"] = merge_value(firm.get("INTAKE_URL", ""), normalize_url(info.get("intake url", "")))
         firm["COUNTIES"] = merge_csv_list(firm.get("COUNTIES", ""), info.get("counties", ""))
 
     for staged in STAGING.glob("*/firms.tsv"):
@@ -188,13 +308,13 @@ def load_firms() -> dict[str, dict[str, str]]:
                     "SOURCE_URLS": "",
                 },
             )
-            firm["NAME"] = name or firm.get("NAME", "")
-            firm["WEBSITE"] = merge_value(firm.get("WEBSITE", ""), row.get("WEBSITE", ""))
-            firm["PHONE"] = merge_value(firm.get("PHONE", ""), row.get("PHONE", ""))
+            firm["NAME"] = NAME_OVERRIDES.get(short_name, name or firm.get("NAME", ""))
+            firm["WEBSITE"] = merge_value(firm.get("WEBSITE", ""), normalize_url(row.get("WEBSITE", "")))
+            firm["PHONE"] = merge_value(firm.get("PHONE", ""), normalize_phone(row.get("PHONE", "")))
             firm["EMAIL"] = merge_value(firm.get("EMAIL", ""), row.get("EMAIL", ""))
-            firm["INTAKE_URL"] = merge_value(firm.get("INTAKE_URL", ""), row.get("INTAKE_URL", ""))
+            firm["INTAKE_URL"] = merge_value(firm.get("INTAKE_URL", ""), normalize_url(row.get("INTAKE_URL", "")))
             firm["COUNTIES"] = merge_csv_list(firm.get("COUNTIES", ""), row.get("COUNTIES", ""))
-            firm["PRIMARY_CHARGE_TAGS"] = merge_csv_list(
+            firm["PRIMARY_CHARGE_TAGS"] = normalize_tag_list(
                 firm.get("PRIMARY_CHARGE_TAGS", ""),
                 row.get("PRIMARY_CHARGE_TAGS", ""),
             )
@@ -219,7 +339,7 @@ def load_cases() -> list[dict[str, str]]:
                 "COURT": clean(row.get("COURT")),
                 "DOCKET": clean(row.get("DOCKET")),
                 "DATE_FILED": clean(row.get("DATE_FILED")),
-                "OFFENSE_TAGS": merge_csv_list(row.get("OFFENSE_TAGS", "")),
+                "OFFENSE_TAGS": normalize_tag_list(row.get("OFFENSE_TAGS", "")),
                 "ACTUAL_CHARGES": clean(row.get("ACTUAL_CHARGES")),
                 "CONFIDENCE": clean(row.get("CONFIDENCE")) or "medium",
                 "ATTORNEY": clean(row.get("ATTORNEY")),
@@ -227,7 +347,9 @@ def load_cases() -> list[dict[str, str]]:
                 "SOURCE_URL": clean(row.get("SOURCE_URL")),
                 "CASE_PATH": clean(row.get("CASE_PATH")),
             }
-            if not case["FIRM_NAME"] or not case["CASE_NAME"]:
+            if case["CASE_PATH"] and not case["CASE_PATH"].startswith(f"{case['SHORT_NAME']}/"):
+                case["CASE_PATH"] = ""
+            if not case["FIRM_NAME"] or not case["CASE_NAME"] or not case["OFFENSE_TAGS"]:
                 continue
             key = (
                 case["SHORT_NAME"],
@@ -267,6 +389,7 @@ def build_profiles(
 ) -> list[dict[str, str]]:
     cases_by_firm: dict[str, list[dict[str, str]]] = defaultdict(list)
     tags_by_firm: dict[str, Counter[str]] = defaultdict(Counter)
+    taxonomy_terms = load_taxonomy_terms()
 
     for case in cases:
         short_name = case["SHORT_NAME"]
@@ -291,7 +414,7 @@ def build_profiles(
                 "SOURCE_URLS": "",
             },
         )
-        firm["PRIMARY_CHARGE_TAGS"] = merge_csv_list(
+        firm["PRIMARY_CHARGE_TAGS"] = normalize_tag_list(
             firm.get("PRIMARY_CHARGE_TAGS", ""),
             ", ".join(tag for tag, _count in tag_counts.most_common()),
         )
@@ -310,15 +433,17 @@ def build_profiles(
             firm.get("SOURCE_URLS", ""),
             ", ".join(case.get("SOURCE_URL", "") for case in firm_cases[:5]),
         )
-        tags = firm.get("PRIMARY_CHARGE_TAGS", "")
+        tags = normalize_tag_list(firm.get("PRIMARY_CHARGE_TAGS", ""))
+        match_terms = caller_match_terms(tags, taxonomy_terms)
         profile_text = " ".join(
             part
             for part in [
                 f"{firm.get('NAME', '')} is a Bay Area criminal defense firm.",
                 f"Counties served: {firm.get('COUNTIES', '')}." if firm.get("COUNTIES") else "",
                 f"Charge categories: {tags}." if tags else "",
+                f"Caller case details to match: {match_terms}." if match_terms else "",
                 f"Representative cases: {representative}." if representative else "",
-                "Useful for JailCall routing when a caller gives a matching general charge category.",
+                "Useful for JailCall routing when a caller describes matching criminal charges, arrest facts, or case details.",
             ]
             if part
         )
@@ -413,6 +538,24 @@ def write_case_files(cases: list[dict[str, str]]) -> None:
         (case_dir / "case.txt").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
+def prune_generated_directories(profiles: list[dict[str, str]], cases: list[dict[str, str]]) -> None:
+    kept_firms = {profile["SHORT_NAME"] for profile in profiles}
+    kept_case_paths = {case["CASE_PATH"] for case in cases if case.get("CASE_PATH")}
+
+    for firm_dir in ROOT.iterdir():
+        if not firm_dir.is_dir() or firm_dir.name.startswith("_"):
+            continue
+        if not (firm_dir / "firm.txt").exists():
+            continue
+        if firm_dir.name not in kept_firms:
+            shutil.rmtree(firm_dir)
+            continue
+        for case_dir in firm_dir.glob("case-*"):
+            case_file = case_dir / "case.txt"
+            if case_file.exists() and str(case_file.relative_to(ROOT)) not in kept_case_paths:
+                shutil.rmtree(case_dir)
+
+
 def update_summary(profiles: list[dict[str, str]], cases: list[dict[str, str]]) -> None:
     tag_counts: Counter[str] = Counter()
     for case in cases:
@@ -454,9 +597,12 @@ def update_summary(profiles: list[dict[str, str]], cases: list[dict[str, str]]) 
 def main() -> None:
     firms = load_firms()
     cases = load_cases()
-    profiles = build_profiles(firms, cases)
+    profiles = [profile for profile in build_profiles(firms, cases) if is_runtime_profile(profile)]
+    kept_firms = {profile["SHORT_NAME"] for profile in profiles}
+    cases = [case for case in cases if case["SHORT_NAME"] in kept_firms]
 
     write_case_files(cases)
+    prune_generated_directories(profiles, cases)
     write_tsv(ROOT / "cases.tsv", CASE_COLUMNS, cases)
     write_tsv(ROOT / "firm_profiles.tsv", PROFILE_COLUMNS, profiles)
     write_tsv(

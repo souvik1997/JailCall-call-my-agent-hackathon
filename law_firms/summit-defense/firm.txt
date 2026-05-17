@@ -2,9 +2,9 @@ Name: Summit Defense
 Short name: summit-defense
 Website: https://summitdefense.com/
 Phone: +14159130787
-Email:
+Email: 
 Intake URL: https://summitdefense.com/
 Counties: san francisco, alameda, san mateo, contra costa, santa clara, marin
-Primary charge tags: dui, domestic violence, assault, firearm, drug possession/sales, theft, robbery, burglary, white-collar/fraud, probation violation, reckless driving, domestic-violence, federal-crimes, drug-trafficking, sex-crimes, murder, violent-crime, embezzlement, fraud, probation-violation, cocaine
+Primary charge tags: dui, domestic-violence, assault, firearm, drug-possession, drug-trafficking, theft, robbery, burglary, white-collar-crime, fraud, probation-violation, reckless-driving, federal-crimes, sex-crimes, murder, violent-crime, embezzlement, cocaine
 Representative case count: 10
 Source URLs: https://summitdefense.com/contact-us/, https://summitdefense.com/, https://summitdefense.com/san-mateo-criminal-defense-attorney/, https://summitdefense.com/case-results/, https://summitdefense.com/case-results/embezzlement-civil-compromise-no-criminal-conviction/

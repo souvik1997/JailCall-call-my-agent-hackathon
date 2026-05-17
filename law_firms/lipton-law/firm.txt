@@ -1,10 +1,10 @@
 Name: Lipton Law Office
 Short name: lipton-law
 Website: https://liptonlawoffice.com
-Phone: (415) 658-7873
+Phone: +14156587873
 Email: info@liptonlawoffice.com
 Intake URL: https://liptonlawoffice.com/
 Counties: san francisco, san mateo, marin, alameda
-Primary charge tags: dui, domestic violence, assault, firearm, drug possession/sales, theft, robbery, burglary, probation violation
+Primary charge tags: dui, domestic-violence, assault, firearm, drug-possession, drug-trafficking, theft, robbery, burglary, probation-violation
 Representative case count: 0
 Source URLs: https://liptonlawoffice.com/

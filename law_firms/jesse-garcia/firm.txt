@@ -1,10 +1,10 @@
 Name: Law Offices of Jesse J. Garcia
 Short name: jesse-garcia
 Website: https://www.jessejgarcialaw.com
-Phone: (925) 247-0094
+Phone: +19252470094
 Email: jesse@jessejgarcialaw.com
 Intake URL: https://www.jessejgarcialaw.com/
 Counties: contra costa, alameda, solano
-Primary charge tags: dui, domestic violence, assault, drug possession/sales, theft, robbery, burglary, probation violation
+Primary charge tags: dui, domestic-violence, assault, drug-possession, drug-trafficking, theft, robbery, burglary, probation-violation
 Representative case count: 0
 Source URLs: https://www.jessejgarcialaw.com/

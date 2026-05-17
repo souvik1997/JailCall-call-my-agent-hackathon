@@ -1,10 +1,10 @@
 Name: Jackson Law
 Short name: bethani-jackson-law
 Website: https://bethanijacksonlaw.com
-Phone: (650) 249-1369
+Phone: +16502491369
 Email: bethanijacksonlaw@gmail.com
 Intake URL: https://bethanijacksonlaw.com/
 Counties: san mateo, santa clara, san francisco, alameda
-Primary charge tags: dui, domestic violence, assault, drug possession/sales, theft, robbery, burglary, probation violation
+Primary charge tags: dui, domestic-violence, assault, drug-possession, drug-trafficking, theft, robbery, burglary, probation-violation
 Representative case count: 0
 Source URLs: https://bethanijacksonlaw.com/

@@ -1,10 +1,10 @@
 Name: Vandeveld Law Office
 Short name: vandeveld-law
 Website: https://vandeveldlaw.com
-Phone: (650) 364-1435
-Email:
+Phone: +16503641435
+Email: 
 Intake URL: https://vandeveldlaw.com/contact/
 Counties: san mateo, santa clara, san francisco
-Primary charge tags: dui, domestic violence, assault, firearm, drug possession/sales, theft, robbery, burglary, probation violation
+Primary charge tags: dui, domestic-violence, assault, firearm, drug-possession, drug-trafficking, theft, robbery, burglary, probation-violation
 Representative case count: 0
 Source URLs: https://vandeveldlaw.com/contact/

@@ -1,10 +1,10 @@
 Name: Law Office of Adrienne Dell
 Short name: adrienne-dell
 Website: https://www.adriannedelllaw.com
-Phone: (408) 217-2575
-Email:
-Intake URL: https://www.adriannedelllaw.com/
+Phone: +14082172575
+Email: 
+Intake URL: https://www.delldefense.com/criminal-defense/
 Counties: santa clara, alameda, san mateo
-Primary charge tags: dui, domestic violence, assault, firearm, drug possession/sales, theft, robbery, burglary, probation violation
+Primary charge tags: dui, domestic-violence, assault, firearm, drug-possession, drug-trafficking, theft, robbery, burglary, probation-violation, violent-crime, gang-crime, juvenile
 Representative case count: 0
-Source URLs: https://www.adriannedelllaw.com/
+Source URLs: https://www.adriannedelllaw.com/, https://www.delldefense.com/criminal-defense/

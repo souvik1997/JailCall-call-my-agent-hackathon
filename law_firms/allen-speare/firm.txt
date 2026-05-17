@@ -1,10 +1,10 @@
 Name: Law Office of Allen C. Speare
 Short name: allen-speare
 Website: https://www.allenspeare.com
-Phone: (408) 295-1180
+Phone: +14082951180
 Email: aspeare@att.net
-Intake URL: https://www.allenspeare.com/
+Intake URL: https://www.allenspearelaw.com/
 Counties: santa clara, alameda, san mateo
-Primary charge tags: dui, domestic violence, assault, firearm, drug possession/sales, theft, robbery, burglary, probation violation
+Primary charge tags: dui, domestic-violence, assault, firearm, drug-possession, drug-trafficking, theft, robbery, burglary, probation-violation, traffic, felony, misdemeanor
 Representative case count: 0
-Source URLs: https://www.allenspeare.com/
+Source URLs: https://www.allenspeare.com/, https://www.allenspearelaw.com/

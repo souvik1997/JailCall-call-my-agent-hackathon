@@ -1,10 +1,10 @@
 Name: Osterhoudt Law
 Short name: osterhoudt-law
 Website: https://www.osterhoudtlaw.com
-Phone: (415) 236-5830
+Phone: +14152365830
 Email: info@osterhoudtlaw.com
 Intake URL: https://www.osterhoudtlaw.com/contact/
 Counties: san francisco, alameda, san mateo, contra costa
-Primary charge tags: dui, domestic violence, assault, firearm, drug possession/sales, theft, robbery, burglary, white-collar/fraud, probation violation
+Primary charge tags: dui, domestic-violence, assault, firearm, drug-possession, drug-trafficking, theft, robbery, burglary, white-collar-crime, fraud, probation-violation
 Representative case count: 0
 Source URLs: https://www.osterhoudtlaw.com/contact/

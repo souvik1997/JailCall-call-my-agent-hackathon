@@ -1,10 +1,10 @@
 Name: Law Offices of Majeed S. Samara
 Short name: majeed-samara
 Website: https://www.samaralaw.com
-Phone: (650) 437-5230
-Email:
+Phone: +16504375230
+Email: 
 Intake URL: https://www.samaralaw.com/contact/
 Counties: san mateo, san francisco, santa clara, alameda
-Primary charge tags: dui, reckless driving, domestic violence, assault, drug possession/sales, theft, probation violation
+Primary charge tags: dui, reckless-driving, domestic-violence, assault, drug-possession, drug-trafficking, theft, probation-violation
 Representative case count: 0
 Source URLs: https://www.samaralaw.com/contact/

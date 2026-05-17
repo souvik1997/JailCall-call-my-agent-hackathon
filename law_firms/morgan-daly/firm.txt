@@ -1,10 +1,10 @@
 Name: Morgan H. Daly Attorney at Law
 Short name: morgan-daly
 Website: https://morgandaly.com
-Phone: (415) 492-6800
-Email:
+Phone: +14154926800
+Email: 
 Intake URL: https://morgandaly.com/
 Counties: marin, sonoma, san francisco, napa
-Primary charge tags: dui, domestic violence, assault, drug possession/sales, theft, robbery, burglary, white-collar/fraud, probation violation
+Primary charge tags: dui, domestic-violence, assault, drug-possession, drug-trafficking, theft, robbery, burglary, white-collar-crime, fraud, probation-violation
 Representative case count: 0
 Source URLs: https://morgandaly.com/

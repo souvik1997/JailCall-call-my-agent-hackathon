@@ -1,10 +1,10 @@
 Name: Gorelick Law Offices
 Short name: gorelick-law
 Website: https://www.gorelick-law.com
-Phone: (925) 847-9000
-Email:
+Phone: +19258479000
+Email: 
 Intake URL: https://www.gorelick-law.com/contact-us/
 Counties: alameda, contra costa, santa clara
-Primary charge tags: dui, domestic violence, assault, firearm, drug possession/sales, theft, robbery, burglary, probation violation
+Primary charge tags: dui, domestic-violence, assault, firearm, drug-possession, drug-trafficking, theft, robbery, burglary, probation-violation
 Representative case count: 0
 Source URLs: https://www.gorelick-law.com/contact-us/

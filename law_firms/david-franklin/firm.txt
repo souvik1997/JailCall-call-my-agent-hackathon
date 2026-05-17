@@ -1,10 +1,10 @@
 Name: Law Office of David R. Franklin
 Short name: david-franklin
 Website: https://bayarealawyers.com
-Phone: (650) 366-8729
+Phone: +16503668729
 Email: dfranklin@bayarealawyers.com
 Intake URL: https://bayarealawyers.com/contact-us/
 Counties: san mateo, santa clara, alameda, san francisco
-Primary charge tags: dui, domestic violence, assault, firearm, drug possession/sales, theft, robbery, burglary, white-collar/fraud, probation violation
+Primary charge tags: dui, domestic-violence, assault, firearm, drug-possession, drug-trafficking, theft, robbery, burglary, white-collar-crime, fraud, probation-violation
 Representative case count: 0
 Source URLs: https://bayarealawyers.com/contact-us/

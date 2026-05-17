@@ -1,10 +1,10 @@
 Name: Valiente Law Firm
 Short name: valiente-law
 Website: https://www.valientelawfirm.com
-Phone: (925) 674-7020
-Email:
+Phone: +19256747020
+Email: 
 Intake URL: https://www.valientelawfirm.com/criminal-defense/
 Counties: contra costa, alameda, solano
-Primary charge tags: dui, domestic violence, assault, firearm, drug possession/sales, theft, robbery, burglary, probation violation
+Primary charge tags: dui, domestic-violence, assault, firearm, drug-possession, drug-trafficking, theft, robbery, burglary, probation-violation
 Representative case count: 0
 Source URLs: https://www.valientelawfirm.com/criminal-defense/

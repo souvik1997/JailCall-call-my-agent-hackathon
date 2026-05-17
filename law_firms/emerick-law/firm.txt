@@ -1,10 +1,10 @@
 Name: Emerick Law Offices
 Short name: emerick-law
 Website: https://www.emericklawoffices.com
-Phone: (707) 800-9529
+Phone: +17078009529
 Email: Scott@emericklawoffices.com
 Intake URL: https://www.emericklawoffices.com/contact.html
 Counties: sonoma, marin, napa
-Primary charge tags: dui, assault, firearm, drug possession/sales, theft, probation violation
+Primary charge tags: dui, assault, firearm, drug-possession, drug-trafficking, theft, probation-violation
 Representative case count: 0
 Source URLs: https://www.emericklawoffices.com/contact.html

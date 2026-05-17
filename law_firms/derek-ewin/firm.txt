@@ -1,10 +1,10 @@
 Name: Law Office of Derek R. Ewin
 Short name: derek-ewin
 Website: https://www.drewinlaw.com
-Phone: (925) 228-1600
+Phone: +19252281600
 Email: drewin@drewinlaw.com
 Intake URL: https://www.drewinlaw.com/
 Counties: contra costa, alameda, solano
-Primary charge tags: dui, domestic violence, assault, firearm, drug possession/sales, theft, robbery, burglary, white-collar/fraud, probation violation
+Primary charge tags: dui, domestic-violence, assault, firearm, drug-possession, drug-trafficking, theft, robbery, burglary, white-collar-crime, fraud, probation-violation
 Representative case count: 0
 Source URLs: https://www.drewinlaw.com/

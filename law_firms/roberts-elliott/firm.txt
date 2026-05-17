@@ -1,10 +1,10 @@
-Name: Roberts Elliott Law Corp
+Name: Roberts | Elliott Law Corp
 Short name: roberts-elliott
-Website: https://www.robertselliott.com
-Phone: (408) 275-9800
-Email:
-Intake URL: https://www.robertselliott.com/contact-us/
-Counties: santa clara, alameda, san mateo
-Primary charge tags: dui, domestic violence, assault, firearm, drug possession/sales, theft, robbery, burglary, white-collar/fraud, probation violation
+Website: https://www.robertsandelliott.com/
+Phone: +14082759800
+Email: 
+Intake URL: https://www.robertsandelliott.com/
+Counties: santa clara, bay area, alameda, san mateo
+Primary charge tags: dui, domestic-violence, assault, firearm, drug-possession, drug-trafficking, theft, robbery, burglary, white-collar-crime, fraud, probation-violation, juvenile, traffic
 Representative case count: 0
-Source URLs: https://www.robertselliott.com/contact-us/
+Source URLs: https://www.robertselliott.com/contact-us/, https://www.robertsandelliott.com/

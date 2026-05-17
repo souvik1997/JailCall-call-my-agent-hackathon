@@ -1,10 +1,10 @@
 Name: Law Offices of Jonathan Steele
 Short name: jonathan-steele
 Website: https://www.steelelaw.org
-Phone: (707) 648-9046
-Email:
+Phone: +17076489046
+Email: 
 Intake URL: https://www.steelelaw.org/
 Counties: solano, napa, sonoma
-Primary charge tags: dui, domestic violence, assault, firearm, drug possession/sales, theft, robbery, burglary, probation violation
+Primary charge tags: dui, domestic-violence, assault, firearm, drug-possession, drug-trafficking, theft, robbery, burglary, probation-violation
 Representative case count: 0
 Source URLs: https://www.steelelaw.org/

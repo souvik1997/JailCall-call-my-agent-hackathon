@@ -2,9 +2,9 @@ Name: Demetrius Costy Law
 Short name: demetrius-costy-law
 Website: https://www.costylaw.com/
 Phone: +15102543945
-Email:
+Email: 
 Intake URL: https://www.costylaw.com/
 Counties: alameda, bay area, contra costa
-Primary charge tags: dui, domestic violence, assault, firearm, drug possession/sales, theft, robbery, burglary, probation violation, domestic-violence, drug-trafficking, sex-crimes, violent-crime
+Primary charge tags: dui, domestic-violence, assault, firearm, drug-possession, drug-trafficking, theft, robbery, burglary, probation-violation, sex-crimes, violent-crime
 Representative case count: 0
 Source URLs: https://www.costylaw.com/

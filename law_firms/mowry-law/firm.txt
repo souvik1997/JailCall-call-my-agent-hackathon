@@ -1,10 +1,10 @@
 Name: Mowry Law Group
 Short name: mowry-law
 Website: https://www.mowrylawgroup.com
-Phone: (510) 542-9355
+Phone: +15105429355
 Email: help@mowrylawgroup.com
-Intake URL: https://www.mowrylawgroup.com/contact/
-Counties: alameda, santa clara, contra costa, san francisco
-Primary charge tags: dui, domestic violence, assault, firearm, drug possession/sales, theft, robbery, burglary, probation violation, reckless driving
+Intake URL: https://www.mowrylawgroup.com/
+Counties: san francisco, alameda, santa clara, contra costa, san mateo
+Primary charge tags: dui, domestic-violence, assault, firearm, drug-possession, drug-trafficking, theft, robbery, burglary, probation-violation, reckless-driving, fraud
 Representative case count: 0
-Source URLs: https://www.mowrylawgroup.com/contact/
+Source URLs: https://www.mowrylawgroup.com/contact/, https://www.mowrylawgroup.com/

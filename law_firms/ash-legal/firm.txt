@@ -1,10 +1,10 @@
 Name: ASH Legal
 Short name: ash-legal
 Website: https://ashlegal.com
-Phone: (415) 890-1021
+Phone: +14158901021
 Email: info@ashlegal.com
 Intake URL: https://ashlegal.com/contact/
 Counties: san francisco, alameda, san mateo, contra costa
-Primary charge tags: dui, domestic violence, assault, firearm, drug possession/sales, theft, robbery, burglary, white-collar/fraud, probation violation
+Primary charge tags: dui, domestic-violence, assault, firearm, drug-possession, drug-trafficking, theft, robbery, burglary, white-collar-crime, fraud, probation-violation
 Representative case count: 0
 Source URLs: https://ashlegal.com/contact/
