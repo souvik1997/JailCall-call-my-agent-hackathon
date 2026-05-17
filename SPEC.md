@@ -304,6 +304,10 @@ requests
 AGENTPHONE_API_KEY=sk_live_...
 AGENTPHONE_WEBHOOK_SECRET=whsec_...
 AGENTPHONE_NUMBER_ID=...
+AGENTPHONE_NUMBER=+15551234567
+AGENTPHONE_AGENT_ID=...
+AGENTPHONE_VOICE_ID=...
+PUBLIC_WEBHOOK_BASE_URL=https://your-server.example.com
 ANTHROPIC_API_KEY=sk-ant-...
 ANTHROPIC_MODEL=claude-haiku-4-5-20251001
 BROWSER_USE_API_KEY=bu_...
@@ -357,19 +361,253 @@ How AgentPhone handles speech, and the exact ordered steps to go from no account
 
 ---
 
-## Build order (time budget)
+## Delivery architecture and milestones
 
-| Block | Time | What |
+The build should move in vertical slices. Each milestone must leave the repo in a runnable
+state, with one concrete thing that can be dialed, invoked, or verified from the command line.
+Do not spend time polishing downstream channels until the upstream voice path is working.
+
+### System slices
+
+| Slice | Files | Responsibility |
 |---|---|---|
-| 1 | 30 min | AgentPhone setup — playbook Steps 1–7. Confirm you can call and hear beginMessage. |
-| 2 | 60 min | server.py — playbook Steps 8 + 10 (echo handler → NDJSON streaming) + Claude tool-call loop with classify_location only. Call the number, speak a city, see it parse. |
-| 3 | 90 min | browser_find_lawyers + contact_attorneys via Browser Use. Test standalone first, then wire into the tool loop. |
-| 4 | 45 min | email_attorneys via AgentMail. Wire in. |
-| 5 | 30 min | send_confirmation_sms. Wire in. |
-| 6 | 30 min | End-to-end test: call → intake → browser search → forms filled → email sent → SMS confirmation. |
-| 7 | 60 min | Polish: voice/tone tuning, edge cases (caller doesn't know county, no attorneys found, browser timeout), error handling. |
-| 8 | 30 min | Record demo video: split screen of call transcript + browser agent filling forms. |
-| **Total** | **~6 hours** | Leaves buffer for debugging and lunch. |
+| Runtime config | `config.py`, `.env.example` | Load env vars, choose model, configure host/port, centralize service constants. |
+| AgentPhone setup | `setup_agent.py` | Register webhook, create webhook-mode agent, attach number, print IDs/secrets to store in `.env`. |
+| Voice webhook | `server.py` | Verify AgentPhone signatures, parse voice events, stream NDJSON replies, map `recentHistory` to Claude messages. |
+| Conversation controller | `server.py` | Keep per-call in-memory intake state, enforce the locked script order, decide when dispatch begins. |
+| Claude tool loop | `server.py`, `tools.py` | Run bounded Anthropic tool-use loop with the exact tool names and schemas from this spec. |
+| External tools | `tools.py` | Implement `classify_location`, Browser Use search/forms, AgentMail email, and AgentPhone SMS. |
+| Demo observability | `server.py` | Log call id, field collection, attorneys found, emails/forms submitted, and SMS status. |
+
+### Milestone 0 - Repo baseline and guardrails (15 min)
+
+**Goal:** Make the current scaffold predictable before touching external services.
+
+**Build:**
+- Confirm `uv sync` works and the app imports.
+- Keep `SPEC.md` as product truth and `TOOLS.md` as vendor truth.
+- Add missing env slots if implementation needs them, but never commit `.env`.
+- Decide that demo state is in-memory only. Persistent caller memory is out of scope.
+
+**Acceptance:**
+- `uv run ruff check .` passes.
+- `uv run basedpyright` passes.
+- `uv run python -m bailcall.server` starts and `/healthz` returns `{"status":"ok"}`.
+
+### Milestone 1 - AgentPhone provisioning path (30-45 min)
+
+**Goal:** One command can create or update the real phone entry points.
+
+**Build:**
+- Implement `setup_agent.py` using `httpx` and AgentPhone REST endpoints from `TOOLS.md`.
+- Inputs: `AGENTPHONE_API_KEY`, `AGENTPHONE_NUMBER_ID`, public webhook base URL, optional voice id.
+- Register `/webhook` with `timeout: 90`.
+- Create a webhook-mode agent with the verbatim `beginMessage`.
+- Attach the configured number to the agent.
+- Print the webhook secret, agent id, number id, and phone number in a copyable summary.
+
+**Acceptance:**
+- Running setup returns a webhook secret to place in `.env`.
+- Dialing the number reaches AgentPhone and speaks the exact opening message.
+- The agent is in `webhook` mode, not hosted mode.
+
+### Milestone 2 - Signed webhook echo with NDJSON (45 min)
+
+**Goal:** Prove that AgentPhone can call our server and hear a response.
+
+**Build:**
+- Add `POST /webhook` in `server.py`.
+- Verify `X-Webhook-Signature`, `X-Webhook-Timestamp`, `X-Webhook-ID`, and `X-Webhook-Event`.
+- Reject invalid signatures and timestamps older than 5 minutes.
+- For non-voice or non-`agent.message` events, return `{"ok": true}`.
+- For voice messages, stream NDJSON with an immediate interim chunk and then a simple scripted reply.
+
+**Acceptance:**
+- Invalid signature returns 401.
+- Valid mock request returns `application/x-ndjson`.
+- A real call can say one phrase and hear a response.
+- Caller never hears silence before slow work.
+
+### Milestone 3 - Scripted intake controller (60 min)
+
+**Goal:** Collect the five routing fields in the locked order before any attorney dispatch.
+
+**Build:**
+- Add an in-memory call state keyed by AgentPhone conversation id or call id.
+- Track `consent`, `location`, `caller_name`, `charge_category`, `callback_number`, and `language`.
+- Ask exactly one routing question at a time, using the wording in the Voice script section.
+- Detect obvious unsafe narrative phrases before sending text to the model and return the locked interrupt.
+- Default language to English if the caller does not provide one.
+- After all fields are present, return the exact confirmation template and start dispatch.
+
+**Acceptance:**
+- A local mock sequence collects all five fields in order.
+- Unsafe input receives the required interrupt text.
+- The controller never asks "what happened".
+- A caller who says "I don't know" for charge still progresses.
+
+### Milestone 4 - Claude tool loop and `classify_location` (45-60 min)
+
+**Goal:** Add the Anthropic loop without introducing external slow tools yet.
+
+**Build:**
+- Define all five tool schemas in `tools.py`, matching this spec.
+- Implement `run_tool_call` in `server.py` using the bounded loop pattern from the cookbook.
+- Convert AgentPhone `recentHistory` into Anthropic `messages`.
+- Implement `classify_location` as a Claude tool path that extracts `{city, county, state}`.
+- Keep model default at `claude-haiku-4-5-20251001`.
+
+**Acceptance:**
+- Mock transcript "I'm in Oakland" produces Alameda County, CA.
+- The voice path can classify location and continue to the next scripted question.
+- Tool-loop max iterations prevents runaway calls.
+
+### Milestone 5 - Browser Use attorney search (60-90 min)
+
+**Goal:** Find local attorney targets before attempting to contact anyone.
+
+**Build:**
+- Implement `browser_find_lawyers(args)` exactly around `county`, `state`, and `charge_category`.
+- Prompt Browser Use to return a JSON array with firm name, phone, email if visible, contact page URL, and notes.
+- Add parsing that tolerates valid JSON strings from Browser Use and preserves raw output in logs.
+- Test standalone with the demo route: Alameda County, CA, DUI.
+
+**Acceptance:**
+- Standalone invocation returns up to 3 attorney candidates.
+- At least one candidate has either an email address or contact form URL.
+- The voice webhook streams the interim "I'm searching..." line before starting this task.
+
+### Milestone 6 - Attorney contact forms (60 min)
+
+**Goal:** Submit web intake forms where Browser Use found contact URLs.
+
+**Build:**
+- Implement `contact_attorneys(args)` using Browser Use.
+- Generate a privilege-safe message that includes only routing info:
+  `URGENT: Person in custody at [county] County needs criminal defense representation. Please call back ASAP.`
+- Do not include incident facts, confessions, or narrative details.
+- Return a structured status per form: submitted, failed, skipped, and reason.
+
+**Acceptance:**
+- Standalone invocation can submit or clearly fail on one real contact page.
+- Failures do not block email or SMS paths for other attorneys.
+- Logs show firm, URL, and result without leaking secrets.
+
+### Milestone 7 - AgentMail dispatch (45 min)
+
+**Goal:** Email every attorney candidate with an email address.
+
+**Build:**
+- Implement `email_attorneys(args)` with AgentMail.
+- Reuse a stable inbox client id such as `bailcall-dispatch`.
+- Use the subject/body from this spec.
+- Return sent status and recipient address.
+
+**Acceptance:**
+- Standalone invocation sends a test email to a controlled address.
+- End-to-end dispatch emails all candidates with email addresses.
+- Email body contains only location, name, charge category, callback, and callback request.
+
+### Milestone 8 - AgentPhone SMS confirmation (30 min)
+
+**Goal:** Confirm dispatch to the callback number.
+
+**Build:**
+- Implement `send_confirmation_sms(args)` with `POST /v1/messages`.
+- Use `AGENTPHONE_API_KEY` and the configured AgentPhone number.
+- Include contacted firm names and the silent-rights reminder.
+- Skip gracefully if no callback number was provided.
+
+**Acceptance:**
+- Standalone invocation sends a real SMS to the demo phone.
+- End-to-end call sends exactly one confirmation text after dispatch completes or times out.
+- SMS does not imply an attorney-client relationship.
+
+### Milestone 9 - Dispatch orchestrator (60 min)
+
+**Goal:** Wire search, forms, email, and SMS into one post-intake workflow.
+
+**Build:**
+- After the five intake fields are complete, run `browser_find_lawyers`.
+- For each candidate, call `contact_attorneys` when a form URL exists and `email_attorneys` when an email exists.
+- Accumulate contacted firm names from successful form or email results.
+- Send SMS with contacted firms, or a fallback text that says BailCall could not confirm contact.
+- Cap total dispatch time so the webhook does not exceed the 90-second AgentPhone timeout.
+
+**Acceptance:**
+- One real call can complete intake and trigger all downstream channels.
+- Browser Use work begins only after the confirmation line is spoken.
+- Partial success is still useful: one contacted attorney is enough for the demo path.
+
+### Milestone 10 - Error handling and edge cases (45-60 min)
+
+**Goal:** Make the demo survivable under realistic caller and vendor failures.
+
+**Build:**
+- Handle unclear location by asking the first question again, not guessing.
+- If county is missing but city/state exists, let `classify_location` infer county.
+- If Browser Use returns no attorneys, ask it once more with "criminal defense attorney near [city]".
+- If email or form submission fails, continue to the next candidate.
+- If the callback number is malformed, skip SMS and say attorneys will use the submitted contact info if available.
+
+**Acceptance:**
+- No single external-service failure crashes `/webhook`.
+- The caller receives a short useful response in every failure case.
+- Logs make it obvious which service failed.
+
+### Milestone 11 - Deployment and demo runbook (45 min)
+
+**Goal:** Remove laptop/tunnel fragility before judging.
+
+**Build:**
+- Prefer Railway, Fly, or Render for the final webhook URL.
+- Set production env vars in the host dashboard.
+- Register the deployed `/webhook` URL with AgentPhone.
+- Keep local tunnel setup documented as fallback.
+- Add a short README with run, setup, test call, and demo commands.
+
+**Acceptance:**
+- Deployed `/healthz` is reachable over HTTPS.
+- AgentPhone webhook points to the deployed URL.
+- Dialing the real number reaches the deployed app, not a local laptop.
+
+### Milestone 12 - Full rehearsal and recording (60 min)
+
+**Goal:** Produce the exact judging demo with proof across channels.
+
+**Build:**
+- Run the judge script using Oakland, John Doe, DUI, and the real callback number.
+- Capture server logs showing intake, Browser Use search, form/email status, and SMS status.
+- Show the Browser Use session if available.
+- Show the SMS confirmation and sent email.
+- Record one clean backup video in case live network conditions fail.
+
+**Acceptance:**
+- Full path completes in one take.
+- Backup video shows real phone call, browser action, email, and SMS.
+- Any known flaky step has a documented fallback for the live demo.
+
+### Critical path
+
+1. Phone call answers with exact `beginMessage`.
+2. `/webhook` verifies signatures and returns spoken NDJSON.
+3. Intake controller collects the five fields without unsafe legal questioning.
+4. `classify_location` produces county/state.
+5. Browser Use finds at least one attorney target.
+6. Email or form submission reaches at least one attorney.
+7. SMS confirmation reaches the callback number.
+8. Deployed URL survives a real call during judging.
+
+### Time budget
+
+| Phase | Budget | Dependency |
+|---|---:|---|
+| Milestones 0-2 | 1.5-2 h | Required before real voice testing. |
+| Milestones 3-4 | 1.5-2 h | Required before safe intake. |
+| Milestones 5-9 | 3-4 h | Required for the multi-channel demo. |
+| Milestones 10-11 | 1.5 h | Required before judging. |
+| Milestone 12 | 1 h | Required for backup demo evidence. |
+| Buffer | 1 h | Vendor auth, tunnel, or Browser Use variance. |
 
 ---
 
