@@ -10,4 +10,4 @@ Crime description: Client faced 12 felony domestic violence charges. Pretrial pr
 Source URL: https://summitdefense.com/san-mateo-criminal-defense-attorney/
 Attorney listed: Richard Weese; Rabin Nabizadeh
 Firm: Summit Defense
-Notes: This file is part of the offense-searchable corpus. It favors usable charge/category matching over exhaustive case history.
+Notes: This representative case supports firm routing. It favors usable charge/category matching over exhaustive case history.

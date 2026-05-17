@@ -10,4 +10,4 @@ Crime description: Undocumented construction worker was accused of a fourth offe
 Source URL: https://www.lamanolaw.com/successful-cases/
 Attorney listed:
 Firm: Lamano Law Office
-Notes: This file is part of the offense-searchable corpus. It favors usable charge/category matching over exhaustive case history.
+Notes: This representative case supports firm routing. It favors usable charge/category matching over exhaustive case history.

@@ -2,7 +2,7 @@ Name: Gasner Criminal Law
 Short name: gasner-criminal-law
 Website: https://www.gasnerlaw.com
 Phone: +14157826002
-Email: 
+Email:
 Intake URL: https://www.gasnerlaw.com/contact-us/
 Counties: san francisco, alameda, san mateo, marin, contra costa
 Primary charge tags: dui, domestic-violence, assault, firearm, drug-possession, drug-trafficking, theft, robbery, burglary, white-collar-crime, fraud, probation-violation

@@ -10,4 +10,4 @@ Crime description: Client was alleged to have broken into a partner's house and 
 Source URL: https://thenieveslawfirm.com/gurjit-pandher-bringing-results-experience-to-the-nieves-law-firm/
 Attorney listed: Gurjit Pandher
 Firm: The Nieves Law Firm
-Notes: This file is part of the offense-searchable corpus. It favors usable charge/category matching over exhaustive case history.
+Notes: This representative case supports firm routing. It favors usable charge/category matching over exhaustive case history.

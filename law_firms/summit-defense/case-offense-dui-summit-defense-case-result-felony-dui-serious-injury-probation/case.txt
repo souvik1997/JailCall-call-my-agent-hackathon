@@ -10,4 +10,4 @@ Crime description: Client faced felony DUI charges with serious injury enhanceme
 Source URL: https://summitdefense.com/case-results/
 Attorney listed:
 Firm: Summit Defense
-Notes: This file is part of the offense-searchable corpus. It favors usable charge/category matching over exhaustive case history.
+Notes: This representative case supports firm routing. It favors usable charge/category matching over exhaustive case history.

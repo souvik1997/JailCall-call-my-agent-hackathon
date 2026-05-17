@@ -2,7 +2,7 @@ Name: Perani Law
 Short name: perani-law
 Website: https://peranilaw.com/
 Phone: +14159961131
-Email: 
+Email:
 Intake URL: https://peranilaw.com/
 Counties: alameda, contra costa, marin, san francisco, bay area, san mateo, santa clara
 Primary charge tags: dui, domestic-violence, assault, firearm, drug-possession, drug-trafficking, theft, robbery, burglary, white-collar-crime, fraud, probation-violation, reckless-driving

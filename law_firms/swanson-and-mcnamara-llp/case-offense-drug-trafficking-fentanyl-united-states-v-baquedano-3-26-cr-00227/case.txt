@@ -10,4 +10,4 @@ Crime description: RECAP detention memorandum states Carlos Alberto Baquedano wa
 Source URL: https://www.courtlistener.com/docket/73319493/united-states-v-baquedano/
 Attorney listed: August P. Gugelmann
 Firm: Swanson & McNamara LLP
-Notes: This file is part of the offense-searchable corpus. It favors usable charge/category matching over exhaustive case history.
+Notes: This representative case supports firm routing. It favors usable charge/category matching over exhaustive case history.

@@ -2,7 +2,7 @@ Name: Jayne Law Group
 Short name: jayne-law
 Website: http://www.bayarea-criminaldefense.com/
 Phone: +14156233600
-Email: 
+Email:
 Intake URL: https://www.jaynelaw.com/contact
 Counties: san francisco, alameda, contra costa, san mateo
 Primary charge tags: dui, domestic-violence, assault, firearm, drug-possession, drug-trafficking, theft, robbery, burglary, white-collar-crime, fraud, probation-violation

@@ -10,4 +10,4 @@ Crime description: Client was accused of embezzling more than $350,000 from an e
 Source URL: https://summitdefense.com/case-results/embezzlement-civil-compromise-no-criminal-conviction/
 Attorney listed: Richard Weese
 Firm: Summit Defense
-Notes: This file is part of the offense-searchable corpus. It favors usable charge/category matching over exhaustive case history.
+Notes: This representative case supports firm routing. It favors usable charge/category matching over exhaustive case history.

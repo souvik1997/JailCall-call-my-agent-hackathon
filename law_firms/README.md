@@ -7,7 +7,7 @@ Primary demo files:
 - `firm_profiles.tsv` — enriched routing table with contact info, counties, charge tags, representative cases, and source URLs.
 - `moss_documents.jsonl` — one Moss-ready document per firm; this is the best input for `build_index.py`.
 - `law_firms.tsv` — legacy four-column roster: `NAME`, `SHORT_NAME`, `WEBSITE`, `PHONE`.
-- `cases.tsv` — offense-searchable representative cases with actual charge signals and descriptions.
+- `cases.tsv` — representative criminal cases with actual charge signals and descriptions.
 - `offense_taxonomy.tsv` — normalized tags used by firm profiles and case rows.
 
 Each kept firm directory contains `firm.txt`; firms with representative criminal-case examples also contain one or more `case-*/case.txt` files.

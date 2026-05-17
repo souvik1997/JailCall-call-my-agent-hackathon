@@ -10,4 +10,4 @@ Crime description: Client faced possession of methamphetamines with immigration 
 Source URL: https://thenieveslawfirm.com/about-us/
 Attorney listed:
 Firm: The Nieves Law Firm
-Notes: This file is part of the offense-searchable corpus. It favors usable charge/category matching over exhaustive case history.
+Notes: This representative case supports firm routing. It favors usable charge/category matching over exhaustive case history.

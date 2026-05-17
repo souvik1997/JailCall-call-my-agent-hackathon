@@ -10,4 +10,4 @@ Crime description: Client was stopped for a traffic violation and accused of pos
 Source URL: https://summitdefense.com/case-results/possession-of-firearms-and-drugs-with-intent-to-sell-charges-dismissed/
 Attorney listed: Rabin Nabizadeh
 Firm: Summit Defense
-Notes: This file is part of the offense-searchable corpus. It favors usable charge/category matching over exhaustive case history.
+Notes: This representative case supports firm routing. It favors usable charge/category matching over exhaustive case history.

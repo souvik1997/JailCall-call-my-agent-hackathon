@@ -2,7 +2,7 @@ Name: Law Office of Roberta Brooks
 Short name: roberta-brooks
 Website: https://criminaldefender.com
 Phone: +19252289100
-Email: 
+Email:
 Intake URL: https://criminaldefender.com/
 Counties: contra costa, alameda, solano
 Primary charge tags: dui, domestic-violence, assault, firearm, drug-possession, drug-trafficking, theft, robbery, burglary, probation-violation

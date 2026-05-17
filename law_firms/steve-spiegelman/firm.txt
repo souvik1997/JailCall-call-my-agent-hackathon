@@ -2,7 +2,7 @@ Name: Steve Spiegelman, Attorney at Law
 Short name: steve-spiegelman
 Website: https://www.stevespiegelman.com
 Phone: +17079631912
-Email: 
+Email:
 Intake URL: https://www.stevespiegelman.com/
 Counties: napa, sonoma, solano
 Primary charge tags: dui, domestic-violence, assault, firearm, drug-possession, drug-trafficking, theft, robbery, burglary, probation-violation

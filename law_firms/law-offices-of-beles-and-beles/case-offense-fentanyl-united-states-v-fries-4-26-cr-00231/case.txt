@@ -13,4 +13,4 @@ Firm: Law Offices of Beles and Beles
 Defendant / party: Carson Fries
 Source snippets:
 - COMPLAINT as to Carson Fries (1). (jlm, COURT STAFF) (Filed on 9/22/2025) (Main Document 1 replaced on 12/9/2025) (jlm, COURT STAFF). [4:25-mj-71143-MAG] (Entered: 09/22/2025)
-Notes: This file is part of the offense-searchable corpus. It favors usable charge/category matching over exhaustive case history.
+Notes: This representative case supports firm routing. It favors usable charge/category matching over exhaustive case history.

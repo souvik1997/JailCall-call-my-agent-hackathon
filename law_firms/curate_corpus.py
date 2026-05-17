@@ -508,34 +508,59 @@ def write_firm_files(profiles: list[dict[str, str]]) -> None:
 
 
 def write_case_files(cases: list[dict[str, str]]) -> None:
+    def case_line(label: str, value: object) -> str:
+        value = clean(value)
+        return f"{label}: {value}" if value else f"{label}:"
+
     for case in cases:
-        if case.get("CASE_PATH"):
-            continue
         tags = "-".join(
             slugify(tag) for tag in re.split(r"[,;|]", case.get("OFFENSE_TAGS", "")) if clean(tag)
         )
-        suffix = slugify(
-            " ".join(part for part in [case["CASE_NAME"], case.get("DOCKET", "")] if part)
-        )
-        case_dir = ROOT / case["SHORT_NAME"] / f"case-offense-{tags}-{suffix}"
+        if case.get("CASE_PATH"):
+            case_path = ROOT / case["CASE_PATH"]
+            case_dir = case_path.parent
+        else:
+            suffix = slugify(
+                " ".join(part for part in [case["CASE_NAME"], case.get("DOCKET", "")] if part)
+            )
+            case_dir = ROOT / case["SHORT_NAME"] / f"case-offense-{tags}-{suffix}"
+            case_path = case_dir / "case.txt"
+            case["CASE_PATH"] = str(case_path.relative_to(ROOT))
         case_dir.mkdir(parents=True, exist_ok=True)
-        case["CASE_PATH"] = str(case_dir.relative_to(ROOT) / "case.txt")
+        extra_lines: list[str] = []
+        if case_path.exists():
+            existing_lines = case_path.read_text(encoding="utf-8").splitlines()
+            firm_index = next(
+                (index for index, line in enumerate(existing_lines) if line.startswith("Firm:")),
+                None,
+            )
+            notes_index = next(
+                (
+                    index
+                    for index, line in enumerate(existing_lines)
+                    if line.startswith("Notes:")
+                ),
+                len(existing_lines),
+            )
+            if firm_index is not None and notes_index > firm_index:
+                extra_lines = existing_lines[firm_index + 1 : notes_index]
         lines = [
-            f"Case name: {case['CASE_NAME']}",
-            f"Jurisdiction level: {case['JURISDICTION']}",
-            f"Docket / appellate number: {case['DOCKET']}",
-            f"Court: {case['COURT']}",
-            f"Date filed: {case['DATE_FILED']}",
-            f"Offense tags: {case['OFFENSE_TAGS']}",
-            f"Actual charges / charge signals: {case['ACTUAL_CHARGES']}",
-            f"Charge confidence: {case['CONFIDENCE']}",
-            f"Crime description: {case['DESCRIPTION']}",
-            f"Source URL: {case['SOURCE_URL']}",
-            f"Attorney listed: {case['ATTORNEY']}",
-            f"Firm: {case['FIRM_NAME']}",
-            "Notes: This file is part of the offense-searchable corpus. It favors usable charge/category matching over exhaustive case history.",
+            case_line("Case name", case["CASE_NAME"]),
+            case_line("Jurisdiction level", case["JURISDICTION"]),
+            case_line("Docket / appellate number", case["DOCKET"]),
+            case_line("Court", case["COURT"]),
+            case_line("Date filed", case["DATE_FILED"]),
+            case_line("Offense tags", case["OFFENSE_TAGS"]),
+            case_line("Actual charges / charge signals", case["ACTUAL_CHARGES"]),
+            case_line("Charge confidence", case["CONFIDENCE"]),
+            case_line("Crime description", case["DESCRIPTION"]),
+            case_line("Source URL", case["SOURCE_URL"]),
+            case_line("Attorney listed", case["ATTORNEY"]),
+            case_line("Firm", case["FIRM_NAME"]),
+            *extra_lines,
+            "Notes: This representative case supports firm routing. It favors usable charge/category matching over exhaustive case history.",
         ]
-        (case_dir / "case.txt").write_text("\n".join(lines) + "\n", encoding="utf-8")
+        case_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
 def prune_generated_directories(profiles: list[dict[str, str]], cases: list[dict[str, str]]) -> None:

@@ -10,4 +10,4 @@ Crime description: Cred LLC cryptocurrency-lending executives Daniel Schatt and 
 Source URL: https://www.docketalarm.com/cases/California_Northern_District_Court/3--24-cr-00243/USA_v._Schatt_et_al/59/
 Attorney listed: Edward W. Swanson
 Firm: Swanson & McNamara LLP
-Notes: This file is part of the offense-searchable corpus. It favors usable charge/category matching over exhaustive case history.
+Notes: This representative case supports firm routing. It favors usable charge/category matching over exhaustive case history.

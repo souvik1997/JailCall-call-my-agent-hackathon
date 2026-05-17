@@ -2,7 +2,7 @@ Name: The Maher Law Group
 Short name: maher-law-group
 Website: https://www.themaherlawgroup.com
 Phone: +14157825888
-Email: 
+Email:
 Intake URL: https://www.themaherlawgroup.com/contact-us/
 Counties: alameda, contra costa, san francisco, solano
 Primary charge tags: dui, domestic-violence, assault, firearm, drug-possession, drug-trafficking, theft, robbery, burglary, probation-violation
