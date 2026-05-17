@@ -5,6 +5,8 @@
 
 **One-liner:** Call a number from the police station, an AI agent picks up, and criminal defense attorneys in your jurisdiction are contacted on your behalf before you leave booking.
 
+**Operator email:** Use `souvik@amlalabs.com` when signing up for every external account in this build (AgentPhone, AgentMail, Browser Use, Supermemory, Moss, Stripe, Sponge). Verification codes go there.
+
 ---
 
 ## Scope for today
@@ -312,7 +314,7 @@ ANTHROPIC_API_KEY=sk-ant-...
 ANTHROPIC_MODEL=claude-haiku-4-5-20251001
 BROWSER_USE_API_KEY=bu_...
 AGENTMAIL_API_KEY=...
-PORT=8000
+PORT=5321
 ```
 
 ---
@@ -325,15 +327,15 @@ How AgentPhone handles speech, and the exact ordered steps to go from no account
 
 ### Steps
 
-1. **Sign up.** `POST /v0/agent/sign-up` with `{"email": "..."}` mails a code. `POST /v0/agent/verify` with `{"email": "...", "code": "..."}` returns `{"api_key": "sk_live_..."}`. Save as `AGENTPHONE_API_KEY`.
+1. **Sign up.** `POST /v0/agent/sign-up` with `{"email": "souvik@amlalabs.com"}` mails a code. `POST /v0/agent/verify` with `{"email": "souvik@amlalabs.com", "code": "..."}` returns `{"api_key": "sk_live_..."}`. Save as `AGENTPHONE_API_KEY`.
 
 2. **Provision a number.** `POST /v1/numbers` with empty body. Response includes `id` (the number id) and `phoneNumber` (E.164). Save `id` as `AGENTPHONE_NUMBER_ID`.
 
 3. **Pick a voice.** `GET /v1/agents/voices` returns objects with `voice_id`, `voice_name`, `provider`, `gender`, `accent`, `preview_audio_url`. For BailCall, pick a calm, lower-register, professional voice — avoid bright/sales-y voices. Listen to `preview_audio_url` before committing. The caller is at a jail phone and needs to trust the voice in the first 5 seconds. Save the chosen `voice_id`.
 
-4. **Public tunnel.** AgentPhone needs to POST webhooks to a public HTTPS URL, but our FastAPI server runs on `localhost:8000`. Pick one of:
-   - `cloudflared tunnel --url http://localhost:8000` — no signup, prints a `https://*.trycloudflare.com` URL to stdout. Install: `sudo pacman -S cloudflared` (or grab the binary from Cloudflare).
-   - `ngrok http 8000` — requires a free account + authtoken; ships a request inspector at `http://localhost:4040` that's invaluable for replaying webhook payloads while debugging.
+4. **Public tunnel.** AgentPhone needs to POST webhooks to a public HTTPS URL, but our FastAPI server runs on `localhost:5321`. Pick one of:
+   - `cloudflared tunnel --url localhost:5321/` — no signup, prints a `https://*.trycloudflare.com` URL to stdout. Install: `sudo pacman -S cloudflared` (or grab the binary from Cloudflare).
+   - `ngrok http 5321` — requires a free account + authtoken; ships a request inspector at `http://localhost:4040` that's invaluable for replaying webhook payloads while debugging.
 
    Free-tier URLs from either tool rotate on restart, so Step 5 must re-run each session — roll Steps 5–7 into `setup_agent.py`. **Demo phase:** swap the tunnel for a real deploy (Railway, Fly, Render) so a sleeping laptop or flaky Wi-Fi can't kill the demo.
 

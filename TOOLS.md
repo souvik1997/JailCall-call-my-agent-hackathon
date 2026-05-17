@@ -1111,18 +1111,24 @@ async def lifespan(app: FastAPI):
 This is what gets you sub-10 ms queries instead of round-tripping to the control plane each
 turn.
 
-### Local dev with ngrok
+### Local dev tunnel
+
+AgentPhone POSTs webhooks to a public HTTPS URL, so localhost needs a tunnel. Two options:
 
 ```bash
 uv sync
 uv run python create_index.py
-uv run python server.py        # terminal 1
-ngrok http 8000                # terminal 2 — copy https URL
-# Register the ngrok URL as your AgentPhone webhook
+uv run python server.py                        # terminal 1
+cloudflared tunnel --url localhost:8000/       # terminal 2 — prints https://*.trycloudflare.com URL
+# or: ngrok http 8000                          # alternative — ships a request inspector at localhost:4040
+# Register the printed URL as your AgentPhone webhook
 ```
 
-Free-tier ngrok URLs change on each restart — re-register the webhook each session.
-Alternative tunnel: `cloudflared tunnel --url http://localhost:8000`.
+- **cloudflared**: no signup, single binary (`sudo pacman -S cloudflared`), prints the URL to stdout.
+- **ngrok**: requires a free account + authtoken, but the inspector at `http://localhost:4040` lets you
+  replay webhook payloads while debugging — invaluable when chasing signature/parse bugs.
+
+Free-tier URLs from either tool rotate on restart — re-register the webhook each session.
 
 ### Deploy to Railway
 
@@ -1148,7 +1154,7 @@ one Anthropic call.
 | Symptom | Fix |
 |---|---|
 | `401 invalid webhook signature` | `AGENTPHONE_WEBHOOK_SECRET` is wrong. Use the `whsec_...` from `POST /v1/webhooks` response, **not** your `sk_live_...` API key |
-| ngrok URL changes every session | Re-register webhook, or deploy to Railway |
+| Tunnel URL (ngrok/cloudflared) changes every session | Re-register webhook, or deploy to Railway |
 | Agent says "What are you building?" | Default `beginMessage` — `PATCH /v1/agents/{id}` with a new one |
 | Caller hears silence while LLM thinks | You're not streaming interim NDJSON — yield `{"text": "One moment.", "interim": true}` first |
 | Agent forgets previous turn in same call | You're not threading `recentHistory` into Claude `messages` |
@@ -1286,7 +1292,7 @@ ANTHROPIC_API_KEY=sk-ant-...
 ANTHROPIC_MODEL=claude-haiku-4-5-20251001
 
 # App
-PORT=8000
+PORT=5321
 ```
 
 ---
