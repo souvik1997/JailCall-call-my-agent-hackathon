@@ -1,0 +1,103 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "bailcall"
+version = "0.1.0"
+description = "Emergency legal access voice agent — YC Call My Agent Hackathon 2026-05-17."
+requires-python = ">=3.13"
+dependencies = [
+    "fastapi>=0.136.1",
+    "uvicorn[standard]>=0.47.0",
+    "anthropic>=0.102.0",
+    "python-dotenv>=1.2.2",
+    "httpx>=0.28.1",
+    "browser-use-sdk>=3.6.0",
+    "agentmail>=0.5.0",
+    "agentphone>=0.7.0",
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.15.13",
+    "basedpyright>=1.39.5",
+    "pre-commit>=4.6.0",
+    "pytest>=9.0.3",
+    "pytest-asyncio>=1.3.0",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["bailcall"]
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Ruff — every rule on, narrow set of intentional carve-outs.
+# ─────────────────────────────────────────────────────────────────────────────
+[tool.ruff]
+target-version = "py313"
+line-length = 100
+extend-exclude = [".venv", ".git"]
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+    # Conflicts with the ruff formatter (per ruff docs).
+    "COM812",
+    "ISC001",
+
+    # Docstring convention conflicts — Google style picks one of each pair.
+    "D203",
+    "D213",
+
+    # Project-level call-outs.
+    "CPY001",   # No copyright headers required.
+    "TRY003",   # Allow long messages in raise — ergonomic for hackathon.
+    "EM101",    # Allow string literal in exception — ergonomic.
+    "EM102",    # Allow f-string in exception — ergonomic.
+    "FIX002",   # TODO comments are fine — we will have plenty today.
+    "TD003",    # We don't track TODOs in an issue tracker for this project.
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = [
+    "S101",     # asserts are the point of pytest
+    "PLR2004",  # magic numbers in tests are fine
+    "D",        # docstrings optional in tests
+    "ANN",      # type hints optional in tests
+    "INP001",   # tests dir doesn't need __init__.py
+]
+"bailcall/setup_agent.py" = [
+    "T201",     # print() in setup scripts is intentional
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.isort]
+known-first-party = ["bailcall"]
+required-imports = ["from __future__ import annotations"]
+
+[tool.ruff.format]
+docstring-code-format = true
+
+# ─────────────────────────────────────────────────────────────────────────────
+# basedpyright — strictest mode. Pyright's superset with extra checks.
+# ─────────────────────────────────────────────────────────────────────────────
+[tool.basedpyright]
+include = ["bailcall"]
+exclude = [".venv", "**/__pycache__", "**/node_modules"]
+typeCheckingMode = "all"
+pythonVersion = "3.13"
+reportImplicitOverride = "error"
+reportUnnecessaryTypeIgnoreComment = "error"
+reportImplicitStringConcatenation = "error"
+# Third-party SDKs (agentphone/agentmail/browser-use) may lack full stubs.
+# Surface as warning so they don't block CI but stay visible.
+reportMissingTypeStubs = "warning"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Pytest
+# ─────────────────────────────────────────────────────────────────────────────
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
