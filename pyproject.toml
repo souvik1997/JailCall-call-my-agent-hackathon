@@ -37,7 +37,9 @@ packages = ["jailcall"]
 [tool.ruff]
 target-version = "py313"
 line-length = 100
-extend-exclude = [".venv", ".git"]
+# law_firms/ holds curated firm data + a one-shot scraping/curation script
+# that is not part of the jailcall package. Lint rules don't apply there.
+extend-exclude = [".venv", ".git", "law_firms"]
 
 [tool.ruff.lint]
 select = ["ALL"]

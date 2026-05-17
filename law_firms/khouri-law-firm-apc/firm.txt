@@ -1,10 +1,10 @@
 Name: Khouri Law Firm, APC
 Short name: khouri-law-firm-apc
-Website: 
-Phone: 
-Email: 
-Intake URL: 
-Counties: 
-Primary charge tags: 
+Website:
+Phone:
+Email:
+Intake URL:
+Counties:
+Primary charge tags:
 Representative case count: 0
-Source URLs: 
+Source URLs:

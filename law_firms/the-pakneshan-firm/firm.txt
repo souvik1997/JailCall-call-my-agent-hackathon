@@ -2,7 +2,7 @@ Name: The Pakneshan Firm
 Short name: the-pakneshan-firm
 Website: https://baydefense.com/
 Phone: +14152938454
-Email: 
+Email:
 Intake URL: https://baydefense.com/
 Counties: alameda, contra costa, san francisco, marin, napa, sonoma, solano, santa clara, san mateo
 Primary charge tags: dui, drug-trafficking, domestic-violence, assault, violent-crime, federal-crimes

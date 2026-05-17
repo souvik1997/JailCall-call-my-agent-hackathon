@@ -2,7 +2,7 @@ Name: Law Office of Johann Hall
 Short name: johann-hall
 Website: https://www.johannhall.com
 Phone: (707) 546-1999
-Email: 
+Email:
 Intake URL: https://www.johannhall.com/
 Counties: sonoma, marin, napa
 Primary charge tags: dui, domestic violence, assault, firearm, drug possession/sales, theft, robbery, burglary, probation violation

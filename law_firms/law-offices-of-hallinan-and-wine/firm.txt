@@ -1,10 +1,10 @@
 Name: Law Offices of Hallinan and Wine
 Short name: law-offices-of-hallinan-and-wine
-Website: 
-Phone: 
-Email: 
-Intake URL: 
-Counties: 
-Primary charge tags: 
+Website:
+Phone:
+Email:
+Intake URL:
+Counties:
+Primary charge tags:
 Representative case count: 0
-Source URLs: 
+Source URLs:

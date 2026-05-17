@@ -1,10 +1,10 @@
 Name: Farella Braun and Martel LLP
 Short name: farella-braun-and-martel-llp
-Website: 
-Phone: 
-Email: 
-Intake URL: 
-Counties: 
+Website:
+Phone:
+Email:
+Intake URL:
+Counties:
 Primary charge tags: fraud, mail-fraud
 Representative case count: 1
 Source URLs: https://www.courtlistener.com/docket/71271062/united-states-v-sealed/

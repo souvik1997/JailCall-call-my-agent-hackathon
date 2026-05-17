@@ -2,7 +2,7 @@ Name: Rien, Adams & Cox LLP
 Short name: rien-adams-and-cox-llp
 Website: https://www.criminalaw.net/criminal-defense/weapons-gun-offenses/
 Phone: +19254490666
-Email: 
+Email:
 Intake URL: https://www.criminalaw.net/criminal-defense/weapons-gun-offenses/
 Counties: oakland, san francisco bay area, alameda, contra costa
 Primary charge tags: dui, firearm, drug-trafficking, assault, criminal-defense

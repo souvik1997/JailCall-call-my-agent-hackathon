@@ -1,10 +1,10 @@
 Name: Shearman and Sterling LLP
 Short name: shearman-and-sterling-llp
-Website: 
-Phone: 
-Email: 
-Intake URL: 
-Counties: 
-Primary charge tags: 
+Website:
+Phone:
+Email:
+Intake URL:
+Counties:
+Primary charge tags:
 Representative case count: 0
-Source URLs: 
+Source URLs:

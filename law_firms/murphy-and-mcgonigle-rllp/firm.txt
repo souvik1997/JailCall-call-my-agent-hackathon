@@ -1,10 +1,10 @@
 Name: Murphy and McGonigle, RLLP
 Short name: murphy-and-mcgonigle-rllp
-Website: 
-Phone: 
-Email: 
-Intake URL: 
-Counties: 
-Primary charge tags: 
+Website:
+Phone:
+Email:
+Intake URL:
+Counties:
+Primary charge tags:
 Representative case count: 0
-Source URLs: 
+Source URLs:

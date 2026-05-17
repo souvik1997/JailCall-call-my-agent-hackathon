@@ -1,10 +1,10 @@
 Name: Rosen Bien Galvan and Grunfeld LLP
 Short name: rosen-bien-galvan-and-grunfeld-llp
-Website: 
-Phone: 
-Email: 
-Intake URL: 
-Counties: 
-Primary charge tags: 
+Website:
+Phone:
+Email:
+Intake URL:
+Counties:
+Primary charge tags:
 Representative case count: 0
-Source URLs: 
+Source URLs:

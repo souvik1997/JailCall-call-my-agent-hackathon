@@ -1,10 +1,10 @@
 Name: Jesse Berkowitz Law
 Short name: jesse-berkowitz-law
-Website: 
-Phone: 
-Email: 
-Intake URL: 
-Counties: 
-Primary charge tags: 
+Website:
+Phone:
+Email:
+Intake URL:
+Counties:
+Primary charge tags:
 Representative case count: 0
-Source URLs: 
+Source URLs:

@@ -2,9 +2,9 @@ Name: Rizk and Shearer LLP
 Short name: rizk-and-shearer-llp
 Website: www.rs-llp.com
 Phone: +14155179044
-Email: 
-Intake URL: 
-Counties: 
-Primary charge tags: 
+Email:
+Intake URL:
+Counties:
+Primary charge tags:
 Representative case count: 0
-Source URLs: 
+Source URLs:

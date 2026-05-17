@@ -2,9 +2,9 @@ Name: David M. Bigeleisen Law Office
 Short name: david-m-bigeleisen-law-office
 Website: www.BigeleisenLaw.com
 Phone: +14159571717
-Email: 
-Intake URL: 
-Counties: 
-Primary charge tags: 
+Email:
+Intake URL:
+Counties:
+Primary charge tags:
 Representative case count: 0
-Source URLs: 
+Source URLs:

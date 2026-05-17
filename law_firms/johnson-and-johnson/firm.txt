@@ -2,7 +2,7 @@ Name: Law Offices of Johnson & Johnson
 Short name: johnson-and-johnson
 Website: https://www.johnsoncriminaldefense.com
 Phone: (925) 472-5522
-Email: 
+Email:
 Intake URL: https://www.johnsoncriminaldefense.com/
 Counties: contra costa, alameda, solano
 Primary charge tags: dui, domestic violence, assault, firearm, drug possession/sales, theft, robbery, burglary, probation violation

@@ -2,7 +2,7 @@ Name: The Blalock Law Firm
 Short name: blalock-law
 Website: https://www.theblalocklawfirm.com
 Phone: (925) 407-5876
-Email: 
+Email:
 Intake URL: https://www.theblalocklawfirm.com/
 Counties: contra costa, alameda, solano
 Primary charge tags: dui, domestic violence, assault, firearm, drug possession/sales, theft, robbery, burglary, probation violation

@@ -2,7 +2,7 @@ Name: Presidio Law Group APC
 Short name: presidio-law
 Website: https://presidiolaw.com
 Phone: (415) 225-6353
-Email: 
+Email:
 Intake URL: https://presidiolaw.com/
 Counties: san francisco, alameda, san mateo, marin, contra costa
 Primary charge tags: dui, domestic violence, assault, firearm, drug possession/sales, theft, robbery, burglary, probation violation

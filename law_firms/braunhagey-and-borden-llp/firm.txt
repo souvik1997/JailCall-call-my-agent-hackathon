@@ -1,10 +1,10 @@
 Name: BraunHagey and Borden LLP
 Short name: braunhagey-and-borden-llp
-Website: 
-Phone: 
-Email: 
-Intake URL: 
-Counties: 
-Primary charge tags: 
+Website:
+Phone:
+Email:
+Intake URL:
+Counties:
+Primary charge tags:
 Representative case count: 0
-Source URLs: 
+Source URLs:

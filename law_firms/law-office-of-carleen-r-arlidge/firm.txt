@@ -1,10 +1,10 @@
 Name: Law Office of Carleen R. Arlidge
 Short name: law-office-of-carleen-r-arlidge
-Website: 
-Phone: 
-Email: 
-Intake URL: 
-Counties: 
-Primary charge tags: 
+Website:
+Phone:
+Email:
+Intake URL:
+Counties:
+Primary charge tags:
 Representative case count: 0
-Source URLs: 
+Source URLs:

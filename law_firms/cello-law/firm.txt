@@ -2,7 +2,7 @@ Name: Cello & Maudru
 Short name: cello-law
 Website: https://www.cellolaw.com
 Phone: (650) 508-1536
-Email: 
+Email:
 Intake URL: https://www.cellolaw.com/
 Counties: san mateo, santa clara, san francisco
 Primary charge tags: dui, domestic violence, assault, firearm, drug possession/sales, theft, robbery, burglary, white-collar/fraud, probation violation

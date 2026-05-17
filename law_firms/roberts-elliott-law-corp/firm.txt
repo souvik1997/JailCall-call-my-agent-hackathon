@@ -2,7 +2,7 @@ Name: Roberts | Elliott Law Corp
 Short name: roberts-elliott-law-corp
 Website: https://www.robertsandelliott.com/
 Phone: +14082759800
-Email: 
+Email:
 Intake URL: https://www.robertsandelliott.com/
 Counties: santa clara, bay area
 Primary charge tags: dui, domestic-violence, drug-trafficking, assault, theft, fraud, juvenile, traffic

@@ -2,7 +2,7 @@ Name: Law Office of E. Michael Linscheid
 Short name: gasner-criminal-law
 Website: https://www.gasnerlaw.com
 Phone: (415) 782-6002
-Email: 
+Email:
 Intake URL: https://www.gasnerlaw.com/contact-us/
 Counties: san francisco, alameda, san mateo, marin, contra costa
 Primary charge tags: dui, domestic violence, assault, firearm, drug possession/sales, theft, robbery, burglary, white-collar/fraud, probation violation

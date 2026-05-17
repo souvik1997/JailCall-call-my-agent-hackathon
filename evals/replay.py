@@ -276,74 +276,91 @@ def _tool_calls_for(call_id: str) -> list[str]:
     return out
 
 
+def _grade_required(required: object, tools_called: list[str], detail: str) -> list[Assertion]:
+    """Each ``required`` tool name must appear at least once in tools_called."""
+    if not isinstance(required, list):
+        return []
+    out: list[Assertion] = []
+    for needed in required:
+        if not isinstance(needed, str):
+            continue
+        ok = needed in tools_called
+        out.append(
+            Assertion(
+                label=f"dispatch required: {needed}",
+                passed=ok,
+                detail="" if ok else detail,
+            ),
+        )
+    return out
+
+
+def _grade_any_of(any_of: object, tools_called: list[str], detail: str) -> list[Assertion]:
+    """Each ``any_of`` group needs at least one of its names called."""
+    if not isinstance(any_of, list):
+        return []
+    out: list[Assertion] = []
+    for group in any_of:
+        if not isinstance(group, list):
+            continue
+        names = [str(x) for x in group if isinstance(x, str)]
+        if not names:
+            continue
+        ok = any(n in tools_called for n in names)
+        out.append(
+            Assertion(
+                label=f"dispatch any_of: {' OR '.join(names)}",
+                passed=ok,
+                detail="" if ok else detail,
+            ),
+        )
+    return out
+
+
+def _grade_forbidden(forbidden: object, tools_called: list[str], call_id: str) -> list[Assertion]:
+    """No ``forbidden`` tool name may appear in tools_called."""
+    if not isinstance(forbidden, list):
+        return []
+    out: list[Assertion] = []
+    for banned in forbidden:
+        if not isinstance(banned, str):
+            continue
+        ok = banned not in tools_called
+        out.append(
+            Assertion(
+                label=f"dispatch forbidden: {banned}",
+                passed=ok,
+                detail="" if ok else f"tool {banned} was called for {call_id}",
+            ),
+        )
+    return out
+
+
 def _grade_dispatch(call_id: str, expected: object, tools_called: list[str]) -> list[Assertion]:
     """Run required / any_of / forbidden assertions against the recorded tool calls.
 
     ``expected = None`` means the scenario should not dispatch anything;
     that becomes a single assertion that the tool-call list is empty.
     """
-    out: list[Assertion] = []
     detail = f"tools called for {call_id}: {tools_called}"
 
     if expected is None:
-        out.append(
+        return [
             Assertion(
                 label="no dispatch expected (zero tool calls)",
                 passed=len(tools_called) == 0,
                 detail="" if not tools_called else detail,
             ),
-        )
-        return out
+        ]
 
     if not isinstance(expected, dict):
-        return out
+        return []
 
-    required = expected.get("required") or []
-    if isinstance(required, list):
-        for needed in required:
-            if not isinstance(needed, str):
-                continue
-            ok = needed in tools_called
-            out.append(
-                Assertion(
-                    label=f"dispatch required: {needed}",
-                    passed=ok,
-                    detail="" if ok else detail,
-                ),
-            )
-
-    any_of = expected.get("any_of") or []
-    if isinstance(any_of, list):
-        for group in any_of:
-            if not isinstance(group, list):
-                continue
-            names = [str(x) for x in group if isinstance(x, str)]
-            if not names:
-                continue
-            ok = any(n in tools_called for n in names)
-            out.append(
-                Assertion(
-                    label=f"dispatch any_of: {' OR '.join(names)}",
-                    passed=ok,
-                    detail="" if ok else detail,
-                ),
-            )
-
-    forbidden = expected.get("forbidden") or []
-    if isinstance(forbidden, list):
-        for banned in forbidden:
-            if not isinstance(banned, str):
-                continue
-            ok = banned not in tools_called
-            out.append(
-                Assertion(
-                    label=f"dispatch forbidden: {banned}",
-                    passed=ok,
-                    detail="" if ok else f"tool {banned} was called for {call_id}",
-                ),
-            )
-
-    return out
+    return [
+        *_grade_required(expected.get("required"), tools_called, detail),
+        *_grade_any_of(expected.get("any_of"), tools_called, detail),
+        *_grade_forbidden(expected.get("forbidden"), tools_called, call_id),
+    ]
 
 
 def _check_excludes(agent_text: str, must_not_include: Iterable[Any]) -> list[Assertion]:

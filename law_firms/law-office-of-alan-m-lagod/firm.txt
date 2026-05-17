@@ -1,10 +1,10 @@
 Name: Law Office of Alan M. Lagod
 Short name: law-office-of-alan-m-lagod
-Website: 
-Phone: 
-Email: 
-Intake URL: 
-Counties: 
-Primary charge tags: 
+Website:
+Phone:
+Email:
+Intake URL:
+Counties:
+Primary charge tags:
 Representative case count: 0
-Source URLs: 
+Source URLs:

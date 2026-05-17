@@ -1,10 +1,10 @@
 Name: Office of the Federal Public Defender, San Francisco
 Short name: office-of-the-federal-public-defender-san-francisco
-Website: 
-Phone: 
-Email: 
-Intake URL: 
-Counties: 
+Website:
+Phone:
+Email:
+Intake URL:
+Counties:
 Primary charge tags: firearm
 Representative case count: 1
 Source URLs: https://www.courtlistener.com/docket/73340872/united-states-v-waltenbaugh/

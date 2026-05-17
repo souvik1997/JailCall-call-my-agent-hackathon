@@ -2,9 +2,9 @@ Name: Swanson and McNamara LLP
 Short name: swanson-and-mcnamara-llp
 Website: www.swansonmcnamara.com
 Phone: +14154773800
-Email: 
-Intake URL: 
-Counties: 
+Email:
+Intake URL:
+Counties:
 Primary charge tags: fraud, wire-fraud, money-laundering, drug-trafficking, fentanyl
 Representative case count: 2
 Source URLs: https://www.courtlistener.com/docket/73319493/united-states-v-baquedano/, https://www.docketalarm.com/cases/california_northern_district_court/3--24-cr-00243/usa_v._schatt_et_al/59/

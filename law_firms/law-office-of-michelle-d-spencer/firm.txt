@@ -1,10 +1,10 @@
 Name: Law Office of Michelle D. Spencer
 Short name: law-office-of-michelle-d-spencer
-Website: 
-Phone: 
-Email: 
-Intake URL: 
-Counties: 
+Website:
+Phone:
+Email:
+Intake URL:
+Counties:
 Primary charge tags: identity-theft, theft
 Representative case count: 1
 Source URLs: https://www.courtlistener.com/opinion/10846303/people-v-landrine/

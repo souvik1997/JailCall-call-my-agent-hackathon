@@ -2,7 +2,7 @@ Name: Law Office of Orchid Vaghti
 Short name: orchid-vaghti
 Website: https://www.orchidvaghticriminaldefense.com
 Phone: (707) 595-0912
-Email: 
+Email:
 Intake URL: https://www.orchidvaghticriminaldefense.com/
 Counties: sonoma, marin, napa
 Primary charge tags: dui, domestic violence, assault, firearm, drug possession/sales, theft, robbery, burglary, probation violation

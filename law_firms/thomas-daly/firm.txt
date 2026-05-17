@@ -2,7 +2,7 @@ Name: Law Office of Thomas Daly
 Short name: thomas-daly
 Website: https://www.thomasdalyconsulting.com
 Phone: (925) 937-8700
-Email: 
+Email:
 Intake URL: https://www.thomasdalyconsulting.com/
 Counties: contra costa, alameda, solano
 Primary charge tags: dui, domestic violence, assault, drug possession/sales, theft, robbery, burglary, white-collar/fraud, probation violation

@@ -1,10 +1,10 @@
 Name: Law Offices of Beles and. Beles
 Short name: law-offices-of-beles-and-beles-2
-Website: 
-Phone: 
-Email: 
-Intake URL: 
-Counties: 
+Website:
+Phone:
+Email:
+Intake URL:
+Counties:
 Primary charge tags: drug-trafficking, methamphetamine, fentanyl, money-laundering
 Representative case count: 5
 Source URLs: https://www.courtlistener.com/docket/73332454/united-states-v-fries/

@@ -2,7 +2,7 @@ Name: Law Offices of Robert J. Beles
 Short name: law-offices-of-beles-and-beles
 Website: https://beleslaw.com
 Phone: (510) 836-0100
-Email: 
+Email:
 Intake URL: https://beleslaw.com/
 Counties: alameda, contra costa, san francisco
 Primary charge tags: dui, domestic violence, assault, firearm, drug possession/sales, theft, robbery, burglary, white-collar/fraud, probation violation, drug-trafficking, methamphetamine, fentanyl, money-laundering
