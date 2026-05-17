@@ -1,0 +1,4 @@
+https://walterrubensteinlaw.com/: URLError: <urlopen error [Errno -2] Name or service not known>
+https://www.walterrubensteinlaw.com/: URLError: <urlopen error [Errno -2] Name or service not known>
+http://walterrubensteinlaw.com/: URLError: <urlopen error [Errno -2] Name or service not known>
+http://www.walterrubensteinlaw.com/: URLError: <urlopen error [Errno -2] Name or service not known>

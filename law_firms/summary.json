@@ -5,9 +5,9 @@
   "firm_directories": 81,
   "firm_profiles_tsv": "law_firms/firm_profiles.tsv",
   "firms": 81,
+  "firms_with_representative_cases": 5,
+  "firms_with_site_text": 57,
   "moss_documents_jsonl": "law_firms/moss_documents.jsonl",
-  "offense_searchable_cases": 34,
-  "offense_searchable_firms": 5,
   "offense_tag_counts": {
     "assault": 4,
     "burglary": 1,
@@ -32,10 +32,12 @@
     "wire-fraud": 1
   },
   "offense_taxonomy_tsv": "law_firms/offense_taxonomy.tsv",
-  "rows_with_email": 31,
+  "representative_case_rows": 34,
+  "rows_with_email": 38,
   "rows_with_intake_url": 80,
   "rows_with_phone": 81,
   "rows_with_website": 81,
+  "site_text_files": 75,
   "source_note": "Firm profiles are optimized for JailCall/Moss routing. Representative cases use public CourtListener/RECAP, California appellate opinions, and staged public web research when available.",
   "state_appellate_local_origin_cases": 27
 }

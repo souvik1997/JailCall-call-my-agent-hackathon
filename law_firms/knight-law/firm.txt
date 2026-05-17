@@ -4,7 +4,7 @@ Website: https://knightjustice.com/
 Phone: +14088776177
 Email: info@knightjustice.com
 Intake URL: https://knightjustice.com/
-Counties: santa clara, san mateo, santa cruz, bay area, alameda
+Counties: santa clara, san mateo, alameda
 Primary charge tags: dui, domestic-violence, assault, firearm, drug-possession, drug-trafficking, theft, robbery, burglary, probation-violation, reckless-driving, murder, fraud, white-collar-crime
 Representative case count: 0
 Source URLs: https://www.knightjustice.com/, https://knightjustice.com/

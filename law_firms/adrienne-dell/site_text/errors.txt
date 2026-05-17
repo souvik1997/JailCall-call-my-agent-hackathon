@@ -1,0 +1,4 @@
+https://www.adriannedelllaw.com/: URLError: <urlopen error [Errno -2] Name or service not known>
+https://adriannedelllaw.com/: URLError: <urlopen error [Errno -2] Name or service not known>
+http://www.adriannedelllaw.com/: URLError: <urlopen error [Errno -2] Name or service not known>
+http://adriannedelllaw.com/: URLError: <urlopen error [Errno -2] Name or service not known>

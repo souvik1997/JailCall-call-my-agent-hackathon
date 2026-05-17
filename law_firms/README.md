@@ -10,7 +10,10 @@ Primary demo files:
 - `cases.tsv` — representative criminal cases with actual charge signals and descriptions.
 - `offense_taxonomy.tsv` — normalized tags used by firm profiles and case rows.
 
-Each kept firm directory contains `firm.txt`; firms with representative criminal-case examples also contain one or more `case-*/case.txt` files.
+Each kept firm directory contains `firm.txt`; firms with representative criminal-case examples also contain one or more `case-*/case.txt` files. Per-firm website scrape output lives next to the firm record:
+
+- `site_text/*.txt` — normalized page text with HTML tags removed, ready for embedding/chunking.
+- `site_text/errors.txt` — fetch failures for that firm, when a site blocked, timed out, or returned no usable text.
 
 Primary case sources are CourtListener RECAP metadata for N.D. California federal criminal dockets, California appellate opinions for state/local-origin criminal cases, and firm-published criminal case-result pages. Firm-practice coverage and contact fields come from public firm pages and public legal-resource/directories when a direct firm page was not enough.
 
@@ -40,3 +43,5 @@ Do not optimize for the largest possible firm count. For the hackathon demo, a s
 4. Contact the top firms using `phone`, `email`, or `intake_url` metadata.
 
 Run `python3 law_firms/curate_corpus.py` after adding staged data under `law_firms/_staging/*/firms.tsv` or `law_firms/_staging/*/cases.tsv`.
+
+Run `python3 law_firms/scrape_firm_sites.py --max-pages 4 --workers 24 --timeout 8` to refresh the per-firm normalized website text. The scraper writes per-firm files only; downstream embedding should read `law_firms/*/site_text/*.txt` directly.

@@ -1,0 +1,8 @@
+https://www.andrewcantor.com/: URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+https://andrewcantor.com/: URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+http://www.andrewcantor.com/: URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+http://andrewcantor.com/: URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+https://www.cantor-law.com/white-collar-defense: HTTPError: HTTP Error 404: Not Found
+https://cantor-law.com/white-collar-defense: HTTPError: HTTP Error 404: Not Found
+http://www.cantor-law.com/white-collar-defense: HTTPError: HTTP Error 404: Not Found
+http://cantor-law.com/white-collar-defense: HTTPError: HTTP Error 404: Not Found

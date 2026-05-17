@@ -4,7 +4,7 @@ Website: https://www.bayarea-attorney.com/
 Phone: +14152226188
 Email: 
 Intake URL: https://www.bayarea-attorney.com/
-Counties: san francisco, oakland, berkeley, albany, bay area
+Counties: san francisco, alameda
 Primary charge tags: drug-trafficking, violent-crime, sex-crimes, federal-crimes, money-laundering, computer-fraud
 Representative case count: 0
 Source URLs: https://www.bayarea-attorney.com/practiceareas/federal-crimes.asp

@@ -4,7 +4,7 @@ Website: https://www.criminalaw.net
 Phone: +14159826545
 Email: 
 Intake URL: https://www.criminalaw.net/criminal-defense/weapons-gun-offenses/
-Counties: oakland, san francisco bay area, alameda, contra costa, san francisco, san mateo, santa clara
+Counties: alameda, contra costa, san francisco, san mateo, santa clara
 Primary charge tags: dui, domestic-violence, assault, firearm, drug-possession, drug-trafficking, theft, robbery, burglary, white-collar-crime, fraud, probation-violation
 Representative case count: 0
 Source URLs: https://www.criminalaw.net/contact/, https://www.criminalaw.net/criminal-defense/weapons-gun-offenses/

@@ -4,7 +4,7 @@ Website: https://www.wkimball.com/
 Phone: +15107041400
 Email: wkimball@wkimball.com
 Intake URL: https://www.wkimball.com/
-Counties: bay area
+Counties: 
 Primary charge tags: insider-trading, securities-fraud, wire-fraud, fraud, white-collar-crime
 Representative case count: 0
 Source URLs: https://www.wkimball.com/

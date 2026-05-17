@@ -1,0 +1,8 @@
+https://vandeveldlaw.com/: URLError: <urlopen error [Errno -2] Name or service not known>
+https://www.vandeveldlaw.com/: URLError: <urlopen error [Errno -2] Name or service not known>
+http://vandeveldlaw.com/: URLError: <urlopen error [Errno -2] Name or service not known>
+http://www.vandeveldlaw.com/: URLError: <urlopen error [Errno -2] Name or service not known>
+https://vandeveldlaw.com/contact: URLError: <urlopen error [Errno -2] Name or service not known>
+https://www.vandeveldlaw.com/contact: URLError: <urlopen error [Errno -2] Name or service not known>
+http://vandeveldlaw.com/contact: URLError: <urlopen error [Errno -2] Name or service not known>
+http://www.vandeveldlaw.com/contact: URLError: <urlopen error [Errno -2] Name or service not known>

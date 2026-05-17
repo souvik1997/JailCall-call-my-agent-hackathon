@@ -78,6 +78,31 @@ NAME_OVERRIDES = {
     "gasner-criminal-law": "Gasner Criminal Law",
 }
 
+BAY_AREA_COUNTIES = {
+    "alameda",
+    "contra costa",
+    "marin",
+    "napa",
+    "san francisco",
+    "san mateo",
+    "santa clara",
+    "solano",
+    "sonoma",
+}
+
+COUNTY_ALIASES = {
+    "albany": "alameda",
+    "berkeley": "alameda",
+    "oakland": "alameda",
+    "bay area": "",
+    "california": "",
+    "northern california": "",
+    "sacramento": "",
+    "san francisco bay area": "",
+    "san joaquin": "",
+    "santa cruz": "",
+}
+
 TAG_ALIASES = {
     "criminal-defense": (),
     "domestic violence": ("domestic-violence",),
@@ -100,6 +125,8 @@ EXCLUDED_NAME_PATTERNS = [
         r"\bdepartment of justice\b",
     ]
 ]
+
+EMAIL_RE = re.compile(r"\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b", re.IGNORECASE)
 
 
 def clean(value: object) -> str:
@@ -161,7 +188,7 @@ def normalize_tag_list(*values: str) -> str:
 
 
 def has_dispatch_path(firm: dict[str, str]) -> bool:
-    return bool(firm.get("INTAKE_URL") or firm.get("EMAIL") or firm.get("WEBSITE"))
+    return bool(firm.get("INTAKE_URL") or firm.get("EMAIL"))
 
 
 def is_excluded_entity(firm: dict[str, str]) -> bool:
@@ -204,6 +231,21 @@ def parse_firm_file(path: Path) -> dict[str, str]:
     return data
 
 
+def extracted_site_email(short_name: str) -> str:
+    site_text_dir = ROOT / short_name / "site_text"
+    if not site_text_dir.exists():
+        return ""
+    for text_file in sorted(site_text_dir.glob("*.txt")):
+        if text_file.name == "errors.txt":
+            continue
+        text = text_file.read_text(encoding="utf-8", errors="ignore")
+        for email in EMAIL_RE.findall(text):
+            email = email.lower()
+            if not email.endswith((".png", ".jpg", ".jpeg", ".webp", ".gif")):
+                return email
+    return ""
+
+
 def merge_value(current: str, incoming: str) -> str:
     current = clean(current)
     incoming = clean(incoming)
@@ -217,6 +259,21 @@ def merge_csv_list(*values: str) -> str:
         for item in re.split(r"[,;|]", clean(value)):
             item = clean(item).lower()
             if item and item not in seen:
+                seen.add(item)
+                merged.append(item)
+    return ", ".join(merged)
+
+
+def normalize_counties(*values: str) -> str:
+    seen: set[str] = set()
+    merged: list[str] = []
+    for value in values:
+        for item in re.split(r"[,;|]", clean(value)):
+            item = clean(item).lower()
+            if not item:
+                continue
+            item = COUNTY_ALIASES.get(item, item)
+            if item in BAY_AREA_COUNTIES and item not in seen:
                 seen.add(item)
                 merged.append(item)
     return ", ".join(merged)
@@ -286,7 +343,7 @@ def load_firms() -> dict[str, dict[str, str]]:
         firm["PHONE"] = merge_value(firm.get("PHONE", ""), normalize_phone(info.get("phone", "")))
         firm["EMAIL"] = merge_value(firm.get("EMAIL", ""), info.get("email", ""))
         firm["INTAKE_URL"] = merge_value(firm.get("INTAKE_URL", ""), normalize_url(info.get("intake url", "")))
-        firm["COUNTIES"] = merge_csv_list(firm.get("COUNTIES", ""), info.get("counties", ""))
+        firm["COUNTIES"] = normalize_counties(firm.get("COUNTIES", ""), info.get("counties", ""))
 
     for staged in STAGING.glob("*/firms.tsv"):
         for row in read_tsv(staged):
@@ -313,7 +370,7 @@ def load_firms() -> dict[str, dict[str, str]]:
             firm["PHONE"] = merge_value(firm.get("PHONE", ""), normalize_phone(row.get("PHONE", "")))
             firm["EMAIL"] = merge_value(firm.get("EMAIL", ""), row.get("EMAIL", ""))
             firm["INTAKE_URL"] = merge_value(firm.get("INTAKE_URL", ""), normalize_url(row.get("INTAKE_URL", "")))
-            firm["COUNTIES"] = merge_csv_list(firm.get("COUNTIES", ""), row.get("COUNTIES", ""))
+            firm["COUNTIES"] = normalize_counties(firm.get("COUNTIES", ""), row.get("COUNTIES", ""))
             firm["PRIMARY_CHARGE_TAGS"] = normalize_tag_list(
                 firm.get("PRIMARY_CHARGE_TAGS", ""),
                 row.get("PRIMARY_CHARGE_TAGS", ""),
@@ -433,8 +490,15 @@ def build_profiles(
             firm.get("SOURCE_URLS", ""),
             ", ".join(case.get("SOURCE_URL", "") for case in firm_cases[:5]),
         )
-        tags = normalize_tag_list(firm.get("PRIMARY_CHARGE_TAGS", ""))
+        case_tags = normalize_tag_list(
+            ", ".join(tag for tag, _count in tags_by_firm.get(short_name, Counter()).most_common())
+        )
+        if case_tags:
+            tags = normalize_tag_list(case_tags, firm.get("PRIMARY_CHARGE_TAGS", ""))
+        else:
+            tags = normalize_tag_list(firm.get("PRIMARY_CHARGE_TAGS", ""))
         match_terms = caller_match_terms(tags, taxonomy_terms)
+        email = merge_value(firm.get("EMAIL", ""), extracted_site_email(short_name))
         profile_text = " ".join(
             part
             for part in [
@@ -453,7 +517,7 @@ def build_profiles(
                 "SHORT_NAME": short_name,
                 "WEBSITE": firm.get("WEBSITE", ""),
                 "PHONE": firm.get("PHONE", ""),
-                "EMAIL": firm.get("EMAIL", ""),
+                "EMAIL": email,
                 "INTAKE_URL": firm.get("INTAKE_URL", ""),
                 "COUNTIES": firm.get("COUNTIES", ""),
                 "PRIMARY_CHARGE_TAGS": tags,
@@ -605,8 +669,22 @@ def update_summary(profiles: list[dict[str, str]], cases: list[dict[str, str]]) 
         "rows_with_website": sum(1 for row in profiles if row.get("WEBSITE")),
         "rows_with_email": sum(1 for row in profiles if row.get("EMAIL")),
         "rows_with_intake_url": sum(1 for row in profiles if row.get("INTAKE_URL")),
-        "offense_searchable_cases": len(cases),
-        "offense_searchable_firms": len({row["SHORT_NAME"] for row in cases}),
+        "representative_case_rows": len(cases),
+        "firms_with_representative_cases": len({row["SHORT_NAME"] for row in cases}),
+        "site_text_files": len(
+            [
+                path
+                for path in ROOT.glob("*/site_text/*.txt")
+                if path.name != "errors.txt"
+            ]
+        ),
+        "firms_with_site_text": len(
+            {
+                path.parent.parent.name
+                for path in ROOT.glob("*/site_text/*.txt")
+                if path.name != "errors.txt"
+            }
+        ),
         "offense_tag_counts": dict(sorted(tag_counts.items())),
         "cases_tsv": "law_firms/cases.tsv",
         "firm_profiles_tsv": "law_firms/firm_profiles.tsv",

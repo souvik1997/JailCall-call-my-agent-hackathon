@@ -1,0 +1,8 @@
+https://www.nahmedlaw.com/: URLError: <urlopen error [Errno -2] Name or service not known>
+https://nahmedlaw.com/: URLError: <urlopen error [Errno -2] Name or service not known>
+http://www.nahmedlaw.com/: URLError: <urlopen error [Errno -2] Name or service not known>
+http://nahmedlaw.com/: URLError: <urlopen error [Errno -2] Name or service not known>
+https://www.nahmedlaw.com/contact-us: URLError: <urlopen error [Errno -2] Name or service not known>
+https://nahmedlaw.com/contact-us: URLError: <urlopen error [Errno -2] Name or service not known>
+http://www.nahmedlaw.com/contact-us: URLError: <urlopen error [Errno -2] Name or service not known>
+http://nahmedlaw.com/contact-us: URLError: <urlopen error [Errno -2] Name or service not known>

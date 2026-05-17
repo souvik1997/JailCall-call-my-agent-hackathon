@@ -4,7 +4,7 @@ Website: https://thenieveslawfirm.com/
 Phone: +15108797549
 Email: 
 Intake URL: https://thenieveslawfirm.com/contact-us/
-Counties: alameda, san francisco, contra costa, marin, solano, santa clara, santa cruz, san joaquin, sacramento, napa, san mateo
-Primary charge tags: dui, domestic-violence, assault, firearm, drug-possession, drug-trafficking, theft, robbery, burglary, probation-violation, reckless-driving, fraud, gang-crime, juvenile, sex-crimes, restraining-order, methamphetamine
+Counties: alameda, san francisco, contra costa, marin, solano, santa clara, napa, san mateo
+Primary charge tags: domestic-violence, drug-trafficking, assault, burglary, dui, methamphetamine, sex-crimes, firearm, drug-possession, theft, robbery, probation-violation, reckless-driving, fraud, gang-crime, juvenile, restraining-order
 Representative case count: 7
 Source URLs: https://thenieveslawfirm.com/contact-us/, https://thenieveslawfirm.com/gurjit-pandher-bringing-results-experience-to-the-nieves-law-firm/, https://thenieveslawfirm.com/about-us/

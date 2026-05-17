@@ -1,0 +1,4 @@
+https://www.guytonjinkerson.lawyer/white-collar-crime: HTTPError: HTTP Error 503: Service Unavailable
+https://guytonjinkerson.lawyer/white-collar-crime: HTTPError: HTTP Error 404: Not Found
+http://www.guytonjinkerson.lawyer/white-collar-crime: HTTPError: HTTP Error 503: Service Unavailable
+http://guytonjinkerson.lawyer/white-collar-crime: HTTPError: HTTP Error 404: Not Found

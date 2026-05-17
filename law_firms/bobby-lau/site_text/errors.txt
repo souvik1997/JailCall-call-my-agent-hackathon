@@ -1,0 +1,8 @@
+https://www.bobbylaulaw.com/: URLError: <urlopen error [Errno -2] Name or service not known>
+https://bobbylaulaw.com/: URLError: <urlopen error [Errno -2] Name or service not known>
+http://www.bobbylaulaw.com/: URLError: <urlopen error [Errno -2] Name or service not known>
+http://bobbylaulaw.com/: URLError: <urlopen error [Errno -2] Name or service not known>
+https://www.bobbylaulaw.com/contact-us: URLError: <urlopen error [Errno -2] Name or service not known>
+https://bobbylaulaw.com/contact-us: URLError: <urlopen error [Errno -2] Name or service not known>
+http://www.bobbylaulaw.com/contact-us: URLError: <urlopen error [Errno -2] Name or service not known>
+http://bobbylaulaw.com/contact-us: URLError: <urlopen error [Errno -2] Name or service not known>

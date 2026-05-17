@@ -1,0 +1,8 @@
+https://www.gdcriminaldefense.com/: URLError: <urlopen error [Errno -2] Name or service not known>
+https://gdcriminaldefense.com/: URLError: <urlopen error [Errno -2] Name or service not known>
+http://www.gdcriminaldefense.com/: URLError: <urlopen error [Errno -2] Name or service not known>
+http://gdcriminaldefense.com/: URLError: <urlopen error [Errno -2] Name or service not known>
+https://www.gdcriminaldefense.com/contact: URLError: <urlopen error [Errno -2] Name or service not known>
+https://gdcriminaldefense.com/contact: URLError: <urlopen error [Errno -2] Name or service not known>
+http://www.gdcriminaldefense.com/contact: URLError: <urlopen error [Errno -2] Name or service not known>
+http://gdcriminaldefense.com/contact: URLError: <urlopen error [Errno -2] Name or service not known>

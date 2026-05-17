@@ -2,7 +2,7 @@ Name: Swanson and McNamara LLP
 Short name: swanson-and-mcnamara-llp
 Website: https://www.swansonmcnamara.com
 Phone: +14154773800
-Email: 
+Email: maeve@smllp.law
 Intake URL: 
 Counties: 
 Primary charge tags: fraud, wire-fraud, money-laundering, drug-trafficking, fentanyl

@@ -1,0 +1,4 @@
+https://www.stevespiegelman.com/: URLError: <urlopen error [Errno -2] Name or service not known>
+https://stevespiegelman.com/: URLError: <urlopen error [Errno -2] Name or service not known>
+http://www.stevespiegelman.com/: URLError: <urlopen error [Errno -2] Name or service not known>
+http://stevespiegelman.com/: URLError: <urlopen error [Errno -2] Name or service not known>

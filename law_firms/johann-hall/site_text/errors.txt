@@ -1,0 +1,4 @@
+https://www.johannhall.com/: URLError: <urlopen error [Errno -2] Name or service not known>
+https://johannhall.com/: URLError: <urlopen error [Errno -2] Name or service not known>
+http://www.johannhall.com/: URLError: <urlopen error [Errno -2] Name or service not known>
+http://johannhall.com/: URLError: <urlopen error [Errno -2] Name or service not known>

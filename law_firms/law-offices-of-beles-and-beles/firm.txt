@@ -5,6 +5,6 @@ Phone: +15108360100
 Email: 
 Intake URL: https://beleslaw.com/
 Counties: alameda, contra costa, san francisco
-Primary charge tags: dui, domestic-violence, assault, firearm, drug-possession, drug-trafficking, theft, robbery, burglary, white-collar-crime, fraud, probation-violation, methamphetamine, fentanyl, money-laundering
+Primary charge tags: drug-trafficking, methamphetamine, fentanyl, money-laundering, dui, domestic-violence, assault, firearm, drug-possession, theft, robbery, burglary, white-collar-crime, fraud, probation-violation
 Representative case count: 5
 Source URLs: https://beleslaw.com/, https://www.courtlistener.com/docket/73332454/united-states-v-fries/

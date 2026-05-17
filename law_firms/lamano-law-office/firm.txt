@@ -5,6 +5,6 @@ Phone: +15108420750
 Email: 
 Intake URL: https://www.lamanolaw.com/contact-us-lamano-law/
 Counties: alameda, san francisco, contra costa, santa clara
-Primary charge tags: dui, domestic-violence, assault, firearm, drug-possession, drug-trafficking, theft, robbery, burglary, probation-violation, reckless-driving, felony, misdemeanor, embezzlement, fraud, vehicular-manslaughter, manslaughter
+Primary charge tags: dui, assault, firearm, domestic-violence, embezzlement, theft, fraud, vehicular-manslaughter, manslaughter, drug-possession, drug-trafficking, robbery, burglary, probation-violation, reckless-driving, felony, misdemeanor
 Representative case count: 10
 Source URLs: https://www.lamanolaw.com/contact/, https://www.lamanolaw.com/contact-us-lamano-law/, https://www.lamanolaw.com/successful-cases/

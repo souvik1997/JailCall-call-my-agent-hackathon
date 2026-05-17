@@ -1,0 +1,4 @@
+https://www.allenspeare.com/: URLError: <urlopen error [Errno -5] No address associated with hostname>
+https://allenspeare.com/: URLError: <urlopen error [Errno -5] No address associated with hostname>
+http://www.allenspeare.com/: URLError: <urlopen error [Errno -5] No address associated with hostname>
+http://allenspeare.com/: URLError: <urlopen error [Errno -5] No address associated with hostname>

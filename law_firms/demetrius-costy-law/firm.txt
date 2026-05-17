@@ -4,7 +4,7 @@ Website: https://www.costylaw.com/
 Phone: +15102543945
 Email: 
 Intake URL: https://www.costylaw.com/
-Counties: alameda, bay area, contra costa
+Counties: alameda, contra costa
 Primary charge tags: dui, domestic-violence, assault, firearm, drug-possession, drug-trafficking, theft, robbery, burglary, probation-violation, sex-crimes, violent-crime
 Representative case count: 0
 Source URLs: https://www.costylaw.com/
