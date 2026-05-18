@@ -5,7 +5,7 @@ Generated from public records and public law-firm pages for JailCall research. T
 Primary demo files:
 
 - `firm_profiles.tsv` — enriched routing table with contact info, counties, charge tags, representative cases, and source URLs.
-- `moss_documents.jsonl` — one Moss-ready document per firm; this is the best input for `build_index.py`.
+- `moss_documents.jsonl` — one compact firm summary per firm; useful for inspection and fallback.
 - `law_firms.tsv` — legacy four-column roster: `NAME`, `SHORT_NAME`, `WEBSITE`, `PHONE`.
 - `cases.tsv` — representative criminal cases with actual charge signals and descriptions.
 - `offense_taxonomy.tsv` — normalized tags used by firm profiles and case rows.
@@ -31,16 +31,16 @@ Each `case-offense-* / case.txt` file includes:
 - `Crime description`
 - Source URL and snippets from the public record
 
-For JailCall routing, index `moss_documents.jsonl`. Use `cases.tsv` and `case-offense-*` files only when you need to inspect why a firm document contains a particular criminal charge tag.
+For JailCall routing, build the Moss index with `uv run python -m jailcall.build_index`. The builder reads `firm.txt`, `site_text/*.txt`, and representative cases, then attaches the firm's contact metadata to every indexed chunk. Use `cases.tsv` and `case-offense-*` files only when you need to inspect why a firm document contains a particular criminal charge tag.
 
 ## Curation strategy
 
 Do not optimize for the largest possible firm count. For the hackathon demo, a smaller set of reachable criminal-defense firms with explicit charge tags and caller-language match terms is more useful than a broad roster. The recommended index path is:
 
-1. Read `moss_documents.jsonl`.
-2. Index one document per firm.
-3. Query with the caller's freeform case details, for example `I got arrested for DUI after a traffic stop` or `drug possession with fentanyl`.
-4. Contact the top firms using `phone`, `email`, or `intake_url` metadata.
+1. Run `uv run python -m jailcall.build_index` to validate the chunked firm documents.
+2. Run `uv run python -m jailcall.build_index --push` when `MOSS_PROJECT_ID`, `MOSS_PROJECT_KEY`, and `MOSS_INDEX_NAME` are set.
+3. Query with the caller's charge category or short case phrase, for example `DUI`, `drug possession with fentanyl`, or `domestic violence`.
+4. De-dupe Moss hits by firm and contact the top firms using `phone`, `email`, or `intake_url` metadata.
 
 Run `python3 law_firms/curate_corpus.py` after adding staged data under `law_firms/_staging/*/firms.tsv` or `law_firms/_staging/*/cases.tsv`.
 

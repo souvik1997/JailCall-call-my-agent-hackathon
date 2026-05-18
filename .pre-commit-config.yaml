@@ -38,3 +38,20 @@ repos:
         types: [python]
         pass_filenames: false
         require_serial: true
+
+  # Biome — strict JS / TS / JSX / CSS / JSON linter + formatter (Rust binary).
+  # Config: biome.json at repo root, "all" rules enabled.
+  - repo: https://github.com/biomejs/pre-commit
+    rev: v2.4.15
+    hooks:
+      - id: biome-check
+        additional_dependencies: ["@biomejs/biome@2.4.0"]
+
+  # djLint — HTML / Django / Jinja linter + formatter (Python). Strict profile.
+  - repo: https://github.com/Riverside-Healthcare/djLint
+    rev: v1.36.4
+    hooks:
+      - id: djlint
+        args: ["--profile=html"]
+      - id: djlint-reformat
+        args: ["--profile=html"]

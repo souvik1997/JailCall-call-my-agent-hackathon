@@ -2,7 +2,7 @@ Name: Law Offices of Paula Canny
 Short name: paula-canny
 Website: https://www.paulacanny.com
 Phone: +16509642231
-Email: 
+Email: noreply@paulacanny.com
 Intake URL: https://www.paulacanny.com/contact
 Counties: san mateo, santa clara, san francisco
 Primary charge tags: dui, domestic-violence, assault, firearm, drug-possession, drug-trafficking, theft, robbery, burglary, white-collar-crime, fraud, probation-violation

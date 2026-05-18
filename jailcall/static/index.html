@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+          content="JailCall live ops dashboard — AgentPhone dispatch monitor for the demo call.">
+    <meta name="keywords" content="JailCall,AgentPhone,dashboard,live ops,demo">
+    <title>JailCall Live</title>
+    <link rel="stylesheet" href="/static/dashboard.css">
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">JailCall live ops</p>
+          <h1>AgentPhone dispatch monitor</h1>
+        </div>
+        <div class="status-strip" aria-live="polite">
+          <span id="live-dot" class="live-dot"></span>
+          <span id="live-label">Connecting</span>
+          <span id="last-updated" class="muted">--</span>
+        </div>
+      </header>
+      <section class="metrics" aria-label="Call metrics">
+        <div class="metric">
+          <span class="metric-label">Active call</span>
+          <strong id="active-call">No call yet</strong>
+        </div>
+        <div class="metric">
+          <span class="metric-label">Transcript turns</span>
+          <strong id="turn-count">0</strong>
+        </div>
+        <div class="metric">
+          <span class="metric-label">Moss matches</span>
+          <strong id="match-count">0</strong>
+        </div>
+        <div class="metric">
+          <span class="metric-label">AgentPhone chunks</span>
+          <strong id="chunk-count">0</strong>
+        </div>
+        <div class="metric">
+          <span class="metric-label">AgentMail reply inbox</span>
+          <strong id="dispatch-inbox" class="dispatch-inbox">--</strong>
+        </div>
+      </section>
+      <section class="grid">
+        <section class="panel transcript-panel" aria-labelledby="transcript-title">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Voice transcript</p>
+              <h2 id="transcript-title">Conversation</h2>
+            </div>
+            <span id="call-status" class="status-pill">idle</span>
+          </div>
+          <div id="transcript" class="transcript" aria-live="polite"></div>
+        </section>
+        <section class="panel search-panel" aria-labelledby="search-title">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Routing</p>
+              <h2 id="search-title">Moss search</h2>
+            </div>
+            <span id="latest-query" class="query-label">No query</span>
+          </div>
+          <div id="moss-results" class="moss-results"></div>
+        </section>
+        <section class="panel dispatch-panel" aria-labelledby="dispatch-title">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Dispatch</p>
+              <h2 id="dispatch-title">Tool activity</h2>
+            </div>
+          </div>
+          <div id="tool-list" class="tool-list"></div>
+        </section>
+        <section class="panel agentphone-panel" aria-labelledby="agentphone-title">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Outbound voice</p>
+              <h2 id="agentphone-title">AgentPhone response</h2>
+            </div>
+          </div>
+          <div id="chunks" class="chunks"></div>
+        </section>
+      </section>
+      <section class="panel timeline-panel" aria-labelledby="timeline-title">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">System events</p>
+            <h2 id="timeline-title">Timeline</h2>
+          </div>
+        </div>
+        <div id="timeline" class="timeline"></div>
+      </section>
+    </main>
+    <script src="/static/dashboard.js" defer></script>
+  </body>
+</html>

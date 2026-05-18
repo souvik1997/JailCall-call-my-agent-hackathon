@@ -2,7 +2,7 @@ Name: The Nieves Law Firm
 Short name: the-nieves-law-firm
 Website: https://thenieveslawfirm.com/
 Phone: +15108797549
-Email: 
+Email: info@thenieveslawfirm.com
 Intake URL: https://thenieveslawfirm.com/contact-us/
 Counties: alameda, san francisco, contra costa, marin, solano, santa clara, napa, san mateo
 Primary charge tags: domestic-violence, drug-trafficking, assault, burglary, dui, methamphetamine, sex-crimes, firearm, drug-possession, theft, robbery, probation-violation, reckless-driving, fraud, gang-crime, juvenile, restraining-order

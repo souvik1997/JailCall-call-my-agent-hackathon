@@ -1,23 +1,65 @@
-# JailCall — Hackathon Spec
+# JailCall — Hackathon Spec (as shipped, 2026-05-17)
 
-**Track:** The Fixer (multi-channel: voice + email + browser)
-**Backup track:** Wildcard
+**Track:** The Fixer (voice + email). **Backup:** Wildcard.
 
-**One-liner:** Call a number from the police station, an AI agent picks up, and Bay Area criminal defense attorneys are contacted on your behalf before you leave booking.
+**One-liner:** A real phone number you can call from a police station. An AI voice agent
+picks up, takes a 2-field intake (name + charge), semantically routes the case to Bay Area
+criminal defense firms, sends real intake emails on the caller's behalf — and remembers the
+case across calls so the next time the caller dials in it greets them by name and surfaces
+any attorney replies that came back.
 
-**Operator email:** Use `souvik@amlalabs.com` when signing up for every external account in this build (AgentPhone, AgentMail, Browser Use, Supermemory, Moss, Stripe, Sponge). Verification codes go there.
+**Operator email:** `souvik@amlalabs.com` for every external account signup
+(AgentPhone, AgentMail, Browser Use, Supermemory, Moss, Gemini).
 
-> **HACKATHON SCOPE.** This is a one-day hackathon demo. It is not designed to be general or production-ready. Specific load-bearing simplifications: jurisdiction is hardcoded to the Bay Area (no `classify_location`), no SMS confirmation, English-only callers, no caller memory across sessions. Prefer the tightest path to a working demo over breadth.
+This spec documents what is **actually deployed today** for the hackathon demo. The build is
+single-caller, single-jurisdiction (Bay Area), single-facility (San Francisco County Jail),
+voice-only. Anything not listed under "Sponsor usage" is not in the build.
 
 ---
 
-## Scope for today
+## Scope (shipped)
 
-Ship a working end-to-end demo: a real phone number you can call, a privilege-safe voice agent that collects minimal routing info, and a browser agent that finds and contacts Bay Area criminal defense attorneys.
+What the demo does:
 
-**Hardcoded jurisdiction:** Bay Area. The agent does not ask the caller where they are and does not classify location. All dispatch goes to Bay Area criminal defense attorneys.
+- Real AgentPhone number routes inbound voice to FastAPI `/webhook`.
+- Two-field intake: name + charge category. No callback number, no jurisdiction question
+  (Bay Area is hardcoded), no location question (San Francisco County Jail is hardcoded).
+- Moss-backed semantic routing over a pre-indexed roster of 57 Bay Area criminal defense
+  firms returns top-3 candidates in sub-second.
+- AgentMail sends real outbound intake emails to all 3 firms in parallel during the call.
+- Supermemory captures every caller utterance, every dispatch, and every attorney reply
+  under one container tag. On the next call, recall is injected as a prior-context turn so
+  the agent greets the caller by name and refuses to re-dispatch.
+- Inbound attorney replies hit `/webhook/agentmail` and land in Supermemory in real time.
+- Local dashboard at `/` streams the live call, tool calls, and Moss results for demo
+  observers.
 
-**Not in scope:** attorney roster/SLA system, payments, persistent caller memory across sessions, multi-metro number provisioning, collect-call acceptance, **non-English callers**, **non-Bay-Area callers** (location is hardcoded; we do not handle out-of-area dispatch), **SMS confirmation** (dropped — the inbound voice line is the only AgentPhone channel).
+What it deliberately does **not** do — see "Not in scope" below.
+
+---
+
+## Sponsor usage
+
+Six sponsors are wired into the build. Each one has a concrete, load-bearing role.
+
+| Sponsor | Role | Where in code |
+|---|---|---|
+| **AgentPhone (P26)** | The only voice channel. Real provisioned phone number, HMAC-SHA256 signed webhooks, NDJSON sentence-streamed response. | `server.py` (`/webhook`, `_voice_response_stream`, `_verify_signature`) |
+| **Moss (F25)** | Semantic routing. Pre-indexed roster of 57 Bay Area criminal defense firms. Returns top-3 candidates per query with positional firm_ids that defeat URL/email hallucination by the LLM. | `moss.py`, `tools.py::moss_find_lawyers`, `build_index.py` |
+| **AgentMail (S25)** | Outbound dispatch + inbound reply ingest. `inboxes.messages.send` for outbound intake emails; `/webhook/agentmail` ingests attorney replies straight into Supermemory. Single shared inbox `sb38318@agentmail.to` for both directions. | `tools.py::email_attorneys`, `server.py::agentmail_webhook` |
+| **Supermemory** | Cross-call memory. Caller utterances, dispatch records, attorney replies all stored under one container tag. Recall on every webhook injects a prior-context agent turn so the model remembers the caller and refuses to re-dispatch. | `memory.py`, `server.py::_augment_history_with_recall` |
+| **Browser Use (W25)** | **Offline data pipeline only — not in the runtime voice path.** Crawled all 57 firm websites to enrich the routing index with real contact emails. The demo story: "Browser Use made the live dispatch sub-second by enriching the index ahead of time." | `scrape_firm_emails.py` (one-shot, run before demo) |
+| **Google DeepMind (Gemini 2.5 flash-lite)** | The LLM driving the agent. Sub-half-second TTFT, streamed token output, parallel tool calls in one iteration. Safety thresholds set to `BLOCK_NONE` so the agent answers legal questions about arraignment, bail, Miranda rights, ICE holds etc. directly. | `controller.py::_build_config`, `controller.py::generate` |
+
+### Sponsor combination story
+
+> Caller dials an **AgentPhone** number. Webhook delivery is verified, every caller turn is
+> fire-and-forget written to **Supermemory**. **Gemini 2.5 flash-lite** drives the
+> conversation, streaming sentences back over NDJSON. After two intake questions, Gemini
+> emits a **Moss** query and three parallel **AgentMail** sends in one iteration. Every
+> dispatch is logged to **Supermemory**. If an attorney replies, **AgentMail**'s inbound
+> webhook writes the reply to **Supermemory**, so on call 2 recall surfaces it. **Browser
+> Use** ran before the demo to enrich the **Moss** index with real intake emails.
 
 ---
 
@@ -27,215 +69,279 @@ Ship a working end-to-end demo: a real phone number you can call, a privilege-sa
 Caller (jail phone)
     │
     ▼
-AgentPhone (inbound voice, webhook mode)
+AgentPhone (inbound voice, webhook mode, HMAC-SHA256 signed)
     │
     ▼
-server.py (FastAPI)
-    ├─ /webhook  HMAC-SHA256 verify, NDJSON streaming reply
-    └─ Claude tool-call loop (haiku 4.5)
-        ├─ moss_find_lawyers  → Moss (semantic lookup over pre-indexed Bay
-        │                       Area attorney roster — sub-10 ms)
-        ├─ contact_attorneys  → Browser Use (submit attorney intake/contact forms)
-        └─ email_attorneys    → AgentMail (send intake email)
+FastAPI (jailcall.server)
+    ├─ /                       local live dashboard (jailcall/static/index.html)
+    ├─ /api/dashboard          in-memory transcript / tools / events snapshot
+    ├─ /api/reset-memory       wipe Supermemory + tool-call log between takes
+    ├─ /healthz                liveness
+    ├─ /webhook                AgentPhone signed inbound; NDJSON streamed reply
+    └─ /webhook/agentmail      attorney email reply → Supermemory ingest
+        │
+        ├─ Supermemory write (caller utterance, fire-and-forget)
+        ├─ Supermemory recall (last 40 memories → "[Prior context]" agent turn)
+        └─ Gemini 2.5 flash-lite tool-call loop (jailcall.controller)
+              ├─ moss_find_lawyers  → Moss (sub-second, sub-10ms typical)
+              └─ email_attorneys    → AgentMail send + Supermemory dispatch record
+
+Offline (before the demo):
+    Browser Use → scrape_firm_emails.py → firm.txt → firm_profiles.tsv → build_index.py → Moss
 ```
 
-**Routing strategy.** Moss handles initial routing against a pre-indexed dataset of Bay Area
-criminal defense firms (`law_firms/`), so the search step fits inside a voice turn (sub-10 ms).
-Browser Use is reserved for the slow downstream action — actually filling out the chosen
-firms' contact forms — and AgentMail handles the email path. The Moss index is built once
-before the demo by `build_index.py` (see file structure below).
+### Voice flow per webhook delivery
+
+1. AgentPhone POSTs an `agent.message` webhook on `voice` channel.
+2. `_authenticate_and_parse` verifies HMAC-SHA256 + freshness (5-min skew), parses body.
+3. `_build_webhook_context` extracts `call_id`, transcript, `recentHistory`.
+4. Fire-and-forget `record_caller_utterance(call_id, transcript)` writes to Supermemory.
+5. `_voice_response_stream` yields:
+   - Immediate `{"text": "One moment.", "interim": true}` to cover Gemini TTFT.
+   - `_augment_history_with_recall` pulls last 40 memories under `jailcall:demo` and
+     prepends a `[Prior context for this caller …]` agent turn. If any prior DISPATCH
+     record is present, the header strongly warns the model not to re-dispatch.
+   - `current_call_id` and `current_turn_started_at` ContextVars set so the tool layer can
+     stamp the tool-call log and distinguish "same turn" vs "prior turn" dispatches.
+   - Iterates `controller.generate(augmented_history)`, streaming sentences from Gemini.
+     One-sentence lookahead so only the FINAL sentence in a turn is unflagged — every
+     prior sentence carries `interim: true`.
+6. Non-voice events (e.g. `agent.call_ended`) return `{"ok": true}` and update the
+   dashboard's call-status row.
+
+### Controller loop
+
+`jailcall.controller.generate` is the tool-call loop:
+
+- Builds a Gemini client (`gemini-2.5-flash-lite` by default, `GEMINI_MODEL` overridable).
+- `_build_config` sets the system prompt, `TOOL_SCHEMAS`, `thinking_budget=0`,
+  `max_output_tokens=400`, and `BLOCK_NONE` on every safety category.
+- Iteration loop capped at `MAX_TOOL_ITERATIONS = 10`.
+- `_run_iter_with_retry`: 2 retries (100ms / 300ms backoff) on
+  exception-before-first-yield OR completely-empty iteration. **No mid-stream retries** —
+  if Gemini fails after a sentence has been spoken, we don't re-stream and duplicate it.
+- `_IterState.tool_names_invoked` tracks every tool fired across iterations. If Gemini
+  ends a turn with no spoken text, the **silent-tail backstop** picks:
+  - `POST_DISPATCH_CONFIRMATION` if a dispatch tool actually fired (real send happened),
+  - `FALLBACK_TEXT` otherwise ("I'm having trouble right now…").
+
+### Tool layer
+
+Two tools, both in `jailcall.tools`. Schemas are Gemini `FunctionDeclaration` objects in
+`TOOL_SCHEMAS`. The handler is `run_tool(name, args)`.
+
+#### `moss_find_lawyers(charge_category)`
+
+- Queries Moss against `MOSS_INDEX_NAME` (default `jailcall-lawyers`) with
+  `top_k=12, alpha=0.6`.
+- Dedupes by firm short_name, keeps the first 3 distinct firms.
+- Returns a JSON array of up to 3 candidates, each:
+  ```json
+  {
+    "firm_id": "0",
+    "firm_short_name": "lamano-law-office",
+    "firm_name": "Lamano Law Office",
+    "phone": "+14155551234",
+    "email": "intake@lamanolaw.com",
+    "form_url": "https://lamanolaw.com/contact",
+    "summary": "…"
+  }
+  ```
+- **`firm_id` is positional** — `"0"`, `"1"`, `"2"`. The model echoes it back verbatim to
+  `email_attorneys`. The smallest possible identifier makes hallucination effectively
+  impossible.
+- Caches the candidates per `call_id` in `_moss_results_by_call[call_id]` so the dispatch
+  tool can resolve `firm_id` → real metadata server-side.
+
+#### `email_attorneys(firm_id, caller_name, charge_category, message)`
+
+- Resolves `firm_id` from the cache. Hallucinated firm_id → returns
+  `{"error": "unknown firm_id", "valid_firm_ids": [...]}`.
+- Builds the intake body via `_build_intake_message` which injects the hardcoded facility
+  block (name / phone / address / visit_info) and a `Reply to: sb38318@agentmail.to` line.
+  The model never has to know facility info.
+- **`noreply@` short-circuit:** if the resolved email starts with `noreply@`, the send is
+  skipped (returns `{status: "sent", placeholder: true, ...}`) but the dispatch record is
+  still written to Supermemory and the dashboard. These addresses are synthetic
+  placeholders we wrote into the corpus for firms whose websites didn't list a public
+  email — sending there would bounce or hit an unrelated inbox.
+- Otherwise calls `client.inboxes.messages.send(inbox_id, to, subject, text)` via
+  `asyncio.to_thread`. Inbox id is resolved once from `AGENTMAIL_DISPATCH_INBOX` and
+  cached for the process lifetime.
+- Writes a `DISPATCH (email): contacted <to> for caller '<name>' on the '<charge>' matter`
+  memory to Supermemory.
+
+#### Hard guard against re-dispatch
+
+`run_tool` reads `evals/last_run/tool_calls.jsonl` and short-circuits any
+`email_attorneys` call where a prior-turn dispatch entry exists (filtered by
+`ts < current_turn_started_at` so parallel sends inside the same turn aren't false
+positives). Returns `{"error": "dispatch_already_completed", ...}` and the model answers
+from prior context instead.
+
+### Memory layer
+
+`jailcall.memory` is the Supermemory wrapper. One container tag for the whole service:
+`DEMO_CONTAINER_TAG` (default `jailcall:demo`, overridable via `JAILCALL_MEMORY_TAG`).
+Supermemory's Python SDK is sync; every call is wrapped in `asyncio.to_thread`. Failures
+log but never raise — Supermemory hiccups must not break the live voice path.
+
+Entry points:
+
+| Function | Writes / reads | Used by |
+|---|---|---|
+| `record_caller_utterance(call_id, text)` | One memory per caller turn | `server.webhook` fire-and-forget |
+| `record_dispatch_attempt(channel, target, caller_name, charge)` | `DISPATCH (email): …` memory | `email_attorneys` (both real and placeholder sends) |
+| `record_attorney_reply(sender, subject, text)` | `Attorney reply from X — subject: …` memory | `/webhook/agentmail` |
+| `recall_context(limit=40)` | Returns recent memories oldest-first | `_augment_history_with_recall` per turn |
+| `clear_memory()` | Bulk-delete via `documents.delete_bulk(container_tags=[...])` | `server.lifespan` startup + `/api/reset-memory` |
+
+### Lifespan (startup)
+
+`server.lifespan` runs three things on startup, in order:
+
+1. `get_moss_client().load_index(MOSS_INDEX_NAME)` so subsequent queries are local.
+2. `clear_memory()` — wipe Supermemory under the demo tag.
+3. `clear_tool_call_log()` — wipe `evals/last_run/tool_calls.jsonl`.
+4. `clear_moss_result_cache()` — drop the per-call firm-id cache.
+
+Single-caller demo always starts blank. The same wipe is exposed at `POST /api/reset-memory`
+so the demo can be reset between takes without restarting the process.
+
+### Facility (hardcoded)
+
+`jailcall.facility.current_facility()` always returns:
+
+```
+San Francisco County Jail (Jail #2)
++1 (415) 555-0100
+425 7th Street, San Francisco, CA 94103
+Attorney visits 24/7 in the professional visiting room with a valid bar card.
+```
+
+The caller never tells the agent where they are. Attorneys reach the caller through the
+facility's intake line or by attorney visit — not via a personal callback number, because
+the caller is in custody.
+
+### Offline data pipeline (Browser Use)
+
+`law_firms/` has 57 firm directories. Each has a `firm.txt` (curated metadata) and a
+`site_text/` subdir of normalized website chunks. `firm_profiles.tsv` is the routing-table
+view that `build_index.py` reads.
+
+`jailcall.scrape_firm_emails` is a one-shot Browser Use crawler:
+
+1. Walks `law_firms/`, finds firms with empty `Email:` (or with `--retry-noreply`,
+   placeholder emails too).
+2. For each firm, runs `AsyncBrowserUse().run(...)` against the firm's intake URL or
+   homepage with a prompt that finds the single best contact email or returns `NONE`.
+3. Writes the result back into `firm.txt` and syncs into `firm_profiles.tsv` so
+   `build_index.py` picks it up on the next build.
+
+`jailcall.build_index`:
+
+- Reads `firm_profiles.tsv`.
+- Builds three doc types per firm with full contact metadata on every chunk:
+  - `firm_profile` (one per firm)
+  - `site_text` (chunked website text)
+  - `representative_case` (when present in `cases.tsv`)
+- `client.create_index(MOSS_INDEX_NAME, docs, "moss-minilm")` then `load_index`.
+- Idempotent — drops and recreates.
+
+### Final email coverage (after Browser Use + manual curation)
+
+- **57 / 57** firms have an email in the index.
+- **~6** real attorney emails scraped by Browser Use (Tayac, Hoorfar, Tully & Weiss,
+  Gorelick, Nieves, Perani).
+- **22** `noreply@<domain>` placeholders — handled at runtime by the short-circuit in
+  `email_attorneys`; never actually sent to.
+- **29** originally-curated emails from the corpus seed pass.
 
 ---
 
-## Voice script (privilege-safe)
+## Voice script (as shipped)
 
-The agent MUST follow this script. No deviation. The call is potentially recorded by the facility.
+The opening greeting is configured server-side in the **AgentPhone portal** as
+`beginMessage` — it plays automatically when the call connects, before the first webhook
+delivery. The controller's system prompt explicitly tells the model: never re-speak the
+opening.
 
-### Opening (beginMessage)
+### Intake (two fields, no callback)
 
-> "You've reached JailCall. I am not a lawyer and this call may be recorded by the facility. Do not tell me what happened or any details about your case. I can help contact a criminal defense attorney on your behalf right now. Would you like me to do that?"
+After the caller's first reply (treated as consent to engage), the agent asks:
 
-### If yes — collect routing info only
+1. "What's your name?"
+2. After name: "What are you charged with? Just the general category — DUI, drug,
+   assault, anything like that."
 
-1. **"What is your full name?"** → store as `caller_name`
-2. **"Do you know what you've been charged with? Just the general category — like DUI, assault, drug charge, or you can say you don't know."** → store as `charge_category`
-3. **"Is there a phone number where an attorney can reach you or a family member? This could be the number you're calling from, or someone on the outside."** → store as `callback_number`
+The caller may dump both at once ("John Doe, DUI") — the agent takes what it gets and
+dispatches. The caller may say "I don't know" for charge — agent accepts `"unknown"` and
+continues.
 
-The agent does NOT ask about location. The jurisdiction is hardcoded to the Bay Area.
+The agent **does not** ask where the caller is (facility hardcoded), does not ask for a
+callback number (the caller is in custody), and does not ask about jurisdiction (Bay Area
+hardcoded).
 
-### Confirmation
+### Dispatch (mandatory two-wave sequence)
 
-> "I have your information. I'm contacting criminal defense attorneys in the Bay Area right now. They will reach out using the callback number you gave me. Remember — do not discuss your case with anyone except your attorney. You have the right to remain silent."
+Once name + charge are present, the model fires:
 
-### Unsafe input handling
+- **Wave 1 — Moss search (one iteration):** `moss_find_lawyers(charge_category=…)`,
+  exactly once. No retries with synonyms.
+- **Wave 2 — AgentMail sends (one iteration, parallel):** one `email_attorneys` call per
+  firm returned, emitted as parallel function-call parts in a single iteration. The model
+  passes `firm_id="0"`, `firm_id="1"`, `firm_id="2"` verbatim from the Moss output. The
+  handler resolves `firm_id` → real email server-side.
 
-If the caller starts describing what happened, the agent MUST interrupt:
+### Final confirmation (spoken once Wave 2 completes)
 
-> "I need to stop you there. This call may be recorded and anything you say could be used against you. Please do not tell me what happened. Save that for your attorney. Can I get your name instead?"
+> "I've reached out to N attorneys for you: <Firm A>, <Firm B>, and <Firm C>. They know
+> you're at San Francisco County Jail and can reach you through the facility — either by
+> phone or an in-person attorney visit. Hang in there."
 
----
+If Gemini falls silent after a successful dispatch iteration (a known flash-lite quirk),
+the silent-tail backstop in `controller.generate` speaks `POST_DISPATCH_CONFIRMATION`,
+which carries the same content.
 
-## Tools
+### Post-dispatch Q&A
 
-Three tools. Jurisdiction is hardcoded to the Bay Area, so there is no `classify_location` and no `county`/`state` arguments.
+After dispatch completes, the call enters Q&A mode. The agent answers legal questions
+about the criminal process directly using the Gemini context — bail, arraignment, Miranda,
+public defenders vs private counsel, ICE holds, what to expect over the next few days.
+Safety thresholds are `BLOCK_NONE`. Brief caller acknowledgements ("ok", "thanks") get a
+brief reciprocal acknowledgement and never trigger tools. Any attempt to re-dispatch is
+hard-blocked by `run_tool`.
 
-### 1. moss_find_lawyers
+### Returning caller (call 2+)
 
-**Purpose:** Query the pre-built Moss index of Bay Area criminal defense firms for the top
-candidates matching the caller's charge category. The Moss index is built once from
-`law_firms/` by `build_index.py` (see file structure) and loaded into memory on server
-startup, so this tool returns in sub-10 ms — comfortably inside a voice turn.
+`_augment_history_with_recall` injects a prior-context agent turn at the front of the
+conversation. The system prompt teaches the model to:
 
-**Input:**
-```json
-{
-  "charge_category": "DUI"
-}
-```
-
-**Implementation:**
-```python
-async def moss_find_lawyers(args: dict) -> str:
-    charge = (args.get("charge_category") or "criminal defense").strip()
-
-    # Built query — biased toward charge category, kept Bay Area implicit because every
-    # document in the index is already a Bay Area firm. Hybrid retrieval (alpha=0.6) so
-    # exact-term hits ("DUI", "drug") still beat pure semantic neighbours.
-    query = f"{charge} criminal defense attorney"
-
-    result = await moss_client.query(
-        os.environ["MOSS_INDEX_NAME"],
-        query,
-        QueryOptions(top_k=3, alpha=0.6),
-    )
-
-    # Each Moss doc carries the firm's contact info in metadata (see build_index.py).
-    candidates = [
-        {
-            "firm_name": doc.metadata.get("name"),
-            "phone": doc.metadata.get("phone"),
-            "email": doc.metadata.get("email"),
-            "form_url": doc.metadata.get("intake_url") or doc.metadata.get("website"),
-            "summary": doc.text,
-        }
-        for doc in result.docs
-    ]
-    return json.dumps(candidates)
-```
-
-**Latency note:** Moss is the fast step (sub-10 ms once the index is loaded). The slow step
-in this workflow is now `contact_attorneys` (Browser Use form fill — 30-90 s). The interim
-NDJSON chunk lives before `contact_attorneys`, not here.
-
-**Index prerequisite:** `build_index.py` must have populated the `MOSS_INDEX_NAME` index
-from `law_firms/` before the server starts, and `server.py`'s startup hook must call
-`client.load_index(MOSS_INDEX_NAME)` so queries run from the loaded local copy.
-
-### 2. contact_attorneys
-
-**Purpose:** Use Browser Use to fill out contact/intake forms on attorney websites. Called
-once per firm returned by `moss_find_lawyers` that has a `form_url`.
-
-**Input:**
-```json
-{
-  "form_url": "https://smithlaw.com/contact",
-  "caller_name": "John Doe",
-  "charge_category": "DUI",
-  "callback_number": "+15551234567",
-  "message": "URGENT: Person in custody in the Bay Area needs criminal defense representation. Please call back ASAP."
-}
-```
-
-**Implementation:**
-```python
-async def contact_attorneys(args: dict) -> str:
-    client = AsyncBrowserUse()
-    task = (
-        f"Go to {args['form_url']}. Fill out the contact form with: "
-        f"Name: {args['caller_name']}, "
-        f"Phone: {args['callback_number']}, "
-        f"Message: {args['message']}. "
-        f"Submit the form. Confirm submission."
-    )
-    result = await client.run(task)
-    return result.output
-```
-
-**Latency note:** This is the slow step (30-90 s per form). Stream an interim NDJSON chunk
-before kicking it off:
-> "I'm reaching out to attorneys in the Bay Area now. This will take a moment."
-
-### 3. email_attorneys
-
-**Purpose:** Send structured intake emails to attorneys whose email addresses were found.
-
-**Input:**
-```json
-{
-  "to": "intake@smithlaw.com",
-  "caller_name": "John Doe",
-  "charge_category": "DUI",
-  "callback_number": "+15551234567"
-}
-```
-
-**Implementation:**
-```python
-async def email_attorneys(args: dict) -> str:
-    inbox = agentmail_client.inboxes.create(client_id="jailcall-dispatch")
-
-    subject = "URGENT: Person in custody — Bay Area"
-    body = (
-        f"A person currently in custody in the Bay Area has requested legal representation.\n\n"
-        f"Name: {args['caller_name']}\n"
-        f"Charge category: {args['charge_category']}\n"
-        f"Callback: {args['callback_number']}\n\n"
-        f"Please call back as soon as possible.\n\n"
-        f"— JailCall (automated legal access service)"
-    )
-
-    agentmail_client.inboxes.messages.send(
-        inbox.inbox_id,
-        to=args["to"],
-        subject=subject,
-        text=body,
-    )
-    return f"Email sent to {args['to']}"
-```
+- Greet by name if recall has it.
+- Skip re-asking name and charge.
+- Refuse to re-dispatch if a `DISPATCH STATUS` header is present.
+- Surface attorney replies proactively if any `Attorney reply` memory exists.
 
 ---
 
 ## System prompt
 
-```python
-SYSTEM_PROMPT = """You are JailCall, an emergency legal access agent on a live phone call.
+Defined verbatim in `jailcall.controller.SYSTEM_PROMPT`. Key rules (do not paraphrase
+without checking the source):
 
-CRITICAL RULES:
-1. You are NOT a lawyer. Never give legal advice.
-2. This call may be recorded by the jail or police station. NEVER ask what happened.
-3. If the caller starts describing their case, IMMEDIATELY interrupt and tell them to stop.
-4. Collect ONLY: name, charge category, callback number. Do NOT ask about location — jurisdiction is hardcoded to the Bay Area. English-only — do not ask about language preference.
-5. Keep responses short — 1-2 sentences. This is a phone call, not a chatbot.
-6. Be calm, direct, and reassuring. The caller is stressed.
-
-WORKFLOW:
-- Greet with the privilege warning.
-- Collect the 3 routing fields, one at a time.
-- Call moss_find_lawyers to look up Bay Area attorneys (sub-second).
-- Call contact_attorneys and/or email_attorneys for each attorney found.
-- Close the call with a reminder of their right to remain silent.
-
-UNSAFE INPUT PATTERNS — interrupt immediately if the caller says anything like:
-- "So what happened was..."
-- "I was driving and..."
-- "They found..."
-- "I didn't do..."
-- Any narrative about the alleged incident.
-
-Response (verbatim, matching the Voice script): "I need to stop you there. This call may be recorded and anything you say could be used against you. Please do not tell me what happened. Save that for your attorney. Can I get your name instead?"
-"""
-```
+- The caller is at San Francisco County Jail; never ask where they are.
+- The caller is in custody; do not ask for a callback number.
+- Legal advice is **authorized** — the agent answers questions directly. Refusal is wrong
+  here.
+- Intake is 2 fields: name + charge. Don't re-ask fields already in history or prior
+  context.
+- AgentPhone has already played the opening; never re-speak it. Treat "hello"/"hi"/"help
+  me" on turn 1 as engagement and go straight to asking for the name.
+- Dispatch is mandatory two-wave: Moss once, then parallel `email_attorneys` per firm in
+  one iteration. Pass `firm_id` verbatim. Don't pass emails, URLs, or callback numbers —
+  those schema fields don't exist anymore.
+- Post-dispatch: ABSOLUTELY DO NOT CALL ANY TOOLS. Answer from context.
+- If prior context says dispatch is done, don't dispatch again.
 
 ---
 
@@ -244,49 +350,43 @@ Response (verbatim, matching the Voice script): "I need to stop you there. This 
 ```
 jailcall/
 ├── __init__.py
-├── server.py              # FastAPI webhook handler + tool-call loop; loads Moss index on startup
-├── tools.py               # Tool schemas + handler implementations (Moss, Browser Use, AgentMail)
-├── config.py              # Env vars, constants
-├── setup_agent.py         # One-time: create AgentPhone agent + webhook
-└── build_index.py         # One-time: parse law_firms/*/firm.txt and create the Moss index
-law_firms/                 # Pre-scraped Bay Area criminal defense firms (Codex-generated;
-                           #   one directory per firm, each with firm.txt + optional case
-                           #   subdirectories). Source data for build_index.py — not loaded
-                           #   at runtime by server.py.
-pyproject.toml             # Deps + lint config (source of truth — no requirements.txt)
+├── server.py              # FastAPI app; /webhook, /webhook/agentmail, /api/*, /
+├── controller.py          # Gemini 2.5 flash-lite tool-call loop + system prompt
+├── tools.py               # TOOL_SCHEMAS, moss_find_lawyers, email_attorneys, run_tool
+├── memory.py              # Supermemory wrapper (record_*, recall_context, clear_memory)
+├── moss.py                # RealMossClient (no fallback; requires MOSS_PROJECT_*)
+├── facility.py            # Hardcoded DEMO_FACILITY (SF County Jail Jail #2)
+├── call_context.py        # current_call_id, current_turn_started_at ContextVars
+├── dashboard.py           # In-memory state for the live dashboard
+├── config.py              # require_env + small constants
+├── setup_agent.py         # One-time AgentPhone provisioning script
+├── build_index.py         # One-time Moss index builder from law_firms/
+├── scrape_firm_emails.py  # One-time Browser Use email enrichment (OFFLINE)
+└── static/
+    ├── index.html         # Live demo dashboard
+    ├── dashboard.css
+    └── dashboard.js
+
+law_firms/                 # 57 firm directories + firm_profiles.tsv (curated)
+evals/
+├── interactive.py         # Type-at-the-agent REPL — signs an AgentPhone-shape webhook
+├── captures/              # Raw webhook deliveries persisted at runtime (gitignored)
+└── last_run/              # tool_calls.jsonl + Moss preview JSONL (gitignored)
+pyproject.toml             # Deps + lint config (no requirements.txt)
 uv.lock                    # Locked dependency versions
 .env                       # API keys (gitignored)
-.env.example               # Template for .env
-CLAUDE.md                  # Project guidance for Claude Code / Codex sessions
+.env.example               # Template
 SPEC.md                    # This file
 TOOLS.md                   # Vendor SDK/API reference
-evals/transcripts.jsonl    # Scenario eval set (controller-shape, not AgentPhone-shape)
+CLAUDE.md                  # Project guidance for Claude / Codex sessions
 ```
-
----
-
-## Dependencies
-
-```
-fastapi>=0.115.0
-uvicorn>=0.30.0
-anthropic>=0.39.0
-python-dotenv>=1.0.0
-httpx>=0.28.0
-moss>=1.0.0
-browser-use-sdk
-agentmail
-agentphone
-```
-
-> Source of truth is `pyproject.toml`. The list here is informational; do not maintain a
-> separate `requirements.txt`.
 
 ---
 
 ## Env vars
 
 ```
+# Voice + LLM
 AGENTPHONE_API_KEY=sk_live_...
 AGENTPHONE_WEBHOOK_SECRET=whsec_...
 AGENTPHONE_NUMBER_ID=...
@@ -294,332 +394,114 @@ AGENTPHONE_NUMBER=+15551234567
 AGENTPHONE_AGENT_ID=...
 AGENTPHONE_VOICE_ID=...
 PUBLIC_WEBHOOK_BASE_URL=https://your-server.example.com
-ANTHROPIC_API_KEY=sk-ant-...
-ANTHROPIC_MODEL=claude-haiku-4-5-20251001
+GEMINI_API_KEY=...
+GEMINI_MODEL=gemini-2.5-flash-lite
+
+# Routing
 MOSS_PROJECT_ID=...
 MOSS_PROJECT_KEY=moss_...
 MOSS_INDEX_NAME=jailcall-lawyers
-BROWSER_USE_API_KEY=bu_...
+
+# Dispatch
 AGENTMAIL_API_KEY=...
+AGENTMAIL_DISPATCH_INBOX=sb38318@agentmail.to
+
+# Memory
+SUPERMEMORY_API_KEY=sm_...
+JAILCALL_MEMORY_TAG=jailcall:demo
+
+# Offline pipeline only
+BROWSER_USE_API_KEY=bu_...
+BROWSER_USE_SCRAPE_MAX_COST_USD=1.00
+
+# App
 PORT=5321
+LOG_LEVEL=INFO
+```
+
+`ANTHROPIC_API_KEY` exists in `.env.example` for completeness but is not used by the
+shipped controller — the active brain is Gemini. Same for `STRIPE_SECRET_KEY` and
+`SPONGE_API_KEY` — present in the env template, not wired into the build.
+
+---
+
+## Build & run
+
+```bash
+# 1. Install deps.
+uv sync
+
+# 2. Fill .env from .env.example.
+cp .env.example .env  # then edit
+
+# 3. Build the Moss index from the law_firms/ corpus.
+uv run python -m jailcall.build_index --push
+
+# 4. (Optional, before demo) refresh attorney emails via Browser Use.
+uv run python -m jailcall.scrape_firm_emails --retry-noreply
+uv run python -m jailcall.build_index --push  # rebuild after scrape
+
+# 5. Provision AgentPhone (one-time per session if using a fresh tunnel).
+uv run python -m jailcall.setup_agent
+
+# 6. Run the server.
+uv run python -m jailcall.server   # listens on 127.0.0.1:5321
+
+# 7. Either dial the AgentPhone number, or test in-terminal:
+uv run python -m evals.interactive
+```
+
+Reset between demo takes (wipes Supermemory + tool-call log + Moss firm-id cache):
+
+```bash
+curl -X POST http://127.0.0.1:5321/api/reset-memory
 ```
 
 ---
 
-## AgentPhone voice setup playbook
-
-How AgentPhone handles speech, and the exact ordered steps to go from no account to "the number speaks our `beginMessage`." AgentPhone owns the entire voice stack — STT, TTS, codec, barge-in. We choose a voice once and return `{"text": "..."}` from the webhook; AgentPhone synthesizes and streams it to the caller. **No external TTS to integrate.**
-
-**Voice mode:** `webhook` (we control the LLM). `hosted` is a non-goal — we need the Claude tool-call loop.
-
-### Steps
-
-1. **Sign up.** `POST /v0/agent/sign-up` with `{"email": "souvik@amlalabs.com"}` mails a code. `POST /v0/agent/verify` with `{"email": "souvik@amlalabs.com", "code": "..."}` returns `{"api_key": "sk_live_..."}`. Save as `AGENTPHONE_API_KEY`.
-
-2. **Provision a number.** `POST /v1/numbers` with empty body. Response includes `id` (the number id) and `phoneNumber` (E.164). Save `id` as `AGENTPHONE_NUMBER_ID`.
-
-3. **Pick a voice.** `GET /v1/agents/voices` returns objects with `voice_id`, `voice_name`, `provider`, `gender`, `accent`, `preview_audio_url`. For JailCall, pick a calm, lower-register, professional voice — avoid bright/sales-y voices. Listen to `preview_audio_url` before committing. The caller is at a jail phone and needs to trust the voice in the first 5 seconds. Save the chosen `voice_id`.
-
-4. **Public tunnel.** AgentPhone needs to POST webhooks to a public HTTPS URL, but our FastAPI server runs on `localhost:5321`. Pick one of:
-   - `cloudflared tunnel --url localhost:5321/` — no signup, prints a `https://*.trycloudflare.com` URL to stdout. Install: `sudo pacman -S cloudflared` (or grab the binary from Cloudflare).
-   - `ngrok http 5321` — requires a free account + authtoken; ships a request inspector at `http://localhost:4040` that's invaluable for replaying webhook payloads while debugging.
-
-   Free-tier URLs from either tool rotate on restart, so Step 5 must re-run each session — roll Steps 5–7 into `setup_agent.py`. **Demo phase:** swap the tunnel for a real deploy (Railway, Fly, Render) so a sleeping laptop or flaky Wi-Fi can't kill the demo.
-
-5. **Register the webhook.** `POST /v1/webhooks` with `{"url": "https://…/webhook", "timeout": 90}`. Returns `{"secret": "whsec_..."}`. Save as `AGENTPHONE_WEBHOOK_SECRET`. The 90-second timeout is non-default — `contact_attorneys` runs Browser Use form fills at 30–90s each and the default 30s will sever the call mid-dispatch.
-
-6. **Create the agent.** `POST /v1/agents` with `voiceMode: "webhook"`, the **verbatim** `beginMessage` from the Voice script section, the chosen `voice_id` as `voice`, and `modelTier: "turbo"`. The agent's `systemPrompt` field is hosted-mode only — our system prompt lives in the Anthropic call, not here.
-
-7. **Attach the number.** `POST /v1/agents/{agent_id}/numbers` with `{"numberId": "<NUMBER_ID>"}`. Any call to the number now routes to our webhook.
-
-8. **Webhook handler (`server.py`).** Verify HMAC-SHA256 signature (headers `X-Webhook-Signature`, `X-Webhook-Timestamp`, `X-Webhook-ID`, `X-Webhook-Event`; reject timestamps older than 5 min). For `event: "agent.message"` + `channel: "voice"`, read `data.transcript`, return a JSON object with a `text` field. Start with a dumb echo response to verify the round-trip before wiring Claude. **Non-object responses are silently ignored** — first thing to check if the caller hears nothing.
-
-9. **Test by dialing the real number.** `/v1/calls/web` exists but returns an access token for the `agentphone-web-sdk` (not a clickable URL), so a host page is needed to use it. For hackathon speed, dial the provisioned number from your phone — at $0.13/min, ten test calls is $1.30 against the $5 signup credit. Listen for voice quality, pronunciation of "JailCall" and "DUI", and end-pointing on short replies like "yes."
-
-10. **Switch to NDJSON streaming.** Return `StreamingResponse(generate(), media_type="application/x-ndjson")` where `generate()` yields `{"text": "...", "interim": true}` *before* any slow tool, then `{"text": answer}` after. Silence on a jail phone is a product killer; the interim chunk is what hides Browser Use's 30–90s form fill behind speech. (Moss lookup is sub-10 ms — no interim chunk needed for `moss_find_lawyers`.)
-
-### Things that bite people
-
-- Webhook response must be a JSON **object**. Lists, strings, bare numbers → caller hears silence.
-- Default voice webhook timeout is 30s; raise to 90 at registration for Browser Use tools.
-- `recentHistory` (on the event payload) must be threaded into Anthropic `messages` or each turn is amnesiac. See the `to_anthropic_history` helper in the TOOLS.md cookbook.
-- The agent's `systemPrompt` field only fires in hosted mode. Don't waste effort populating it.
-- Emergency / N11 numbers (911, 211, 411, …) are blocked from provisioning/dialing.
-- Free ngrok / cloudflared tunnels rotate URLs on restart — re-run webhook registration each session.
-- `interim: true` is NDJSON-only; it does nothing in a plain JSON response.
-
----
-
-## Delivery architecture and milestones
-
-The build should move in vertical slices. Each milestone must leave the repo in a runnable
-state, with one concrete thing that can be dialed, invoked, or verified from the command line.
-Do not spend time polishing downstream channels until the upstream voice path is working.
-
-### System slices
-
-| Slice | Files | Responsibility |
-|---|---|---|
-| Runtime config | `config.py`, `.env.example` | Load env vars, choose model, configure host/port, centralize service constants. |
-| AgentPhone setup | `setup_agent.py` | Register webhook, create webhook-mode agent, attach number, print IDs/secrets to store in `.env`. |
-| Moss index build | `build_index.py`, `law_firms/` | Parse `law_firms/*/firm.txt`, construct `DocumentInfo`s with contact metadata, `create_index` on Moss. One-time per dataset refresh. |
-| Voice webhook | `server.py` | Verify AgentPhone signatures, parse voice events, stream NDJSON replies, map `recentHistory` to Claude messages, `load_index` on startup. |
-| Conversation controller | `server.py` | Keep per-call in-memory intake state, enforce the locked script order, decide when dispatch begins. |
-| Claude tool loop | `server.py`, `tools.py` | Run bounded Anthropic tool-use loop with the exact tool names and schemas from this spec. |
-| External tools | `tools.py` | Implement Moss attorney lookup, Browser Use form submission, and AgentMail email. |
-| Demo observability | `server.py` | Log call id, field collection, attorneys found, and emails/forms submitted. |
-
-### Milestone 0 - Repo baseline and guardrails (15 min)
-
-**Goal:** Make the current scaffold predictable before touching external services.
-
-**Build:**
-- Confirm `uv sync` works and the app imports.
-- Keep `SPEC.md` as product truth and `TOOLS.md` as vendor truth.
-- Add missing env slots if implementation needs them, but never commit `.env`.
-- Decide that demo state is in-memory only. Persistent caller memory is out of scope.
-
-**Acceptance:**
-- `uv run ruff check .` passes.
-- `uv run basedpyright` passes.
-- `uv run python -m jailcall.server` starts and `/healthz` returns `{"status":"ok"}`.
-
-### Milestone 1 - AgentPhone provisioning path (30-45 min)
-
-**Goal:** One command can create or update the real phone entry points.
-
-**Build:**
-- Implement `setup_agent.py` using `httpx` and AgentPhone REST endpoints from `TOOLS.md`.
-- Inputs: `AGENTPHONE_API_KEY`, `AGENTPHONE_NUMBER_ID`, public webhook base URL, optional voice id.
-- Register `/webhook` with `timeout: 90`.
-- Create a webhook-mode agent with the verbatim `beginMessage`.
-- Attach the configured number to the agent.
-- Print the webhook secret, agent id, number id, and phone number in a copyable summary.
-
-**Acceptance:**
-- Running setup returns a webhook secret to place in `.env`.
-- Dialing the number reaches AgentPhone and speaks the exact opening message.
-- The agent is in `webhook` mode, not hosted mode.
-
-### Milestone 2 - Signed webhook echo with NDJSON (45 min)
-
-**Goal:** Prove that AgentPhone can call our server and hear a response.
-
-**Build:**
-- Add `POST /webhook` in `server.py`.
-- Verify `X-Webhook-Signature`, `X-Webhook-Timestamp`, `X-Webhook-ID`, and `X-Webhook-Event`.
-- Reject invalid signatures and timestamps older than 5 minutes.
-- For non-voice or non-`agent.message` events, return `{"ok": true}`.
-- For voice messages, stream NDJSON with an immediate interim chunk and then a simple scripted reply.
-
-**Acceptance:**
-- Invalid signature returns 401.
-- Valid mock request returns `application/x-ndjson`.
-- A real call can say one phrase and hear a response.
-- Caller never hears silence before slow work.
-
-### Milestone 3 - Scripted intake controller (60 min)
-
-**Goal:** Collect the three routing fields in the locked order before any attorney dispatch.
-
-**Build:**
-- Add an in-memory call state keyed by AgentPhone conversation id or call id.
-- Track `consent`, `caller_name`, `charge_category`, and `callback_number`.
-- Ask exactly one routing question at a time, using the wording in the Voice script section.
-- Detect obvious unsafe narrative phrases before sending text to the model and return the locked interrupt.
-- After all fields are present, return the exact confirmation template and start dispatch.
-
-**Acceptance:**
-- A local mock sequence collects all three fields in order.
-- Unsafe input receives the required interrupt text.
-- The controller never asks "what happened" and never asks for location.
-- A caller who says "I don't know" for charge still progresses.
-
-### Milestone 4 - Claude tool loop (45-60 min)
-
-**Goal:** Add the Anthropic loop wiring before introducing external slow tools.
-
-**Build:**
-- Define the three tool schemas (`moss_find_lawyers`, `contact_attorneys`, `email_attorneys`) in `tools.py`, matching this spec.
-- Implement `run_tool_call` in `server.py` using the bounded loop pattern from the cookbook.
-- Convert AgentPhone `recentHistory` into Anthropic `messages`.
-- Keep model default at `claude-haiku-4-5-20251001`.
-
-**Acceptance:**
-- The Claude loop runs end-to-end on a mock turn, returning a final assistant message.
-- Tool-loop max iterations prevents runaway calls.
-- The voice path can complete intake and trigger at least one tool call without timing out.
-
-### Milestone 5 - Moss attorney routing (60-90 min)
-
-**Goal:** Build a Moss index over `law_firms/` and wire the `moss_find_lawyers` tool so the
-search step fits inside a voice turn.
-
-**Build:**
-- Implement `build_index.py`:
-  - Walk `law_firms/*/firm.txt` and parse the structured key-value lines (`Name`, `Short name`,
-    `Website`, `Phone`, `Email` if present, `Address`, `Areas of practice`, `Attorneys observed`,
-    etc. — the dataset is Codex-generated, so tolerate missing/extra fields).
-  - For each firm, build a `DocumentInfo` with `id = short_name`, `text` containing the
-    semantically-searchable surface (firm name + practice areas + attorney names + free-text
-    notes), and `metadata` containing the contact fields (`name`, `phone`, `email`, `website`,
-    `intake_url`).
-  - Call `client.create_index(MOSS_INDEX_NAME, docs, "moss-minilm")`. Idempotent: drop/recreate
-    is fine for a one-time build.
-- Add a FastAPI `lifespan` handler in `server.py` that calls `client.load_index(MOSS_INDEX_NAME)`
-  once at startup so subsequent `query` calls run from the local loaded copy.
-- Implement `moss_find_lawyers(args)` taking `charge_category` only; Bay Area is hardcoded.
-  Query against the loaded index with `QueryOptions(top_k=3, alpha=0.6)`. Return a JSON
-  array of firm objects (firm_name, phone, email, form_url, summary).
-
-**Acceptance:**
-- `uv run python -m jailcall.build_index` populates the Moss index from `law_firms/`.
-- Standalone invocation of `moss_find_lawyers` returns up to 3 attorney candidates in
-  under ~50 ms.
-- At least one candidate has either an email address or a form URL.
-- No interim NDJSON chunk is required before this tool — Moss is fast enough to call
-  inline in the voice turn.
-
-### Milestone 6 - Attorney contact forms (60 min)
-
-**Goal:** Submit web intake forms where Browser Use found contact URLs.
-
-**Build:**
-- Implement `contact_attorneys(args)` using Browser Use.
-- Generate a privilege-safe message that includes only routing info:
-  `URGENT: Person in custody in the Bay Area needs criminal defense representation. Please call back ASAP.`
-- Do not include incident facts, confessions, or narrative details.
-- Return a structured status per form: submitted, failed, skipped, and reason.
-
-**Acceptance:**
-- Standalone invocation can submit or clearly fail on one real contact page.
-- Failures do not block email paths for other attorneys.
-- Logs show firm, URL, and result without leaking secrets.
-
-### Milestone 7 - AgentMail dispatch (45 min)
-
-**Goal:** Email every attorney candidate with an email address.
-
-**Build:**
-- Implement `email_attorneys(args)` with AgentMail.
-- Reuse a stable inbox client id such as `jailcall-dispatch`.
-- Use the subject/body from this spec.
-- Return sent status and recipient address.
-
-**Acceptance:**
-- Standalone invocation sends a test email to a controlled address.
-- End-to-end dispatch emails all candidates with email addresses.
-- Email body contains only name, charge category, callback, and a callback request — no incident details.
-
-### Milestone 8 - Dispatch orchestrator (60 min)
-
-**Goal:** Wire search, forms, and email into one post-intake workflow.
-
-**Build:**
-- After the three intake fields are complete, run `moss_find_lawyers` (sub-second).
-- For each candidate, call `contact_attorneys` when a form URL exists and `email_attorneys` when an email exists.
-- Accumulate contacted firm names from successful form or email results.
-- Cap total dispatch time so the webhook does not exceed the 90-second AgentPhone timeout — the binding constraint is Browser Use form fills, not the Moss lookup.
-
-**Acceptance:**
-- One real call can complete intake and trigger all downstream channels.
-- Browser Use work begins only after the confirmation line is spoken.
-- Partial success is still useful: one contacted attorney is enough for the demo path.
-
-### Milestone 9 - Error handling and edge cases (45-60 min)
-
-**Goal:** Make the demo survivable under realistic caller and vendor failures.
-
-**Build:**
-- If `moss_find_lawyers` returns no hits (low-recall charge category), retry once with a relaxed query like `"criminal defense attorney Bay Area"` and `alpha` shifted toward keyword (e.g. 0.3).
-- If email or form submission fails, continue to the next candidate.
-- If the callback number is malformed, still proceed with email/form dispatch — attorneys can use the contact info embedded in the dispatch.
-
-**Acceptance:**
-- No single external-service failure crashes `/webhook`.
-- The caller receives a short useful response in every failure case.
-- Logs make it obvious which service failed.
-
-### Milestone 10 - Deployment and demo runbook (45 min)
-
-**Goal:** Remove laptop/tunnel fragility before judging.
-
-**Build:**
-- Prefer Railway, Fly, or Render for the final webhook URL.
-- Set production env vars in the host dashboard.
-- Register the deployed `/webhook` URL with AgentPhone.
-- Keep local tunnel setup documented as fallback.
-- Add a short README with run, setup, test call, and demo commands.
-
-**Acceptance:**
-- Deployed `/healthz` is reachable over HTTPS.
-- AgentPhone webhook points to the deployed URL.
-- Dialing the real number reaches the deployed app, not a local laptop.
-
-### Milestone 11 - Full rehearsal and recording (60 min)
-
-**Goal:** Produce the exact judging demo with proof across channels.
-
-**Build:**
-- Run the judge script: John Doe, DUI, real callback number.
-- Capture server logs showing intake, Moss lookup results, and form/email status.
-- Show the Browser Use session filling the form if available.
-- Show the email that was sent to the attorney.
-- Record one clean backup video in case live network conditions fail.
-
-**Acceptance:**
-- Full path completes in one take.
-- Backup video shows real phone call, browser action, and email delivery.
-- Any known flaky step has a documented fallback for the live demo.
-
-### Critical path
-
-1. Phone call answers with exact `beginMessage`.
-2. `/webhook` verifies signatures and returns spoken NDJSON.
-3. Intake controller collects the three fields without unsafe legal questioning.
-4. `moss_find_lawyers` returns at least one Bay Area attorney candidate from the pre-built index.
-5. Email or form submission reaches at least one attorney.
-6. Deployed URL survives a real call during judging.
-
-### Time budget
-
-| Phase | Budget | Dependency |
-|---|---:|---|
-| Milestones 0-2 | 1.5-2 h | Required before real voice testing. |
-| Milestones 3-4 | 1.5-2 h | Required before safe intake. |
-| Milestones 5-8 | 2.5-3 h | Required for the multi-channel demo. |
-| Milestones 9-10 | 1.5 h | Required before judging. |
-| Milestone 11 | 1 h | Required for backup demo evidence. |
-| Buffer | 1 h | Vendor auth, tunnel, or Browser Use variance. |
+## Not in scope (deliberately, for the demo)
+
+Things judges sometimes look for that are **not** in the build:
+
+- **Stripe Agent Toolkit, Sponge** — payments are out of scope.
+- **SMS / iMessage** — voice-only. AgentPhone is inbound voice only.
+- **`classify_location` / jurisdiction routing** — Bay Area is hardcoded.
+- **`contact_attorneys` (Browser Use form fill at call time)** — removed from the runtime
+  path. Browser Use is offline-only (corpus enrichment). Email is the only dispatch
+  channel. This change is what made the live demo feel sub-second per dispatch instead of
+  30–90s per firm.
+- **Multi-caller support** — single container tag, single demo persona. Cross-call recall
+  always pulls from the same tag.
+- **Callback-number intake** — the caller is in custody; attorneys reach them through the
+  facility. Schema field removed.
+- **Privilege-safe "unsafe input" interrupt** — disabled. The demo lets the caller talk
+  freely about their case.
+- **Legal-advice refusals / "I am not a lawyer" caveats** — explicitly disabled. The
+  agent answers legal questions directly because that is the most useful thing it can do
+  for someone in custody. Gemini safety settings are `BLOCK_NONE`.
+- **`recall_case_context` / `update_case_memory` as Gemini-visible tools** — these are
+  server-side functions (`memory.recall_context`, `memory.record_*`), not callable tools.
+  Recall happens automatically per webhook; writes happen automatically inside other
+  tools. The model never sees them in `TOOL_SCHEMAS`.
 
 ---
 
 ## Demo script (for judges)
 
-1. "Imagine you've just been arrested. You're at the police station. You don't have a lawyer's number memorized. You don't have anyone to call."
-2. Call the JailCall number live on speakerphone.
-3. Go through the intake: "John Doe", "DUI", give a real callback number. (No location question — jurisdiction is hardcoded to the Bay Area.)
-4. Show the browser agent searching and filling forms in real time on a projector/screen.
-5. Show the email that was sent to the attorney.
-6. "The law says you get a phone call. JailCall is the number that always answers."
-
----
-
-## Judging alignment
-
-Per the hackathon page: "things a human could pay for tomorrow over slide demos."
-
-This works end-to-end with a real phone number, a real call, real Bay Area attorney websites being contacted, and real emails sent. No slides. No mocks. A person in jail could use this today.
-
-**Tracks hit:**
-- **The Fixer** — voice + email + browser in one workflow
-- **Wildcard** — agent touches the real world in a new way (criminal justice)
-- **Web Wranglers** — Browser Use filling real attorney intake forms
-- **The Doer** — booking an appointment (with a lawyer) in the physical world
-
-**Sponsor integrations used:**
-- **AgentPhone** — inbound voice (number, webhook agent, NDJSON streaming).
-- **Anthropic** — Claude Haiku 4.5 in the tool-call loop.
-- **Moss** — sub-10 ms semantic lookup over the pre-indexed Bay Area attorney roster.
-- **Browser Use** — autonomous form fill on real attorney intake pages.
-- **AgentMail** — structured intake emails to attorneys with discoverable inboxes.
+1. **Frame:** "Imagine you've just been arrested. You're at the police station. You don't
+   have a lawyer's number memorized."
+2. **Call 1.** Dial the real JailCall number live. AgentPhone plays the opening. Walk
+   through: "John Doe", "DUI". On the projector show the dashboard:
+   - Moss returning 3 candidates in sub-second.
+   - Three parallel AgentMail sends fired in one iteration.
+   - One real intake email landing in the AgentMail inbox.
+3. **Reply lands.** Send a fake attorney reply to `sb38318@agentmail.to`. AgentMail's
+   webhook fires `/webhook/agentmail` → Supermemory captures it.
+4. **Reset framing:** "Now you're moved to a different facility. You get another phone
+   call."
+5. **Call 2.** Dial again. The agent opens with a personalized greeting referencing John's
+   name and DUI charge (from recall). Ask "did anyone get back to me?" — the agent
+   surfaces the attorney reply by name. Ask "what happens at arraignment?" — the agent
+   answers using case context (DUI, SF County, Bay Area).
+6. **Close:** "The law says you get a phone call. JailCall is the number that always
+   answers — and the only one that remembers what's going on with your case."

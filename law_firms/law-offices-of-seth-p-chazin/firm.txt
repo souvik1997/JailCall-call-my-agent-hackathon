@@ -2,7 +2,7 @@ Name: Law Offices of Seth P. Chazin
 Short name: law-offices-of-seth-p-chazin
 Website: https://www.bayarea-attorney.com/
 Phone: +14152226188
-Email: 
+Email: noreply@bayarea-attorney.com
 Intake URL: https://www.bayarea-attorney.com/
 Counties: san francisco, alameda
 Primary charge tags: drug-trafficking, violent-crime, sex-crimes, federal-crimes, money-laundering, computer-fraud

@@ -17,3 +17,13 @@ from contextvars import ContextVar
 from typing import Final
 
 current_call_id: Final[ContextVar[str]] = ContextVar("current_call_id", default="")
+
+# Unix-seconds timestamp at which the *current webhook delivery* started
+# being processed. Used by ``jailcall.tools._dispatch_already_done`` to
+# tell apart "dispatch fired in a prior turn" (block re-dispatch in Q&A)
+# from "dispatch fired earlier in this same iteration" (don't block —
+# the model is firing several parallel dispatch tools, one per firm).
+current_turn_started_at: Final[ContextVar[float]] = ContextVar(
+    "current_turn_started_at",
+    default=0.0,
+)

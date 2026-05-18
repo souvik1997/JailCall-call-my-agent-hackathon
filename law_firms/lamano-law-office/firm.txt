@@ -2,7 +2,7 @@ Name: Lamano Law Office
 Short name: lamano-law-office
 Website: https://www.lamanolaw.com/
 Phone: +15108420750
-Email: 
+Email: noreply@lamanolaw.com
 Intake URL: https://www.lamanolaw.com/contact-us-lamano-law/
 Counties: alameda, san francisco, contra costa, santa clara
 Primary charge tags: dui, assault, firearm, domestic-violence, embezzlement, theft, fraud, vehicular-manslaughter, manslaughter, drug-possession, drug-trafficking, robbery, burglary, probation-violation, reckless-driving, felony, misdemeanor

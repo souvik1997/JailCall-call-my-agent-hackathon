@@ -2,7 +2,7 @@ Name: Nolan Barton Olmos & Luciano LLP
 Short name: nbo-law
 Website: https://www.nbo.law
 Phone: +16503278600
-Email: 
+Email: noreply@nbo.law
 Intake URL: https://www.nbo.law/contact-us/
 Counties: santa clara, san mateo, alameda, san francisco
 Primary charge tags: dui, domestic-violence, assault, firearm, drug-possession, drug-trafficking, theft, robbery, burglary, white-collar-crime, fraud, probation-violation
