@@ -17,6 +17,8 @@ MAX_EVENTS: Final[int] = 300
 MAX_TURNS: Final[int] = 120
 MAX_TOOL_RECORDS: Final[int] = 120
 MAX_AGENTPHONE_CHUNKS: Final[int] = 120
+MAX_INBOUND_REPLIES: Final[int] = 50
+REPLY_PREVIEW_CHARS: Final[int] = 1200
 
 
 @dataclass
@@ -124,6 +126,7 @@ class ConversationState:
 _lock: Final[Lock] = Lock()
 _conversations: dict[str, ConversationState] = {}
 _events: list[DashboardEvent] = []
+_inbound_replies: list[JsonObject] = []
 _active_call_id = ""
 _seq = 0
 
@@ -138,6 +141,16 @@ def _coerce_call_id(call_id: str | None = None) -> str:
         return explicit
     contextual = current_call_id.get().strip()
     return contextual or "unknown-call"
+
+
+def _normalize_transcript(text: str) -> str:
+    """Lowercase + collapse whitespace + strip trailing punctuation.
+
+    Used to dedup caller turns where AgentPhone delivers slight variations
+    (partial vs final transcripts, punctuation drift) of the same utterance
+    so they don't show as two separate rows in the dashboard transcript.
+    """
+    return " ".join(text.lower().strip(" .,!?\"'").split())
 
 
 def _conversation_locked(call_id: str) -> ConversationState:
@@ -212,7 +225,8 @@ def record_webhook_delivery(
         if transcript and (
             not conversation.transcript
             or conversation.transcript[-1].role != "caller"
-            or conversation.transcript[-1].text != transcript
+            or _normalize_transcript(conversation.transcript[-1].text)
+            != _normalize_transcript(transcript)
         ):
             conversation.transcript.append(
                 TranscriptTurn(role="caller", text=transcript, ts=now),
@@ -355,6 +369,38 @@ def record_moss_search(
         )
 
 
+def record_inbound_reply(
+    *,
+    sender: str,
+    subject: str,
+    text: str,
+) -> None:
+    """Record an inbound AgentMail reply for the dashboard's reply panel.
+
+    Written alongside the Supermemory ingest in ``server.agentmail_webhook``.
+    Sender + subject are kept for display only — the demo trusts the body
+    text for firm identification, not the headers.
+    """
+    with _lock:
+        _inbound_replies.append(
+            {
+                "ts": _now(),
+                "sender": sender.strip() or "unknown",
+                "subject": subject.strip() or "(no subject)",
+                "text": text.strip()[:REPLY_PREVIEW_CHARS],
+                "call_id": _active_call_id,
+            },
+        )
+        del _inbound_replies[:-MAX_INBOUND_REPLIES]
+        _append_event_locked(
+            call_id=_active_call_id or "inbox",
+            kind="agentmail-inbound",
+            title="AgentMail reply received",
+            detail=f"from {sender or '?'} — {subject or '(no subject)'}",
+            payload={"sender": sender, "subject": subject},
+        )
+
+
 def snapshot() -> JsonObject:
     """Return the full dashboard state as JSON."""
     with _lock:
@@ -369,4 +415,5 @@ def snapshot() -> JsonObject:
             "dispatch_inbox": os.environ.get("AGENTMAIL_DISPATCH_INBOX", ""),
             "conversations": [conversation.to_json() for conversation in conversations],
             "events": [event.to_json() for event in _events],
+            "inbound_replies": list(reversed(_inbound_replies)),
         }

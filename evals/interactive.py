@@ -44,10 +44,9 @@ DEFAULT_URL: Final[str] = "http://127.0.0.1:5321/webhook"
 # Locked beginMessage — must match SPEC.md → Voice script → Opening verbatim
 # (and the agent's beginMessage configured in the AgentPhone portal).
 BEGIN_MESSAGE: Final[str] = (
-    "You've reached JailCall. I am not a lawyer and this call may be "
-    "recorded by the facility. Do not tell me what happened or any "
-    "details about your case. I can help contact a criminal defense "
-    "attorney on your behalf right now. Would you like me to do that?"
+    "You've reached JailCall. I can help connect you with a criminal "
+    "defense attorney in the Bay Area and walk you through what happens "
+    "next. What's going on?"
 )
 
 # Fake-but-realistic ids for synthesized payloads. Real captures use

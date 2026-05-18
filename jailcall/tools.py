@@ -59,10 +59,11 @@ MOSS_FIRM_LIMIT: Final[int] = 3
 
 # Hackathon demo lever: this firm is force-prioritised to firm_id="0" in
 # every moss_find_lawyers result regardless of charge. Real firm with a
-# real intake address (info@thenieveslawfirm.com) so the AgentMail send
-# delivers to a real domain. The user manually impersonates this firm in
-# the AgentMail inbox during the demo.
-DEMO_PRIORITY_FIRM_SHORT_NAME: Final[str] = "the-nieves-law-firm"
+# real intake address (help@veralawoffice.com) — picked over Nieves
+# because "Vera Law" is easier to pronounce in the spoken confirmation.
+# The user manually impersonates this firm in the AgentMail inbox during
+# the demo.
+DEMO_PRIORITY_FIRM_SHORT_NAME: Final[str] = "vera-law"
 
 # Per-call cache of the most recent ``moss_find_lawyers`` result, keyed
 # by call_id → {firm_id: candidate_dict}. ``email_attorneys`` looks up
@@ -361,6 +362,130 @@ def _resolve_dispatch_inbox_id_sync(email: str) -> str:
             return _agentmail_inbox_id_cache
     msg = f"AgentMail inbox {email!r} not found among {len(response.inboxes)} inboxes"
     raise RuntimeError(msg)
+
+
+# Tracks ``(thread_id, last_message_id)`` pairs we've already ingested via
+# the synchronous inbox sync below, so each turn only writes truly new
+# messages into the dashboard + Supermemory.
+_seen_inbox_thread_messages: set[tuple[str, str]] = set()
+
+
+def clear_inbox_sync_state() -> None:
+    """Reset the inbox-sync dedup set. Called from lifespan / reset."""
+    _seen_inbox_thread_messages.clear()
+
+
+def _ingest_inbox_thread(
+    *,
+    sender: str,
+    subject: str,
+    text: str,
+) -> None:
+    """Record one thread's latest content into dashboard + Supermemory.
+
+    Uses ``memory.record_attorney_reply_sync`` so the recall block format
+    is identical regardless of whether the reply arrived via the webhook
+    push or this synchronous pull.
+    """
+    from jailcall.dashboard import record_inbound_reply  # noqa: PLC0415
+    from jailcall.memory import record_attorney_reply_sync  # noqa: PLC0415
+
+    record_inbound_reply(sender=sender, subject=subject, text=text)
+    record_attorney_reply_sync(sender=sender, subject=subject, text=text)
+
+
+def _sync_inbox_sync(dispatch_inbox: str) -> int:
+    """Pull threads from the dispatch inbox, ingest new ones. Returns count."""
+    inbox_id = _resolve_dispatch_inbox_id_sync(dispatch_inbox)
+    client = _agentmail_client_sync()
+    response = client.inboxes.threads.list(
+        inbox_id,
+        include_spam=True,
+        include_trash=True,
+    )
+    new_count = 0
+    for thread in response.threads:
+        key = (thread.thread_id, thread.last_message_id or "")
+        if key in _seen_inbox_thread_messages:
+            continue
+        _seen_inbox_thread_messages.add(key)
+        sender = thread.senders[0] if thread.senders else "unknown"
+        _ingest_inbox_thread(
+            sender=sender,
+            subject=thread.subject or "(no subject)",
+            text=thread.preview or "",
+        )
+        new_count += 1
+    return new_count
+
+
+async def sync_inbox_into_dashboard() -> int:
+    """Synchronously pull new AgentMail messages, ingest into dashboard+memory.
+
+    Called at the start of every voice turn so the agent's prior-context
+    block is always fresh, even if the AgentMail webhook never fires
+    (e.g., tunnel down, webhook misconfigured). Errors are swallowed —
+    a failed sync must not block the voice path.
+    """
+    try:
+        dispatch_inbox = _agentmail_dispatch_inbox()
+    except RuntimeError:
+        return 0
+    try:
+        return await asyncio.to_thread(_sync_inbox_sync, dispatch_inbox)
+    except Exception:
+        logger.exception("agentmail inbox sync failed")
+        return 0
+
+
+def _clear_agentmail_inbox_sync(dispatch_inbox: str) -> int:
+    """Permanently delete every thread in the dispatch inbox. Returns count.
+
+    AgentMail deletes are thread-based (not per-message). Pages through
+    ``inboxes.threads.list`` with spam/trash included so a fresh demo run
+    starts with a truly empty inbox — same intent as ``memory.clear_memory``
+    for Supermemory. ``permanent=True`` skips the trash bucket so threads
+    don't resurrect into recall on the next run.
+    """
+    inbox_id = _resolve_dispatch_inbox_id_sync(dispatch_inbox)
+    client = _agentmail_client_sync()
+    deleted = 0
+    page_token: str | None = None
+    while True:
+        response = client.inboxes.threads.list(
+            inbox_id,
+            include_spam=True,
+            include_trash=True,
+            page_token=page_token,
+        )
+        for thread in response.threads:
+            try:
+                client.inboxes.threads.delete(inbox_id, thread.thread_id, permanent=True)
+                deleted += 1
+            except Exception:
+                logger.exception("agentmail thread delete failed id=%s", thread.thread_id)
+        page_token = response.next_page_token
+        if not page_token:
+            break
+    return deleted
+
+
+async def clear_agentmail_inbox() -> None:
+    """Bulk-delete every message in the AgentMail dispatch inbox.
+
+    Failure-tolerant: AgentMail outages must not block server startup.
+    """
+    try:
+        dispatch_inbox = _agentmail_dispatch_inbox()
+    except Exception:
+        logger.exception("agentmail inbox clear skipped — env not configured")
+        return
+    try:
+        deleted = await asyncio.to_thread(_clear_agentmail_inbox_sync, dispatch_inbox)
+    except Exception:
+        logger.exception("agentmail inbox clear failed for %s", dispatch_inbox)
+        return
+    logger.info("agentmail inbox cleared (%d message(s)) for %s", deleted, dispatch_inbox)
 
 
 def _send_intake_email_sync(

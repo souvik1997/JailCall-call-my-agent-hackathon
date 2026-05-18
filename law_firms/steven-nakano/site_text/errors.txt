@@ -1,2 +1,0 @@
-https://www.nakanolaw.com/: URLError: <urlopen error timed out>
-https://nakanolaw.com/: URLError: <urlopen error timed out>

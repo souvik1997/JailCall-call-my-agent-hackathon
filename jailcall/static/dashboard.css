@@ -325,6 +325,7 @@ h2 {
 
 .tool-list,
 .chunks,
+.replies,
 .timeline {
   display: flex;
   flex-direction: column;
@@ -333,6 +334,7 @@ h2 {
 
 .tool-row,
 .chunk-row,
+.reply-row,
 .timeline-row {
   min-width: 0;
   gap: 10px;
@@ -342,12 +344,14 @@ h2 {
 
 .tool-row:last-child,
 .chunk-row:last-child,
+.reply-row:last-child,
 .timeline-row:last-child {
   border-bottom: 0;
 }
 
 .tool-time,
 .chunk-time,
+.reply-time,
 .event-time {
   width: 68px;
   flex: 0 0 auto;
@@ -358,19 +362,35 @@ h2 {
 
 .tool-main,
 .chunk-main,
+.reply-main,
 .event-main {
   min-width: 0;
   flex: 1 1 auto;
 }
 
 .tool-name,
-.event-title {
+.event-title,
+.reply-subject {
   margin-bottom: 4px;
   font-weight: 800;
 }
 
 .tool-status {
   color: var(--teal);
+}
+
+.reply-from {
+  margin-bottom: 6px;
+  color: var(--muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.78rem;
+}
+
+.reply-body {
+  color: #3d4656;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  white-space: pre-wrap;
 }
 
 .tool-result,

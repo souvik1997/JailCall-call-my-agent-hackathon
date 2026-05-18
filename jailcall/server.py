@@ -48,6 +48,7 @@ from jailcall.controller import generate as run_agent
 from jailcall.dashboard import (
     record_agentphone_chunk,
     record_call_status,
+    record_inbound_reply,
     record_webhook_delivery,
     snapshot,
 )
@@ -58,7 +59,13 @@ from jailcall.memory import (
     record_caller_utterance,
 )
 from jailcall.moss import get_moss_client
-from jailcall.tools import clear_moss_result_cache, clear_tool_call_log
+from jailcall.tools import (
+    clear_agentmail_inbox,
+    clear_inbox_sync_state,
+    clear_moss_result_cache,
+    clear_tool_call_log,
+    sync_inbox_into_dashboard,
+)
 
 if TYPE_CHECKING:
     from collections.abc import AsyncGenerator, AsyncIterator
@@ -78,6 +85,12 @@ STATIC_DIR: Final[Path] = Path(__file__).resolve().parent / "static"
 # nobody references can be collected before they complete.
 _BACKGROUND_TASKS: set[asyncio.Task[None]] = set()
 
+# Call_ids we've already polled the AgentMail inbox for. AgentPhone's
+# webhook fires once per *turn* but we only want to sync the inbox once
+# per *call* — the rest of the call's turns reuse whatever Supermemory
+# captured at call start (plus any in-call replies the webhook pushes).
+_synced_call_ids: set[str] = set()
+
 logger = logging.getLogger("jailcall.webhook")
 
 
@@ -95,8 +108,11 @@ async def lifespan(_app: FastAPI) -> AsyncGenerator[None]:
     # for caller recall) and the local tool-call log (used by the hard
     # guard against re-dispatch).
     await clear_memory()
+    await clear_agentmail_inbox()
     clear_tool_call_log()
     clear_moss_result_cache()
+    clear_inbox_sync_state()
+    _synced_call_ids.clear()
     yield
     # No shutdown work today.
 
@@ -542,8 +558,11 @@ async def reset_memory() -> dict[str, object]:
     the server.
     """
     await clear_memory()
+    await clear_agentmail_inbox()
     clear_tool_call_log()
     clear_moss_result_cache()
+    clear_inbox_sync_state()
+    _synced_call_ids.clear()
     return {"ok": True}
 
 
@@ -578,6 +597,11 @@ async def agentmail_webhook(request: Request) -> dict[str, bool]:
 
     logger.info("agentmail webhook ingested from=%s subject=%r", sender or "?", subject)
 
+    # Surface the reply on the live dashboard immediately (sync, in-memory).
+    record_inbound_reply(sender=sender, subject=subject, text=text)
+
+    # Fire-and-forget the durable Supermemory write so it shows up in recall
+    # on the caller's next call.
     task = asyncio.create_task(
         record_attorney_reply(sender=sender, subject=subject, text=text),
     )
@@ -643,6 +667,24 @@ async def webhook(
 
     if ctx.event_name != "agent.message" or ctx.channel != "voice":
         return _handle_non_voice_event(ctx)
+
+    # First turn of a new call: synchronously pull the AgentMail inbox so
+    # any attorney replies that landed between calls are in Supermemory
+    # before the controller's recall fires. The webhook push is the
+    # primary path; this synchronous sync is the safety net for when
+    # the webhook hasn't fired (tunnel down, webhook unregistered, etc.).
+    if ctx.call_id and ctx.call_id not in _synced_call_ids:
+        _synced_call_ids.add(ctx.call_id)
+        try:
+            new_replies = await sync_inbox_into_dashboard()
+            if new_replies:
+                logger.info(
+                    "synced %d inbox message(s) at call start (call_id=%s)",
+                    new_replies,
+                    ctx.call_id,
+                )
+        except Exception:
+            logger.exception("inbox sync failed at call start (call_id=%s)", ctx.call_id)
 
     # Fire-and-forget the Supermemory write so voice latency doesn't
     # depend on Supermemory's API. The single-caller demo writes every

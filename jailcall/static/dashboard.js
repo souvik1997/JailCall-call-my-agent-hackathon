@@ -15,6 +15,8 @@ const nodes = {
   mossResults: document.querySelector("#moss-results"),
   toolList: document.querySelector("#tool-list"),
   chunks: document.querySelector("#chunks"),
+  replies: document.querySelector("#replies"),
+  replyCount: document.querySelector("#reply-count"),
   timeline: document.querySelector("#timeline"),
 };
 
@@ -23,6 +25,7 @@ const renderKeys = {
   moss: "",
   tools: "",
   chunks: "",
+  replies: "",
   timeline: "",
 };
 
@@ -278,6 +281,36 @@ function renderChunks(conversation) {
   nodes.chunks.replaceChildren(...rows);
 }
 
+function renderReplies(state) {
+  const replies = Array.isArray(state.inbound_replies) ? state.inbound_replies : [];
+  const key = stableJson(replies);
+  if (renderKeys.replies === key) {
+    return;
+  }
+  renderKeys.replies = key;
+
+  nodes.replyCount.textContent = String(replies.length);
+
+  if (replies.length === 0) {
+    setEmpty(nodes.replies, "No attorney replies yet.");
+    return;
+  }
+
+  const rows = replies.map((reply) => {
+    const row = el("article", "reply-row");
+    row.append(el("time", "reply-time", formatTime(reply.ts)));
+    const main = el("div", "reply-main");
+    main.append(
+      el("div", "reply-subject", asText(reply.subject, "(no subject)")),
+      el("div", "reply-from", `from ${asText(reply.sender, "unknown")}`),
+      el("div", "reply-body", asText(reply.text, "(empty body)")),
+    );
+    row.append(main);
+    return row;
+  });
+  nodes.replies.replaceChildren(...rows);
+}
+
 function renderTimeline(state) {
   const events = Array.isArray(state.events) ? state.events : [];
   const key = stableJson(events.slice(-50));
@@ -323,6 +356,7 @@ async function refresh() {
     renderMoss(mossEvent);
     renderTools(conversation);
     renderChunks(conversation);
+    renderReplies(state);
     renderTimeline(state);
   } catch (error) {
     nodes.liveDot.classList.remove("live");

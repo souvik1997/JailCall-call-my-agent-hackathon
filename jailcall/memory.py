@@ -117,6 +117,29 @@ async def record_dispatch_attempt(
     await asyncio.to_thread(_add_sync, content)
 
 
+def build_attorney_reply_content(*, sender: str, subject: str, text: str) -> str:
+    """Compose the body-first Supermemory entry for one attorney reply.
+
+    Shared by ``record_attorney_reply`` (async webhook path) and the
+    synchronous inbox-polling path in ``jailcall.tools`` so both write
+    the same content format — recall surfaces them identically.
+    """
+    body_excerpt = text.strip()[:1000] or "(empty body)"
+    return (
+        "Inbound attorney reply landed in the dispatch inbox.\n"
+        "TRUST THE BODY, not the From/Subject headers — identify the firm and "
+        "the substance of the reply from the body text below.\n\n"
+        f"Body:\n{body_excerpt}\n\n"
+        f"(Headers — informational only — from={sender.strip() or 'unknown'}; "
+        f"subject={subject.strip() or '(no subject)'})"
+    )
+
+
+def record_attorney_reply_sync(*, sender: str, subject: str, text: str) -> None:
+    """Synchronous variant for callers already in a worker thread."""
+    _add_sync(build_attorney_reply_content(sender=sender, subject=subject, text=text))
+
+
 async def record_attorney_reply(*, sender: str, subject: str, text: str) -> None:
     """Best-effort async write of one inbound attorney email to Supermemory.
 
@@ -126,15 +149,7 @@ async def record_attorney_reply(*, sender: str, subject: str, text: str) -> None
     which firm replied. Sender + subject are recorded as metadata at
     the end of the entry, not as the authoritative source of truth.
     """
-    body_excerpt = text.strip()[:1000] or "(empty body)"
-    content = (
-        "Inbound attorney reply landed in the dispatch inbox.\n"
-        "TRUST THE BODY, not the From/Subject headers — identify the firm and "
-        "the substance of the reply from the body text below.\n\n"
-        f"Body:\n{body_excerpt}\n\n"
-        f"(Headers — informational only — from={sender.strip() or 'unknown'}; "
-        f"subject={subject.strip() or '(no subject)'})"
-    )
+    content = build_attorney_reply_content(sender=sender, subject=subject, text=text)
     await asyncio.to_thread(_add_sync, content)
 
 
