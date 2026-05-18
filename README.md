@@ -18,7 +18,7 @@ Every year, **roughly ten million people are booked into U.S. jails.** At any gi
 **nearly 70% of the jail population hasn't been convicted of anything** — hundreds of
 thousands of people sitting in custody, waiting. The law guarantees them a phone call.
 Most of them don't know a criminal defense lawyer's number.
-ss
+
 The fallback is the public defender's office — overworked, underpaid, and not always
 available. When someone is booked at 2 AM, the PD's number rings to voicemail.
 
@@ -354,7 +354,8 @@ evals/
 ├── captures/              # Raw webhook deliveries persisted at runtime (gitignored)
 └── last_run/              # tool_calls.jsonl + Moss preview JSONL (gitignored)
 assets/
-└── stack.svg              # Sponsor stack graphic (source; PNG is gitignored, re-render with rsvg-convert)
+├── stack.png              # Sponsor stack graphic (1280×720)
+└── stack.svg              # SVG source — re-render via `rsvg-convert -w 1280 -h 720`
 pyproject.toml             # Deps + lint config
 uv.lock                    # Locked dependency versions
 .env                       # API keys (gitignored)
